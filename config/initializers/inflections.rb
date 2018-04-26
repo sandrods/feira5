@@ -76,6 +76,11 @@ ActiveSupport::Inflector.inflections do |inflect|
 
     inflect.uncountable %w( tórax tênis ônibus lápis fênix inbox )
 
+  inflect.irregular('item_compra', 'itens_compra')
+  inflect.irregular('item_venda',  'itens_venda' )
+  inflect.irregular('item_sacola', 'itens_sacola')
+  inflect.irregular('item_estoque', 'itens_estoque')
+  
 end
 
 # These inflection rules are supported but not enabled by default:

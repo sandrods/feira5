@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-header alert-info">
+    <b>Movimentações</b>
+  </div>
+
+  <table class="table mb-0">
+    <tbody>
+      <% @produto.movimentacoes.each do |ie| %>
+      <tr>
+        <td> <%= ie.movimento.data %> </td>
+        <td> <%= movimento_descr(ie) %> </td>
+        <td> <%= ie.item.tamanho.nome %> </td>
+        <td> <%= ie.item.cor.nome %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

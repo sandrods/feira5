@@ -1,0 +1,44 @@
+<div class="card mb-4">
+  <div class="card-header">
+    <b>Etiquetas</b>
+    <%= button_tag icn(:plus, 'Incluir Etiquetas'), class: 'btn btn-sm btn-outline-primary pull-right', id: 'add_etiqueta' %>
+    <%= button_tag icn(:chevron_up, 'Terminei de incluir'), class: 'btn btn-sm btn-outline-primary pull-right', id: 'end_add_etiqueta', style: "display: none;"%>
+  </div>
+
+  <div class="card-body card-text" id='add_etiqueta_form' style="display: none;">
+    <%= simple_form_for [@produto, Etiqueta.new], remote: true do |f| %>
+
+      <div class="row">
+
+        <div class="col-5">
+          <%= f.association :cor, label_method: :nome %>
+        </div>
+        <div class="col-4">
+          <%= f.association :tamanho, label_method: :nome %>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label for="quant_etiq">Quantidade</label>
+            <input type="text" class="form-control" id="quant_etiq" name='quantidade' value=1>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="panel-actions pull-right">
+        <%= f.submit 'Salvar', class: 'btn btn-sm btn-primary' %>
+      </div>
+
+    <% end -%>
+  </div>
+
+  <table class="table mb-0">
+    <tbody id='t_etiquetas'>
+      <%= render partial: 'etiquetas/etiqueta', collection: @produto.etiquetas %>
+    </tbody>
+  </table>
+
+  <div class="card-footer text-right">
+    <b id="t_etiquetas_count"><%= @produto.etiquetas.count %></b> etiquetas
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<%= page_header @produto.ref, back_to: produtos_path do %>
+  <%= link_to icn(:edit, 'Editar Produto'), edit_produto_path(@produto), class: 'btn btn-primary btn-sm' %>
+<% end %>
+
+<div class="d-flex mb-4">
+  <div class="card card-body card-text bg-light">
+    <div class="row">
+      <div class="col">
+        <%= card_item(@produto.colecao&.descricao, 'Coleção') %>
+        <%= card_item(@produto.fornecedor&.nome, 'Fornecedor') %>
+      </div>
+      <div class="col">
+        <%= card_item(@produto.linha&.descricao, 'Linha') %>
+        <%= card_item(@produto.tipo&.descricao, 'Tipo') %>
+      </div>
+    </div>
+  </div>
+  <div class="card card-body alert-warning valores ml-4">
+      <div class="row">
+        <div class="col">
+          <div class="rotulo">Valor de Venda</div>
+          <div class="valor text-success"><%= number_to_currency @produto.valor %></div>
+        </div>
+        <div class="col">
+          <div class="rotulo">Custo</div>
+          <div class="valor text-danger"><%= number_to_currency @produto.custo %></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="rotulo">Lucro</div>
+          <div class="valor text-info"><%= number_to_currency @produto.lucro %></div>
+        </div>
+        <div class="col">
+          <div class="rotulo">Rentabilidade</div>
+          <div class="valor text-info"><%= number_to_percentage @produto.rentabilidade %></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+
+  <div class="col">
+    <%= render partial: 'produtos/etiquetas/index' %>
+  </div>
+
+  <div class="col">
+    <%= render partial: 'produtos/itens/index' %>
+
+    <%= render partial: 'produtos/estoques' %>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+// Place all the styles related to the resultados controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.card-body.valores {
+  text-align: right;
+  font-weight: bold;
+  div.rotulo {
+    color: #777;
+    margin-top: 3px;
+  }
+  div.valor {
+    font-size: 2em;
+    line-height: 1em;
+    margin-bottom: 8px;
+  }
+}

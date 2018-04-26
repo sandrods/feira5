@@ -175,4 +175,8 @@ module ApplicationHelper
     HTML
   end
 
+  def curr(val)
+    number_with_precision(val, precision: 2)
+  end
+
 end

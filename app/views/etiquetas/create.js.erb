@@ -1,0 +1,5 @@
+$('#t_etiquetas').html("<%= j render partial: 'etiquetas/etiqueta', collection: @produto.etiquetas  %>");
+$('#t_etiquetas_count').html('<%= @produto.etiquetas.count %>');
+// $('#etiqueta_cor_id').select2('val', '');
+$('#etiqueta_tamanho_id').select2('val', '');
+$('#quant_etiq').val(1);

@@ -1,0 +1,6 @@
+<%= tag.tr id: dom_id(item) do %>
+  <td><%= item.tamanho.nome %></td>
+  <td><%= item.cor.nome %></td>
+  <td><small><%= item.barcode %></small></td>
+  <td class="right"><%= label_estoque(item.estoque) %></td>
+<% end -%>

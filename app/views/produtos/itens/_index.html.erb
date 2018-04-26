@@ -1,0 +1,15 @@
+<div class="card mb-4">
+  <div class="card-header alert-warning">
+    <b>Estoque</b>
+  </div>
+
+  <table class="table mb-0">
+    <tbody>
+      <%= render partial: 'produtos/itens/item', collection: @produto.itens.ordenados %>
+    </tbody>
+  </table>
+
+  <div class="card-footer text-right">
+    <b><%= @produto.itens.sum(:estoque) %></b> itens
+  </div>
+</div>

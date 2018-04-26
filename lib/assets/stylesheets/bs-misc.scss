@@ -65,11 +65,24 @@ small.sub1 {
     // text-transform: uppercase;
   }
 }
+.currency, .integer {
+  input {
+    text-align: right;
+  }
+}
 
 .table thead th {
   font-size: 75%;
   text-transform: uppercase;
   padding-bottom: 0.5rem;
+}
+
+.card-body {
+  flex-basis: 0;
+}
+
+.badge.badge-md {
+  font-size: 90%;
 }
 
 .form-group-invalid > .input-group ~ .invalid-feedback {

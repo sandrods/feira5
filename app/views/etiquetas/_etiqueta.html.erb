@@ -1,0 +1,11 @@
+<%= tag.tr id: dom_id(etiqueta) do %>
+  <td><%= etiqueta.cor.nome %></td>
+  <td><%= etiqueta.tamanho.nome %></td>
+  <td style="width: 30px;">
+    <%= link_to icn(:trash_lg),
+                [@produto, etiqueta],
+                remote: true,
+                class: 'muted-danger',
+                method: :delete %>
+  </td>
+<% end -%>

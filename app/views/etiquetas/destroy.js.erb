@@ -1,0 +1,2 @@
+$('#t_etiquetas').html("<%= j render partial: 'etiquetas/etiqueta', collection: @produto.etiquetas  %>");
+$('#t_etiquetas_count').html('<%= @produto.etiquetas.count %>')

@@ -1,0 +1,87 @@
+<%= simple_form_for(@produto) do |f| %>
+<div class="card card-body card-text bg-light">
+
+  <div class="row">
+    <div class="col-sm-8">
+      <%= f.input :ref, label: 'Ref', input_html: { class: 'form-control-lg'} %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.association :fornecedor, label: 'Fornecedor', collection: Fornecedor.ativos, label_method: :nome, input_html: { class: 'select2' } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <%= f.association :colecao, label: 'Coleção', label_method: :descricao, input_html: { class: 'select2' } %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.association :tipo, label: 'Tipo', label_method: :descricao, input_html: { class: 'select2' } %>
+     </div>
+    <div class="col-sm-4">
+      <%= f.association :linha, label: 'Linha', label_method: :descricao, input_html: { class: 'select2' } %>
+    </div>
+  </div>
+
+<hr/>
+
+  <b>Valores</b><br/>
+
+  <div class="row" data-controller="valores">
+    <div class="col-sm-3 col-xs-6">
+      <%= f.input :custo,
+                  as: :currency,
+                  input_html: {
+                    class: 'form-control-lg',
+                    value: curr(@produto.custo),
+                    data: {
+                      target: 'valores.custo',
+                      action: 'blur->valores#reload'
+                    }
+                  } %>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <%= f.input :valor,
+                  label: 'Valor de Venda',
+                  as: :currency,
+                  input_html: {
+                    class: 'form-control-lg',
+                    value: curr(@produto.valor),
+                    data: {
+                      target: 'valores.valor',
+                      action: 'blur->valores#reload'
+                    }
+                  } %>
+    </div>
+
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group">
+        <label>Lucro</label>
+        <%= tag.p number_to_currency(@produto.lucro),
+                  class: 'form-control-plaintext form-control-lg',
+                  data: { target: 'valores.lucro' } %>
+      </div>
+    </div>
+    <div class="col-sm-3 col-xs-6">
+      <div class="form-group">
+        <label>Rentabilidade</label>
+        <%= tag.p number_to_percentage(@produto.rentabilidade),
+                class: 'form-control-plaintext form-control-lg',
+                data: { target: 'valores.rentabilidade' } %>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+  <div class="bottom-actions">
+    <%= f.button :submit, 'Salvar e Novo', class: 'btn btn-info' if @produto.new_record? -%>
+
+    <%= f.button :submit, 'Salvar Produto', class: 'btn btn-primary' %>
+
+    <%= link_to icon(:trash, 'Apagar este Produto'),
+          @produto,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger ml-auto' unless @produto.new_record? %>
+  </div>
+<% end %>
