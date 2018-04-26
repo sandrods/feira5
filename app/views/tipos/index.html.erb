@@ -1,0 +1,21 @@
+<%= page_header "Tipos" do %>
+  <%= link_to(icn(:plus, 'Novo Tipo'), new_tipo_path, class: 'btn btn-sm btn-success') %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tipos.each do |tipo| %>
+      <tr>
+        <td><%= link_to tipo.descricao, edit_tipo_path(tipo) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+<h5 class="index_count"><span class="badge badge-info"><%= @tipos.count %></span> <small>tipos encontradas</small></h5>

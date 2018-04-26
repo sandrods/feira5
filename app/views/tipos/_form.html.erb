@@ -1,0 +1,20 @@
+<%= simple_form_for(@tipo) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :descricao, label: 'Descrição' %>
+
+    </div>
+  </div>
+
+  <div class="bottom-actions">
+    <%= f.button :submit, 'Salvar Tipo', class: 'btn btn-primary' %>
+
+    <%= link_to icn(:trash, 'Apagar este Tipo'),
+          @tipo,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger ml-auto' unless @tipo.new_record? %>
+  </div>
+
+<% end %>

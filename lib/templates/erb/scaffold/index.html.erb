@@ -1,8 +1,7 @@
-<% att = (attributes_names.first || 'nome') %>
 <%%= page_header "<%= plural_table_name.capitalize %>" do %>
   <%%= link_to(icn(:plus, 'Novo <%= singular_table_name.capitalize %>'), new_<%= singular_table_name %>_path, class: 'btn btn-sm btn-success') %>
 <%% end %>
-
+<% att = (attributes_names.first || 'nome') %>
 <div class="search right mb-4">
 
   <%%= simple_form_for @search,
