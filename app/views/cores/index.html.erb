@@ -1,0 +1,21 @@
+<%= page_header "Cores" do %>
+  <%= link_to(icn(:plus, 'Nova Cor'), new_cor_path, class: 'btn btn-sm btn-success') %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cores.each do |cor| %>
+      <tr>
+        <td><%= link_to cor.nome, edit_cor_path(cor) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+<h5 class="index_count"><span class="badge badge-info"><%= @cores.count %></span> <small>cores encontradas</small></h5>

@@ -1,0 +1,21 @@
+<%= page_header "Tamanhos" do %>
+  <%= link_to(icn(:plus, 'Novo Tamanho'), new_tamanho_path, class: 'btn btn-sm btn-success') %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tamanhos.each do |tamanho| %>
+      <tr>
+        <td><%= link_to tamanho.nome, edit_tamanho_path(tamanho) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+<h5 class="index_count"><span class="badge badge-info"><%= @tamanhos.count %></span> <small>tamanhos encontradas</small></h5>

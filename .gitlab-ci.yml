@@ -1,0 +1,30 @@
+before_script:
+  - ruby -v                                   # Print out ruby version for debugging
+
+rspec:
+  stage: test
+  before_script:
+    - "bundle check || bundle install -j $(nproc) --path=/cache/bundler"  # Install dependencies into ./vendor/ruby
+    - cp config/database.gitlab-ci.yml config/database.yml
+    - cp config/app_config.yml.example config/app_config.yml
+    - "bundle exec rake db:migrate RAILS_ENV=test"
+    - "bundle exec rake assets:precompile RAILS_ENV=test"
+  script:
+  - bundle exec rspec spec
+
+# deploy to staging:
+#   stage: deploy
+#   environment: staging
+#   only:
+#     - master
+#
+#   before_script: #https://docs.gitlab.com/ce/ci/ssh_keys/README.html
+#     - eval $(ssh-agent -s)
+#     - ssh-add <(echo "$SSH_PRIVATE_KEY")
+#     - mkdir -p ~/.ssh
+#     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+#
+#   script:
+#     - git remote remove staging || true
+#     - git remote add staging rails@staging5.tre-rs.gov.br:rails/sms/.git
+#     - git push staging master

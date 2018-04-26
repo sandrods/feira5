@@ -1,0 +1,89 @@
+.btn-clean:hover {
+  color: #999;
+}
+.form-control.datepicker[readonly] {
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.label a {
+  color: #fff;
+}
+
+.text-very-muted {
+  color: #aaa;
+}
+
+small.sub {
+  line-height: 1.1;
+  display: block;
+  color: #888;
+  font-size: 85%;
+}
+
+small.sub1 {
+  line-height: 1.1;
+  display: block;
+  color: theme-color("info");
+  text-transform: uppercase;
+}
+
+.smaller {
+  font-size: 85%;
+  .table td,
+  .table th,
+  .list-group-item { padding: 0.5rem 0.7rem }
+
+  .card-header { padding: 0.5rem 0.7rem }
+  small {
+    font-size: 90%;
+    text-transform: uppercase;
+  }
+}
+
+.muted-danger {
+  color: #ccc;
+  &:hover {
+    color: theme-color("danger");
+  }
+}
+
+.alert .text {
+  line-height: 1.2;
+  margin-left: 1rem;
+}
+
+.navbar a.navbar-brand {
+  color: rgba(255, 255, 255, 0.5);
+  small {
+    font-size: 70%;
+    margin-left: 5px;
+
+    // color: rgba(255, 255, 255, 1);
+    // display: block;
+    // margin-top: -3px;
+    // text-transform: uppercase;
+  }
+}
+
+.table thead th {
+  font-size: 75%;
+  text-transform: uppercase;
+  padding-bottom: 0.5rem;
+}
+
+.form-group-invalid > .input-group ~ .invalid-feedback {
+  display: block;
+}
+.form-group-invalid > .input-group > .input-group-prepend > .input-group-text {
+  border-color: #dc3545;
+  border-right-color: #ced4da;
+}
+
+.form-group-invalid > .input-group > input.is-invalid {
+  border-left-color: #ced4da;
+}
+
+.form-group-invalid > .select2-container > .selection > .select2-selection {
+  border-color: #dc3545;
+}

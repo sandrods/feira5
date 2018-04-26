@@ -1,0 +1,17 @@
+$theme-color: #563d7c;
+
+.bg-theme { background-color: $theme-color; }
+
+html { font-size: 14px; }
+body {
+    background: asset-url("bg.png") 0 0 repeat;
+    padding-top: 60px;
+    & > .container {
+        background-color: #fff;
+        padding: 0 20px 40px 20px;
+        border-radius: 6px 6px 0 0;
+        border: 1px solid #e0e0e0;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+}

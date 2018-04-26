@@ -1,0 +1,44 @@
+.card-header.with_caption {
+  font-weight: bold;
+  color: darken($theme-color, 5%);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  small {
+    margin-top: .2rem;
+    display: block;
+    color: #777;
+    font-size: 75%;
+  }
+}
+
+.card-text {
+
+  label {
+    text-transform: uppercase;;
+    font-size: 80%;
+    font-weight: normal;
+    color: theme-color("primary");
+    margin-bottom: 0px;
+  }
+
+  p { margin-top: -2px; }
+
+  a.action {
+    margin: 5px -3px -6px 0;
+    font-size: 80%;
+    float: right;
+    color: #777;
+    &.left {
+      float: left;
+      margin: 5px 0 -3px -3px;
+    }
+    &:hover {
+      color: theme-color("danger");
+    }
+    &.danger {
+      color: theme-color("danger");
+      &:hover { color: theme-color("primary"); }
+    }
+  }
+
+}

@@ -1,0 +1,36 @@
+.search {
+  padding: 10px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  position: relative;
+
+  form {
+    display: inline-flex;
+  }
+
+  .form-group {
+    margin-right: 10px;
+  }
+
+  label.form-control-label {
+    font-weight: bold;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin-right: 5px;
+    abbr {
+      display: none;
+    }
+  }
+
+  .form-control {
+    font-size: 11px;
+    height: 24px !important;
+    padding: 4px 8px;
+  }
+
+}
+
+.right {
+  text-align: right
+}

@@ -1,0 +1,7 @@
+.select2-sub {
+  display: table-cell;
+  color: #888;
+  .select2-results__option--highlighted & {
+    color: #CCC;
+  }
+}
