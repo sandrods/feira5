@@ -1,0 +1,63 @@
+<%= page_header "Ajuste de Estoque ##{@ajuste.id} &nbsp;&nbsp;&nbsp; #{label_es(@ajuste.tipo)}" do %>
+  <%= link_to_back get_back_for(:ajuste_show) %>
+  <%= link_to icon(:edit, 'Editar Ajuste'), edit_ajuste_path(@ajuste), class: 'btn btn-sm btn-primary' %>
+<% end %>
+
+<div class="well well-sm show">
+
+  <div class="row">
+
+    <div class="col-sm-10 big">
+      <%= @ajuste.obs %>
+      <small><%= l @ajuste.created_at.to_date, format: :medium %></small>
+    </div>
+
+    <div class="col-sm-2 big">
+      <span id="itens_count"><%= @ajuste.itens.count %></span> <small>peças</small>
+    </div>
+
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-md-12">
+
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <b class="panel-title">Peças Incluídas</b>
+
+        <%= form_tag(ajuste_itens_path(@ajuste), remote: true ) do %>
+          <%= text_field_tag :barcode,
+                              nil,
+                              maxlength: 10,
+                              class: 'pull-right bar-code-input',
+                              placeholder: "incluir aqui" %>
+        <%- end -%>
+
+      </div>
+
+      <table class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th>Cód.</th>
+            <th>Produto</th>
+            <th>Cor</th>
+            <th>Tam.</th>
+            <th>Coleção</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody id="itens_table">
+          <%= render partial: 'ajustes/itens/item', collection: @itens %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<%= render partial: 'itens/modals' %>

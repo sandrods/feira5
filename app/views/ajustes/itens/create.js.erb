@@ -1,0 +1,13 @@
+$("#itens_table").prepend("<%= j render partial: 'ajustes/itens/item', object: @item %>");
+
+$("#itens_count").html("<%= @ajuste.itens.count %>");
+
+$(".bar-code-input").val('');
+
+window.show_item_box({
+  ref:   '<%= @item.produto.ref %>',
+  cor:   '<%= @item.cor.try :nome %>',
+  tam:   '<%= @item.tamanho.try :nome %>',
+  title: 'Item INCLUÍDO',
+  focus: $('#barcode')
+});

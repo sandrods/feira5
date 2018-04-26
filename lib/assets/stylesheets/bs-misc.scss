@@ -28,6 +28,10 @@ small.sub1 {
   text-transform: uppercase;
 }
 
+td small {
+  color: #777;
+}
+
 .smaller {
   font-size: 85%;
   .table td,

@@ -1,0 +1,14 @@
+<%= content_tag_for(:tr, item) do %>
+  <td><small><%= item.barcode %></small></td>
+  <td><%= item.produto.ref %></td>
+  <td><small><%= item.cor.try :nome %></small></td>
+  <td><small><%= item.tamanho.try :nome %></small></td>
+  <td><%= item.produto.colecao.descricao %></td>
+  <td class="text-right">
+    <%= link_to icon(:trash),
+                  ajuste_item_path(@ajuste, item),
+                  method: 'delete',
+                  class: 'btn btn-xs link_delete',
+                  data: { confirm: "Confirma Exclusão?" },
+                  remote: true %></td>
+<% end -%>

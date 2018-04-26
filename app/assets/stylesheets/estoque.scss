@@ -1,0 +1,21 @@
+// Place all the styles related to the estoque controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.table.clean {
+  margin-bottom: 0;
+  margin-top: -3px;
+  background-color: transparent !important;
+  tr { background-color: transparent !important; }
+  td {
+    border: none;
+    padding: 3px;
+  }
+}
+
+.badge.bigger {
+  font-size: 100%;
+  padding: .1em .6em .1em;
+  line-height: 1.2;
+}

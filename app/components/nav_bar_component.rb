@@ -3,10 +3,10 @@ class NavBarComponent
 
   def render
 
-    add_menu "Produtos", %w(cores tamanhos linhas tipos) do |m|
+    add_menu "Produtos", %w(produtos estoque cores tamanhos linhas tipos) do |m|
       m.link "Produtos", produtos_path
       m.link "Etiquetas", root_path
-      m.link "Estoque", root_path
+      m.link "Estoque", estoque_index_path
       m.divider
       m.link "Cores", cores_path
       m.link "Tamanhos", tamanhos_path

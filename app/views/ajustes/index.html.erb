@@ -1,0 +1,30 @@
+<%= page_header "Ajustes de Estoque" do %>
+  <%= link_to icon(:chevron_left, "Voltar"), estoque_index_path, class: 'btn' %>
+  <%= link_to(icon(:plus, 'Incluir Ajuste'), new_ajuste_path, class: 'btn btn-primary') %>
+<% end %>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Tipo</th>
+      <th>Descrição</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ajustes.each do |ajuste| %>
+      <tr>
+        <td><%= link_to ajuste.data, ajuste_path(ajuste) %></td>
+        <td><%= label_es(ajuste.tipo) %></td>
+        <td><small><%= ajuste.obs %></small></td>
+        <td class="right">
+          <span class="badge">
+            <%= ajuste.itens.count %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p class="index_count"><span><%= @ajustes.count %></span> ajustes encontradas.</p>

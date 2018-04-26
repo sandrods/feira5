@@ -1,0 +1,71 @@
+<%= page_header "Estoque" do %>
+  <%= link_to icn(:random, 'Ajustes de Estoque'), ajustes_path, class: 'btn btn-sm btn-primary' %>
+<% end %>
+
+<div class="row">
+
+  <div class="col-md-9">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Ref</th>
+          <th>Fornecedor</th>
+          <th>Coleção</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @produtos.each do |produto, itens| %>
+          <tr>
+            <td><b><%= produto.ref %></b></td>
+            <td><%= produto.fornecedor.try :nome %></td>
+            <td><small><%= produto.colecao.try :descricao %></small></td>
+            <td>
+              <table class="table table-condensed clean">
+                <% itens.each do |item| %>
+                <tr>
+                  <td style="width: 60px;"><b><%= item.tamanho.try :nome %></b></td>
+                  <td><b><%= item.cor.try :nome %></b></td>
+                  <td class="right"><small><%= item.barcode %></small></td>
+                  <td class="right"style="width: 36px;">
+                    <% lb = item.estoque == 0 ? 'badge-secondary' : 'badge-success'  %>
+                    <span class="badge <%= lb %> bigger"> <%= item.estoque %></span>
+                  </td>
+                </tr>
+                <% end %>
+              </table>
+
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <h5 class="index_count"><span class="badge badge-info"><%= @itens.sum(:estoque) %></span> <small>peças em estoque</small></h5>
+
+  </div>
+
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <b>Filtros</b>
+      </div>
+      <div class="card-body card-text">
+        <%= simple_form_for @search, url: estoque_index_path, method: 'GET' do |f| %>
+
+          <%= f.input :produto_colecao_id_eq, label: 'Coleção', collection: Colecao.to_select %>
+          <%= f.input :produto_fornecedor_id_eq, label: 'Fornecedor', collection: Fornecedor.to_select %>
+          <%= f.input :produto_tipo_id_eq, label: 'Tipo', collection: Tipo.to_select %>
+
+          <%= f.input :produto_ref_cont, label: "Ref" %>
+
+          <%= f.input :em_estoque, label: 'Exibir com estoque', as: :boolean %>
+
+          <hr>
+          <%= f.submit 'Filtrar', class: 'btn btn-info' %>
+          <%= button_tag 'Limpar', class: 'btn btn-light clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
