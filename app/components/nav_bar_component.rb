@@ -4,12 +4,39 @@ class NavBarComponent
   def render
 
     add_menu "Produtos", %w(cores tamanhos linhas tipos) do |m|
+      m.link "Produtos", root_path
+      m.link "Etiquetas", root_path
+      m.link "Estoque", root_path
+      m.divider
       m.link "Cores", cores_path
       m.link "Tamanhos", tamanhos_path
       m.link "Linhas", linhas_path
       m.link "Tipos", tipos_path
     end
 
+    add_menu "Compras", %w(compras fornecedores colecoes) do |m|
+      m.link "Compras", root_path
+      m.link "Fornecedores", root_path
+      m.link "Coleções", root_path
+    end
+
+    add_menu "Vendas", %w(vendas) do |m|
+      m.link "Vendas", root_path
+      m.divider
+      m.link "Sacolas", root_path
+      m.link "Clientes", root_path
+      m.divider
+      m.link "Vendas Mensais", root_path
+    end
+
+    add_menu "Financeiro", %w(vendas) do |m|
+      m.link "Diário", root_path
+      m.link "Anual", root_path
+      m.divider
+      m.link "Contas", root_path
+      m.link "Categorias", root_path
+      m.link "Formas de Pagto", root_path
+    end
     # add_link "Lançamento",
     #          lancamento_propostas_path,
     #          %w(lancamento)) if current_user.role?("admin_proposta")
@@ -50,6 +77,11 @@ class NavBarComponent
       @itens << { text: text, url: url }
     end
 
+    def divider
+      @itens ||= []
+      @itens << { divider: true }
+    end
+
     def render
       yield self
 
@@ -78,9 +110,17 @@ class NavBarComponent
     def render_menu
 
       tag.div class: 'dropdown-menu' do
-        @itens.map { |i| link_to i[:text], i[:url], class: 'dropdown-item' }.join("\n").html_safe
+        @itens.map { |i| render_item_menu(i) }.join("\n").html_safe
       end
 
+    end
+
+    def render_item_menu(item)
+      if item[:divider]
+        tag.div class: 'dropdown-divider'
+      else
+        link_to item[:text], item[:url], class: 'dropdown-item'
+      end
     end
 
   end
