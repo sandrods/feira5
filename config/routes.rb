@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :linhas
   resources :tamanhos
   resources :cores
   root 'cores#index'

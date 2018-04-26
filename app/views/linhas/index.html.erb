@@ -1,0 +1,22 @@
+
+<%= page_header "Linhas" do %>
+  <%= link_to(icn(:plus, 'Nova Linha'), new_linha_path, class: 'btn btn-sm btn-success') %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @linhas.each do |linha| %>
+      <tr>
+        <td><%= link_to linha.descricao, edit_linha_path(linha) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr/>
+<h5 class="index_count"><span class="badge badge-info"><%= @linhas.count %></span> <small>linhas encontradas</small></h5>

@@ -20,7 +20,7 @@ class CoresController < ApplicationController
     @cor = Cor.new(cor_params)
 
     if @cor.save
-      redirect_to cores_path, notice: 'Cor was successfully created.'
+      redirect_to cores_path, notice: 'Cor criada com sucesso.'
     else
       render action: 'new'
     end
@@ -29,7 +29,7 @@ class CoresController < ApplicationController
 
   def update
     if @cor.update(cor_params)
-      redirect_to cores_path, notice: 'Cor was successfully updated.'
+      redirect_to cores_path, notice: 'Cor atualizada com sucesso.'
     else
       render action: 'edit'
     end

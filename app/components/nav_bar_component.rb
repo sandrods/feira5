@@ -6,6 +6,7 @@ class NavBarComponent
     add_menu "Produtos", %w(cores) do |m|
       m.link "Cores", cores_path
       m.link "Tamanhos", tamanhos_path
+      m.link "Linhas", linhas_path
     end
 
     # add_link "Lançamento",
