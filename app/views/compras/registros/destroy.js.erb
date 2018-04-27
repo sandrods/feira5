@@ -1,0 +1,6 @@
+<%
+  total = number_to_currency @compra.pagamentos.sum(:valor)
+%>
+
+$('#registro_<%= params[:id] %>').fadeOut();
+$('#total_pagamentos_compra').html('<%= total %>')

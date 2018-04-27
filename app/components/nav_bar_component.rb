@@ -15,7 +15,7 @@ class NavBarComponent
     end
 
     add_menu "Compras", %w(compras fornecedores colecoes) do |m|
-      m.link "Compras", root_path
+      m.link "Compras", compras_path
       m.link "Fornecedores", fornecedores_path
       m.link "Coleções", colecoes_path
     end

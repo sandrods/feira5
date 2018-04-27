@@ -1,0 +1,81 @@
+<%= page_header "Compra ##{@compra.id}" do %>
+  <%= link_to_back get_back_for(:compra_show) %>
+  <%= link_to icn(:edit, 'Editar Compra'), edit_compra_path(@compra), class: 'btn btn-sm btn-primary' %>
+<% end %>
+
+<div class="card card-body bg-light show mb-4">
+
+  <div class="row">
+
+    <div class="col-sm-5 big">
+      <%= @compra.fornecedor.nome %>
+      <small><%= l @compra.data, format: :medium %></small>
+    </div>
+
+    <div class="col-sm-2 col-xs-4 big">
+      <span id="compra_itens_count"><%= @compra.itens.count %></span> <small>peças</small>
+    </div>
+
+    <div class="col-sm-3 col-xs-4 big">
+      <span id="compra_itens_total"><%= number_to_currency @compra.total %></span> <small>total com desconto</small>
+    </div>
+
+    <div class="col-sm-2 col-xs-4 big desconto">
+      <%= number_to_percentage @compra.desconto, precision: 1, format: "%n %" %>
+      <small><b>DESCONTO</b></small>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col-sm-7 col-md-7 col-lg-8">
+
+    <div class="card">
+      <div class="card-header alert-info d-flex">
+        <b>Peças</b>
+        <div class="ml-auto">
+          <%= form_tag(compra_itens_path(@compra), remote: true ) do %>
+            <%= text_field_tag :barcode,
+                                nil,
+                                maxlength: 10,
+                                class: 'bar-code-input',
+                                placeholder: "Código de Barras",
+                                autocomplete: 'off' %>
+          <%- end -%>
+        </div>
+
+      </div>
+      <table class="table table-sm table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Cód.</th>
+            <th>Produto</th>
+            <th>Cor</th>
+            <th>Tam.</th>
+            <th class="text-right">Valor</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody id="itens_compra_table">
+          <%= render partial: 'compras/itens/item', collection: @compra.itens.order('itens_estoque.id') %>
+        </tbody>
+      </table>
+      <div class="card-footer text-right">
+        <small>Total</small>
+        <span id="total_itens_compra">
+          <%= number_to_currency @compra.itens.sum(:valor) %></span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-sm-5 col-md-5 col-lg-4">
+    <%= render partial: 'compras/registros/index' %>
+  </div>
+
+</div>
+
+<%= render partial: 'itens/modals' %>

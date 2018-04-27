@@ -1,0 +1,11 @@
+<%= tag.tr id: dom_id(registro) do %>
+  <td><%= registro.data %></td>
+  <td><small><%= registro.conta.try :nome %></small></td>
+  <td class="text-right"><%= number_to_currency registro.valor %></td>
+  <td class="text-right"><%= link_to icn(:trash),
+                  compra_registro_path(@compra, registro),
+                  method: 'delete',
+                  class: 'muted-danger',
+                  data: { confirm: 'Confirma exclusão?' },
+                  remote: true %></td>
+<% end %>

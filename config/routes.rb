@@ -41,5 +41,9 @@ Rails.application.routes.draw do
 
   resources :colecoes
 
+  resources :compras do
+    resources :itens, controller: 'compras/itens'
+    resources :registros, controller: 'compras/registros'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

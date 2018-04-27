@@ -1,0 +1,48 @@
+<%= page_header "Compras" do %>
+  <%= link_to(icn(:plus, 'Nova Compra'), new_compra_path, class: 'btn btn-primary') %>
+<% end %>
+
+<div class="row">
+
+  <div class="col-md-8">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th width="90px">Data</th>
+          <th>Fornecedor</th>
+          <th>Coleção</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @compras.each do |compra| %>
+          <tr>
+            <td><%= compra.data %></td>
+            <td><%= link_to compra.fornecedor.nome, compra %></td>
+            <td><%= compra.colecao.try :descricao %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <hr>
+    <%= index_count @compras.count, 'compras encontradas' %>
+
+  </div>
+
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <b>Filtros</b>
+      </div>
+      <div class="card-body card-text">
+        <%= simple_form_for @search, url: compras_path, method: 'GET' do |f| %>
+          <%= f.input :fornecedor_id_eq, label: "Fornecedor", collection: Fornecedor.all, label_method: :nome %>
+          <%= f.input :colecao_id_eq, label: "Coleção", collection: Colecao.to_select %>
+          <hr>
+          <%= f.submit 'Filtrar', class: 'btn btn-info btn-sm' %>
+          <%= button_tag 'Limpar', class: 'btn btn-light btn-sm clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
