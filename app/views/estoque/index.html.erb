@@ -41,7 +41,8 @@
       </tbody>
     </table>
 
-    <h5 class="index_count"><span class="badge badge-info"><%= @itens.sum(:estoque) %></span> <small>peças em estoque</small></h5>
+    <hr>
+    <%= index_count(@itens.sum(:estoque), 'peças em estoque') %>
 
   </div>
 

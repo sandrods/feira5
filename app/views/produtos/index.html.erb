@@ -34,7 +34,8 @@
       </tbody>
     </table>
 
-    <h5 class="index_count"><span class="badge badge-info"><%= @produtos.count %></span> <small>produtos encontrados</small></h5>
+    <hr>
+    <%= index_count(@produtos.count), 'produtos encontrados') %>
 
   </div>
 

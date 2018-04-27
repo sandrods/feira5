@@ -33,4 +33,4 @@
 </table>
 
 <hr/>
-<h5 class="index_count"><span class="badge badge-info"><%%= @<%= plural_table_name %>.count %></span> <small><%= plural_table_name %> encontradas</small></h5>
+<%%= index_count(@<%= plural_table_name %>.count), '<%= plural_table_name %> encontrados') %>
