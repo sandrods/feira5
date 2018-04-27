@@ -75,10 +75,15 @@ td small {
   }
 }
 
-.table thead th {
-  font-size: 75%;
-  text-transform: uppercase;
-  padding-bottom: 0.5rem;
+.table {
+  thead th {
+    font-size: 75%;
+    text-transform: uppercase;
+    padding-bottom: 0.5rem;
+  }
+  &.table-sm {
+    thead th { padding-bottom: 0.3rem }
+  }
 }
 
 .card-body {

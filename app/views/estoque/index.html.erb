@@ -21,7 +21,7 @@
             <td><%= produto.fornecedor.try :nome %></td>
             <td><small><%= produto.colecao.try :descricao %></small></td>
             <td>
-              <table class="table table-condensed clean">
+              <table class="table table-sm clean">
                 <% itens.each do |item| %>
                 <tr>
                   <td style="width: 60px;"><b><%= item.tamanho.try :nome %></b></td>
