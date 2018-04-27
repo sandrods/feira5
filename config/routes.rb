@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   resources :fornecedores do
     post :arquivar, on: :member
   end
-  
+
+  resources :colecoes
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

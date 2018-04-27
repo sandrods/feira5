@@ -1,0 +1,19 @@
+<%= simple_form_for(@colecao) do |f| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :descricao, label: 'Descrição' %>
+    </div>
+  </div>
+
+  <div class="bottom-actions">
+    <%= f.button :submit, 'Salvar Coleção', class: 'btn btn-primary' %>
+
+    <%= link_to icn(:trash, 'Apagar esta Coleção'),
+          @colecao,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger ml-auto' unless @colecao.new_record? %>
+  </div>
+
+<% end %>

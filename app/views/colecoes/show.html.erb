@@ -1,0 +1,114 @@
+<%= page_header @colecao.descricao, 'Resultados', back_to: colecoes_path do %>
+  <%= link_to icn(:edit, 'Editar Coleção'), edit_colecao_path(@colecao), class: 'btn btn-primary btn-sm' %>
+<% end %>
+
+<div class="row">
+
+  <div class="col-sm-12 col-md-6">
+
+    <div class="card card-body bg-light stats">
+      <div class="row">
+        <div class="col-md-4 text-danger">
+          <h1> <%= qc = @resultado.total.quantidade_comprados %></h1>
+          <small>PEÇAS COMPRADAS</small>
+        </div>
+        <div class="col-md-4 text-success divider">
+          <h1> <%= qv = @resultado.total.quantidade_vendidos %></h1>
+          <small>PEÇAS VENDIDAS</small>
+        </div>
+        <div class="col-md-4 text-very-muted divider">
+          <h1> <%= qc - qv %></h1>
+          <small>EM ESTOQUE</small>
+        </div>
+      </div>
+      <%= progress(@resultado.total.porcent_vendidos) %>
+    </div>
+
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+    <div class="card card-body bg-light stats">
+      <div class="row">
+        <div class="col-md-6 text-danger">
+          <h1> <%= number_to_currency @resultado.total.valor_despesas %></h1>
+          <small>TOTAL DESPESAS</small>
+        </div>
+        <div class="col-md-6 text-success">
+          <h1> <%= number_to_currency @resultado.total.valor_receitas %></h1>
+          <small>TOTAL RECEITAS</small>
+        </div>
+      </div>
+
+      <%= progress(@resultado.total.porcent_receitas) %>
+
+      <table class="table table-sm mt-2">
+        <thead>
+          <tr>
+            <th colspan="2">Despesas</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @resultado.total.despesas.each do |d| %>
+          <tr>
+            <td class="text-muted"><%= d.data %></td>
+            <td><%= d.descr %></td>
+            <td class="right"><%= number_to_currency d.valor %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+
+<hr/>
+
+<div class="row">
+
+  <div class="col-sm-12 col-md-6">
+
+    <% @resultado.por_fornecedor.each do |f| %>
+    <h4><b><%= f.fornecedor.nome %></b></h4>
+    <div class="card card-body bg-light stats">
+
+      <div class="row">
+        <div class="col-md-4 text-danger">
+          <h1> <%= qc = f.quantidade_comprados %></h1>
+          <small>PEÇAS COMPRADAS</small>
+        </div>
+        <div class="col-md-4 text-success divider">
+          <h1> <%= qv = f.quantidade_vendidos %></h1>
+          <small>PEÇAS VENDIDAS</small>
+        </div>
+        <div class="col-md-4 text-very-muted divider">
+          <h1> <%= qc - qv %></h1>
+          <small>EM ESTOQUE</small>
+        </div>
+      </div>
+
+      <%= progress(f.porcent_vendidos) %>
+
+      <table class="table table-sm mt-2">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th class="right">Vendidas</th>
+          </tr>
+        </thead>
+        <% f.vendas_por_tipo.each do |item| %>
+          <tr>
+            <td><%= item.tipo %></td>
+            <td class="right"><%= item.quant %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+
+    <br/>
+
+    <% end %>
+  </div>
+
+</div>

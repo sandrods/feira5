@@ -1,0 +1,21 @@
+<%= page_header "Coleções" do %>
+  <%= link_to(icn(:plus, 'Nova Coleção'), new_colecao_path, class: 'btn btn-success btn-sm') %>
+<% end %>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Descrição</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @colecoes.each do |colecao| %>
+      <tr>
+        <td><%= link_to colecao.descricao, colecao_path(colecao) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr>
+<%= index_count @colecoes.count, 'coleções encontradas' %>
