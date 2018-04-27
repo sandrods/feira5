@@ -1,0 +1,35 @@
+// Place all the styles related to the financeiro controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.stats {
+  h1 {
+    margin-top: 5px;
+    margin-bottom: 2px;
+  }
+  h2 { margin: 5px; }
+
+  h3 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #337ab7;
+  }
+
+  .divider {
+    border-left: 1px dotted #bbb;
+  }
+
+  .progress {
+    margin-top: 10px;
+    background-color: #fdfdfd;
+  }
+}
+
+.financeiro.diario {
+  .panel-footer {
+    background-color: #fffbf0;
+    &.upper {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+}

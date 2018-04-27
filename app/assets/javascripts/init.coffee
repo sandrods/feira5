@@ -45,7 +45,7 @@ App.init = ->
       $(input).val('')
 
     for select_found in $('.simple_form select')
-      $(select_found).not('.custom_select').select2().val('').trigger("change")
+      $(select_found).not('.custom_select').val('').trigger("change")
 
     for select_found in $('.custom_select')
       $(select_found).val([])

@@ -1,7 +1,3 @@
-<%= page_header "Editar Ajuste" do %>
-
-  <%= link_to icon(:chevron_left, "Voltar"), ajustes_path, class: 'btn' %>
-
-<% end %>
+<%= page_header "Editar Ajuste", back_to: ajuste_path(@ajuste) %>
 
 <%= render 'form' %>

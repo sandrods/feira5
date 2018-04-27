@@ -25,4 +25,15 @@ module ProdutosHelper
     end
   end
 
+  def label_es(es)
+    case es.upcase
+    when 'E'
+      tag.span 'ENTRADA', class: 'badge badge-success'
+    when 'S'
+      tag.span 'SAÍDA', class: 'badge badge-danger'
+    else
+      tag.span es, class: 'badge badge-default'
+    end
+  end
+
 end

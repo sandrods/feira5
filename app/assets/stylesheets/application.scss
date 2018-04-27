@@ -17,7 +17,6 @@
  *= require pickadate/default.date
  *= require pickadate/default.time
 
- *= require_tree .
  *= require_self
  */
 
@@ -35,3 +34,10 @@ $blue: #337ab7;
 @import "search";
 @import "card_text";
 @import "select2_styles";
+
+@import "compras";
+@import "estoque";
+@import "etiquetas";
+@import "financeiro";
+@import "produtos";
+@import "vendas";

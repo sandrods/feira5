@@ -12,10 +12,10 @@
   <div class="bottom-actions">
     <%= f.button :submit, 'Salvar Ajuste', class: 'btn btn-primary' %>
 
-    <%= link_to icon(:trash, 'Apagar este Ajuste'),
+    <%= link_to icn(:trash, 'Apagar este Ajuste'),
                   @ajuste,
                   method: :delete,
                   data: { confirm: 'Tem certeza?' },
-                  class: 'btn btn-sm text-danger pull-right' unless @ajuste.new_record? %>
+                  class: 'btn btn-sm text-danger ml-auto' unless @ajuste.new_record? %>
   </div>
 <% end %>

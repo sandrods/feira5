@@ -5,7 +5,7 @@ class NavBarComponent
 
     add_menu "Produtos", %w(produtos estoque cores tamanhos linhas tipos) do |m|
       m.link "Produtos", produtos_path
-      m.link "Etiquetas", root_path
+      m.link "Etiquetas", etiquetas_path
       m.link "Estoque", estoque_index_path
       m.divider
       m.link "Cores", cores_path

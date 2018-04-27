@@ -9,7 +9,7 @@ class Colecao < ActiveRecord::Base
   has_many :produtos
 
   def Colecao.to_select
-    Colecao.all.map {|c| [c.descricao, c.id]}
+    Colecao.order('id desc').map {|c| [c.descricao, c.id]}
   end
 
 end

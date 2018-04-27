@@ -1,6 +1,5 @@
-<%= page_header "Ajustes de Estoque" do %>
-  <%= link_to icon(:chevron_left, "Voltar"), estoque_index_path, class: 'btn' %>
-  <%= link_to(icon(:plus, 'Incluir Ajuste'), new_ajuste_path, class: 'btn btn-primary') %>
+<%= page_header "Ajustes de Estoque", back_to: estoque_index_path do %>
+  <%= link_to icn(:plus, 'Novo Ajuste'), new_ajuste_path, class: 'btn btn-success btn-sm' %>
 <% end %>
 
 <table class="table table-hover table-striped">

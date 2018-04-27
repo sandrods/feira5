@@ -14,7 +14,10 @@ class EtiquetasController < ApplicationController
 
     @search = Etiqueta.search(params[:q])
 
-    @etiquetas = @search.result.includes(produto: :fornecedor).order('etiquetas.gerada, fornecedores.nome, produtos.ref').references(:fornecedor)
+    @etiquetas = @search.result
+                        .includes(produto: :fornecedor)
+                        .references(:fornecedor)
+                        .order('etiquetas.gerada, fornecedores.nome, produtos.ref')
 
     @selected = Etiqueta.selecionadas.in_groups_of(5, false)
 
@@ -71,7 +74,7 @@ class EtiquetasController < ApplicationController
     dif = Etiqueta.selecionadas.count % 25
     @etiquetas.where(gerada: false, mark: nil).limit(25 - dif).each { |e| e.mark! }
 
-    redirect_to etiquetas_path(params[:q])
+    redirect_to etiquetas_path(params[:q].permit!)
   end
 
  private

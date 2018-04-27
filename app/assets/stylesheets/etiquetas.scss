@@ -1,0 +1,13 @@
+// Place all the styles related to the etiquetas controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+table.table tbody tr.page { border-bottom: 4px dotted #db3434 }
+table#grid {
+  td {
+    text-align: center;
+    padding: 15px 8px;
+    border-right: 1px solid #ddd;
+    &:last-child { border-right: none;}
+  }
+}
