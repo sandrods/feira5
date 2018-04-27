@@ -69,16 +69,24 @@ module ApplicationHelper
     _flashes.html_safe
   end
 
-  def fa(*names)
+def fa(*names)
     names.map! { |name| name.to_s.gsub('_','-') }
     names.map! do |n|
-      if n =~ /pull-(?:left|right)/
-        n
-      elsif n =~ /(.*)-(lg|\dx)$/
-        "fa fa-#{$1} fa-#{$2}"
+      return n if n =~ /pull-(?:left|right)/
+
+      if n =~ /r-(.*)/
+        pre = 'far'
+        n = $1
       else
-        "fa fa-#{n}"
+        pre = 'fas'
       end
+
+      if n =~ /(.*)-(xs|sm|lg|\dx)$/
+        "#{pre} fa-#{$1} fa-#{$2}"
+      else
+        "#{pre} fa-#{n}"
+      end
+
     end
 
     tag.i class: names
@@ -179,4 +187,13 @@ module ApplicationHelper
     number_with_precision(val, precision: 2)
   end
 
+  def index_count(count, text)
+
+    _count = tag.span count, class: 'badge badge-info'
+    _text  = tag.small text
+    _space = "&nbsp;".html_safe
+
+    tag.h5 _count + _space + _text, class: 'index_count'
+
+  end
 end
