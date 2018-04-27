@@ -35,5 +35,9 @@ Rails.application.routes.draw do
   post 'etiquetas/unselect'     => 'etiquetas#unselect_all', as: 'unselect_all_etiquetas'
   post 'etiquetas/select'       => 'etiquetas#select_page',  as: 'select_page_etiquetas'
 
+  resources :fornecedores do
+    post :arquivar, on: :member
+  end
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

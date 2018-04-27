@@ -1,0 +1,80 @@
+<%= simple_form_for(@fornecedor) do |f| %>
+
+  <div class="card card-body card-text bg-light">
+
+    <div class="row">
+      <div class="col-sm-8 ">
+        <%= f.input :nome, label: 'Nome', input_html: { class: 'input-lg' } %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :cnpj, label: 'CNPJ' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= f.input :email, label: 'email' %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :website, label: "Site" %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :fone, label: 'Fone' %>
+      </div>
+
+
+      <div class="col-sm-6">
+        <%= f.input :endereco, label: 'Endereco' %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :bairro, label: 'Bairro' %>
+      </div>
+      <div class="col-sm-2">
+        <%= f.input :cep, label: 'CEP' %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :cidade, label: 'Cidade' %>
+      </div>
+      <div class="col-sm-2">
+        <%= f.input :uf, label: 'UF' %>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-12">
+        <%= f.input :obs, label: 'Obs' %>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="bottom-actions">
+    <%= f.button :submit, 'Salvar Fornecedor', class: 'btn btn-primary mr-auto' %>
+
+    <% unless @fornecedor.new_record?  %>
+
+    <% if @fornecedor.arquivado? %>
+      <%= link_to icn(:arrow_circle_up_lg, 'Desarquivar este Fornecedor'),
+          arquivar_fornecedor_path(@fornecedor, desarquivar: true),
+          method: :post,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-success pull-right' %>
+    <% else %>
+      <%= link_to icn(:arrow_circle_down_lg, 'Arquivar este Fornecedor'),
+          arquivar_fornecedor_path(@fornecedor),
+          method: :post,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-info pull-right' %>
+    <% end %>
+
+    <%= link_to icn(:trash, 'Apagar este Fornecedor'),
+          @fornecedor,
+          method: :delete,
+          data: { confirm: 'Tem certeza?' },
+          class: 'btn btn-sm text-danger pull-right'  %>
+
+    <% end %>
+  </div>
+
+<% end %>

@@ -1,0 +1,29 @@
+<%= page_header "Exibir Fornecedor" do %>
+  <%= link_to icn(:chevron_left, "Voltar"), fornecedores_path, class: 'btn' %>
+  <%= link_to icn(:edit, 'Editar Fornecedor'), edit_fornecedor_path(@fornecedor), class: 'btn btn-primary' %>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <h4 class="text-primary">
+      <%= @fornecedor.nome %>
+    </h4>
+
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6">
+
+        <dl class="dl-horizontal form">
+
+          <dt>Nome</dt>
+          <dd><%= @fornecedor.nome %></dd>
+
+        </dl>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

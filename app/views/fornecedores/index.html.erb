@@ -1,0 +1,54 @@
+<%= page_header "Fornecedores" do %>
+  <%= link_to(icn(:plus, 'Novo Fornecedor'), new_fornecedor_path, class: 'btn btn-sm btn-success') %>
+<% end %>
+
+<div class="row">
+
+  <div class="col-9">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Num. Compras</th>
+          <th>Última Compra</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fornecedores.each do |fornecedor| %>
+          <tr>
+            <td><%= link_to fornecedor.nome, edit_fornecedor_path(fornecedor) %></td>
+            <td>
+              <% c = fornecedor.compras.count; lb = (c == 0 ? 'light' : 'success')  %>
+              <span class="badge badge-<%= lb %> bigger"> <%= c %></span>
+            </td>
+            <td>
+              <%= fornecedor.compras.last&.data %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <hr>
+    <%= index_count(@fornecedores.count, 'fornecedores encontrados') %>
+
+  </div>
+
+  <div class="col-3">
+    <div class="card">
+      <div class="card-header">
+        <b>Filtros</b>
+      </div>
+      <div class="card-body card-text">
+        <%= simple_form_for @search, url: fornecedores_path, method: 'GET' do |f| %>
+          <%= f.input :nome_cont, label: "Nome" %>
+          <%= f.input :arquivado_eq, label: "Exibir Arquivados", as: :boolean %>
+
+          <hr>
+          <%= f.submit 'Filtrar', class: 'btn btn-info btn-sm' %>
+          <%= button_tag 'Limpar', class: 'btn btn-light btn-sm clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
