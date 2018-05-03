@@ -108,11 +108,9 @@ class NavBarComponent
     end
 
     def render_menu
-
       tag.div class: 'dropdown-menu' do
         @itens.map { |i| render_item_menu(i) }.join("\n").html_safe
       end
-
     end
 
     def render_item_menu(item)

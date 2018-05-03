@@ -8,9 +8,10 @@ if @registro.persisted?
   $('#partial_compras_registros_registro').html('<%= j lista %>');
   $('#registro_data').val('');
   $('#registro_valor').val('');
-  $('#registro_conta_id').select2('data', null)
+  $('#registro_conta_id').val('').trigger('change')
   $('#total_pagamentos_compra').html('<%= total %>')
 
 <% else %>
-  $('#add_pag_form').html('<%= j render partial: "compras/registros/form" %>')
+  $('#add_pag_form').html('<%= j render partial: "compras/registros/form" %>');
+  App.init();
 <% end %>

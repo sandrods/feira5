@@ -75,9 +75,13 @@ td small {
   }
 }
 
+.table-sm th, .table-sm td {
+  padding: 0.5rem;
+}
+
 .table {
   thead th {
-    font-size: 75%;
+    font-size: 80%;
     text-transform: uppercase;
     padding-bottom: 0.5rem;
   }
@@ -85,6 +89,7 @@ td small {
     thead th { padding-bottom: 0.3rem }
   }
 }
+
 
 .card-body {
   flex-basis: 0;

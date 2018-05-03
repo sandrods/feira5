@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include FlashToHeaders
 
-  rescue_from Item::ItemException, with: :show_item_exception
+  rescue_from ItemException, with: :show_item_exception
 
   protected
 

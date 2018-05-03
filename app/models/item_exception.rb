@@ -1,0 +1,2 @@
+class ItemException < Exception
+end

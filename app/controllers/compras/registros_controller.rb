@@ -3,7 +3,7 @@ class Compras::RegistrosController < ApplicationController
 
   def create
     defaults = {
-      descricao: "Compra #{@compra.id} - #{@compra.fornecedor.try :nome}",
+      descricao: "Compra #{@compra.id} - #{@compra.fornecedor&.nome}",
       categoria_id: Categoria::COMPRAS
     }
     parcelas = params[:parcelas].to_i

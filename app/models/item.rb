@@ -1,8 +1,4 @@
 # coding: utf-8
-
-class ItemException < Exception
-end
-
 class Item < ActiveRecord::Base
 
   belongs_to :produto

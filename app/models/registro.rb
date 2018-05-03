@@ -21,8 +21,8 @@ class Registro < ActiveRecord::Base
   belongs_to :conta
   belongs_to :registravel, polymorphic: true
   belongs_to :categoria
-  belongs_to :forma
-  belongs_to :colecao
+  belongs_to :forma, optional: true
+  belongs_to :colecao, optional: true
 
   def pendente?
     !pago

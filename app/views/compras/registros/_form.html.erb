@@ -19,14 +19,14 @@
     <div class="col-sm-4">
       <div class="control-group">
         <label for="">Parcelas</label>
-        <%= select_tag :parcelas, options_for_select((1..6).to_a), class: 'form-control no_select2' %>
+        <%= select_tag :parcelas, options_for_select((1..6).to_a), class: 'form-control custom_select' %>
       </div>
     </div>
 
   </div>
 
-  <div class="panel-actions pull-right">
-    <%= f.submit 'Salvar', class: 'btn btn-sm btn-primary' %>
+  <div class="bottom-actions">
+    <%= f.submit 'Salvar', class: 'btn btn-sm btn-primary ml-auto' %>
   </div>
 
 <% end -%>
