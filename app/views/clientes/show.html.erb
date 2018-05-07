@@ -1,0 +1,44 @@
+<%= page_header "Exibir Cliente" do %>
+  <%= link_to_back get_back_for(:cliente_show) %>
+  <%= link_to icn(:edit, 'Editar Cliente'), edit_cliente_path(@cliente), class: 'btn btn-sm btn-primary' %>
+<% end %>
+
+<div class="card card-body card-text mb-4">
+
+    <h4 class="text-primary">
+      <%= @cliente.nome %>
+    </h4>
+
+    <div class="row">
+
+      <div class="col-3">
+        <label>Email</label>
+        <p><%= @cliente.email %></p>
+      </div>
+      <div class="col-3">
+        <label>Celular</label>
+        <p><%= @cliente.fone_cel %></p>
+      </div>
+
+    </div>
+
+</div>
+
+<table class="table">
+  <tbody>
+    <% @cliente.vendas.includes(itens: { item: [:produto, :cor, :tamanho] }).order(data: :desc).each do |venda| %>
+      <tr class='header'>
+        <td colspan="10"> <%= venda.data %> &nbsp;&nbsp;&nbsp; <%= link_to venda.descr, venda %>   </td>
+      </tr>
+      <% venda.itens.each do |item| %>
+      <tr>
+        <td><%= item.produto.ref %></td>
+        <td><%= item.produto.tipo.descricao %></td>
+        <td><%= item.produto.fornecedor.nome %></td>
+        <td><%= item.tamanho.try :nome %></td>
+        <td><%= item.cor.try :nome %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,77 @@
+<%= simple_form_for(@cliente) do |f| %>
+
+  <div class="row">
+    <div class="col-sm-5 col-md-6">
+      <%= f.input :nome, label: 'Nome', input_html: { class: 'input-lg' } %>
+    </div>
+    <div class="col-sm-5 col-md-4">
+      <%= f.input :email, label: 'email', wrapper: 'input_group', prepend: icn(:envelope) %>
+    </div>
+    <div class="col-sm-2 col-md-2">
+      <%= f.input :aniversario, label: "Aniversário", placeholder: 'dd/mm' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <%= f.input :fone_cel, label: 'Celular', wrapper: 'input_group', prepend: icn(:mobile_alt) %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :fone_res, label: 'Fone Residencial', wrapper: 'input_group', prepend: icn(:phone) %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :fone_com, label: 'Fone Comercial', wrapper: 'input_group', prepend: icn(:phone) %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.input :endereco, label: 'Endereco' %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :bairro, label: 'Bairro' %>
+    </div>
+    <div class="col-sm-2">
+      <%= f.input :cep, label: 'CEP' %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.input :cidade, label: 'Cidade' %>
+    </div>
+    <div class="col-sm-2">
+      <%= f.input :uf, label: 'UF' %>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <%= f.input :obs, label: 'Obs' %>
+    </div>
+
+  </div>
+
+  <div class="bottom-actions">
+    <%= f.button :submit, 'Salvar Cliente', class: 'btn btn-primary' %>
+
+    <% unless @cliente.new_record?  %>
+
+      <% if @cliente.arquivado? %>
+        <%= link_to icn(:arrow_circle_up_lg, 'Desarquivar este Cliente'),
+            arquivar_cliente_path(@cliente, desarquivar: true),
+            method: :post,
+            data: { confirm: 'Tem certeza?' },
+            class: 'btn btn-sm text-success ml-auto' %>
+      <% else %>
+        <%= link_to icn(:arrow_circle_down_lg, ' Arquivar este Cliente'),
+            arquivar_cliente_path(@cliente),
+            method: :post,
+            data: { confirm: 'Tem certeza?' },
+            class: 'btn btn-sm text-info ml-auto' %>
+      <% end %>
+
+      <%= link_to icn(:trash, 'Apagar este Cliente'),
+            @cliente,
+            method: :delete,
+            data: { confirm: 'Tem certeza?' },
+            class: 'btn btn-sm text-danger' %>
+
+    <% end %>
+  </div>
+
+<% end %>

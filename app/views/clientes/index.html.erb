@@ -1,0 +1,57 @@
+<%= page_header "Clientes" do %>
+  <%= link_to(icn(:plus, 'Novo Cliente'), new_cliente_path, class: 'btn btn-sm btn-success') %>
+<% end %>
+
+<div class="text-center affix1" data-offset-top="70"><%= links_letras %></div>
+
+<div class="row">
+
+  <div class="col-md-9">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>email</th>
+          <th class="right">Fone</th>
+          <th class="right">Aniver</th>
+          <th class="right">Vendas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @clientes.each do |cliente| %>
+          <tr>
+            <td><%= link_to cliente.nome, cliente %></td>
+            <td><%= cliente.email %></td>
+            <td class="right"><%= cliente.fone %></td>
+            <td class="right"><%= cliente.aniversario %></td>
+            <td class="right"><%= label_estoque(cliente.vendas.count) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <hr>
+    <%= index_count @clientes.count, "clientes encontradas" %>
+
+  </div>
+
+  <div class="col-md-3">
+
+    <div class="card">
+      <div class="card-header">
+        <b>Filtros</b>
+      </div>
+      <div class="card-body card-text">
+        <%= simple_form_for @search, url: clientes_path, method: 'GET' do |f| %>
+          <%= f.input :nome_cont, label: "Nome" %>
+          <%= f.input :arquivado_eq, label: "Exibir Arquivados", as: :boolean %>
+
+          <hr>
+          <%= f.submit 'Filtrar', class: 'btn btn-info btn-sm' %>
+          <%= button_tag 'Limpar', class: 'btn btn-light btn-sm clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -39,6 +39,10 @@ Rails.application.routes.draw do
     post :arquivar, on: :member
   end
 
+  resources :clientes do
+    post :arquivar, on: :member
+  end
+
   resources :colecoes
 
   resources :compras do

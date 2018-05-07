@@ -24,7 +24,7 @@ class NavBarComponent
       m.link "Vendas", root_path
       m.divider
       m.link "Sacolas", root_path
-      m.link "Clientes", root_path
+      m.link "Clientes", clientes_path
       m.divider
       m.link "Vendas Mensais", root_path
     end
