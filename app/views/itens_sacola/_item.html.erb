@@ -1,0 +1,12 @@
+<%= tag.tr id: dom_id(item) do %>
+  <td><small><%= item.barcode %></small></td>
+  <td><%= item.produto.ref %></td>
+  <td><small><%= item.cor.try :nome %></small></td>
+  <td><small><%= item.tamanho.try :nome %></small></td>
+  <td class="text-right"><%= number_to_currency item.valor %></td>
+  <td class="text-right"><%= link_to icn(:trash),
+                  sacola_item_path(@sacola, item),
+                  method: 'delete',
+                  class: 'muted-danger',
+                  remote: true %></td>
+<% end -%>

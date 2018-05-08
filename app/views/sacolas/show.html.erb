@@ -1,0 +1,106 @@
+<%= page_header "Sacola ##{@sacola.id}", back_to: sacolas_path do %>
+
+  <%= link_to icn(:print, 'Imprimir'), print_sacola_path(@sacola), class: 'btn btn-sm btn-info' %>
+  <%= link_to icn(:plus, 'Criar Venda'),
+              vendas_path(sacola_id: @sacola.id),
+              method: 'POST',
+              class: 'btn btn-sm btn-success',
+              data: { confirm: 'Confirma criação de Venda com os itens incluídos ?' } %>
+<% end %>
+
+
+<div class="card card-body bg-light show mb-4">
+
+  <div class="row">
+
+    <div class="col-sm-5 big">
+      <%= @sacola.nome %>
+      <small><%= l @sacola.created_at.to_date, format: :medium %></small>
+    </div>
+
+    <div class="col-sm-3 col-xs-4 big">
+      <span id="sacola_itens_count"><%= @sacola.itens.incluidos.count %></span> <small>peças</small>
+    </div>
+
+    <div class="col-sm-4 col-xs-4 big">
+      <span id="sacola_itens_total"><%= number_to_currency @sacola.total %></span> <small>total</small>
+    </div>
+
+  </div>
+  <%= link_to 'Editar Sacola', edit_sacola_path(@sacola), class: 'action' %>
+</div>
+
+<div class="row">
+
+  <div class="col-md-7">
+
+    <div class="card">
+      <div class="card-header alert-info d-flex align-items-center">
+        <b>Peças Incluídas</b>
+        <div class="ml-auto">
+          <%= form_tag(sacola_itens_path(@sacola), remote: true ) do %>
+            <%= text_field_tag :barcode,
+                                nil,
+                                maxlength: 10,
+                                class: 'bar-code-input',
+                                placeholder: "incluir aqui",
+                                autocomplete: 'off' %>
+          <%- end -%>
+        </div>
+      </div>
+
+      <table class="table table-sm table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Cód.</th>
+            <th>Produto</th>
+            <th>Cor</th>
+            <th>Tam.</th>
+            <th class="text-right">Valor</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody id="itens_sacola_table">
+          <%= render partial: 'itens_sacola/item', collection: @sacola.itens.incluidos %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="col-md-5 col-sm-8">
+
+    <div class="card">
+      <div class="card-header alert-warning d-flex align-items-center">
+        <b>Peças Devolvidas</b>
+        <div class="ml-auto">
+          <%= form_tag(devolver_sacola_itens_path(@sacola), remote: true ) do %>
+            <%= text_field_tag :barcode_d,
+                                nil,
+                                maxlength: 10,
+                                class: 'bar-code-input',
+                                placeholder: "devolver aqui" %>
+          <% end %>
+        </div>
+      </div>
+
+      <table class="table table-sm table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Cód.</th>
+            <th>Produto</th>
+            <th>Cor</th>
+            <th>Tam.</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody id="itens_sacola_dev_table">
+          <%= render partial: 'itens_sacola/item_devolvido', collection: @sacola.itens.devolvidos, as: 'item' %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<%= render partial: 'itens/modals' %>

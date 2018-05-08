@@ -49,5 +49,13 @@ Rails.application.routes.draw do
     resources :itens, controller: 'compras/itens'
     resources :registros, controller: 'compras/registros'
   end
+
+  resources :sacolas do
+    resources :itens, controller: 'itens_sacola' do
+      post 'devolver', on: :collection
+    end
+    get 'print', on: :member
+  end
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

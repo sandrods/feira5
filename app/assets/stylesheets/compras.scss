@@ -22,6 +22,13 @@
             color: #bbb;
         }
     }
+  .action {
+    position: absolute;
+    right: 0.8em;
+    bottom: 0.5em;
+    color: #aaa;
+    &:hover { color: $primary }
+  }
 }
 
 .bar-code-input {

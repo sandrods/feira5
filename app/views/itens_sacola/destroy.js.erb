@@ -1,0 +1,3 @@
+$('#item_sacola_<%= params[:id] %>').fadeOut();
+$("#sacola_itens_count").html("<%= @sacola.itens.incluidos.count %>");
+$("#sacola_itens_total").html("<%= number_to_currency @sacola.total %>");

@@ -20,10 +20,10 @@ class NavBarComponent
       m.link "Coleções", colecoes_path
     end
 
-    add_menu "Vendas", %w(vendas) do |m|
+    add_menu "Vendas", %w(vendas clientes) do |m|
       m.link "Vendas", root_path
       m.divider
-      m.link "Sacolas", root_path
+      m.link "Sacolas", sacolas_path
       m.link "Clientes", clientes_path
       m.divider
       m.link "Vendas Mensais", root_path

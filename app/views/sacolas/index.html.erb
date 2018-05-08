@@ -1,0 +1,50 @@
+<%= page_header "Sacolas" do %>
+    <%= link_to(icn(:plus, 'Nova Sacola'), new_sacola_path, class: 'btn btn-success btn-sm') %>
+<% end %>
+
+<div class="row">
+
+  <div class="col-md-9">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th width="90px;">Data</th>
+          <th>Nome</th>
+          <th class="right">Peças</th>
+          <th class="right">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sacolas.each do |sacola| %>
+          <tr>
+            <td><small><%= sacola.created_at.to_date %></small></td>
+            <td><%= link_to sacola.nome, sacola %></td>
+            <td class="right"><%= sacola.itens.incluidos.count %></td>
+            <td class="right"><%= number_to_currency sacola.total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <hr>
+    <%= index_count @sacolas.count, "sacolas encontradas" %>
+
+  </div>
+
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <b>Filtros</b>
+      </div>
+      <div class="card-body card-text">
+        <%= simple_form_for @search, url: sacolas_path, method: 'GET' do |f| %>
+          <%= f.input :cliente_nome_cont, label: "Cliente" %>
+
+          <hr>
+          <%= f.submit 'Filtrar', class: 'btn btn-info btn-sm' %>
+          <%= button_tag 'Limpar', class: 'btn btn-light btn-sm clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
