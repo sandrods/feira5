@@ -1,51 +1,52 @@
 <%= simple_form_for(@cliente) do |f| %>
+  <div class="card card-body bg-light card-text">
 
-  <div class="row">
-    <div class="col-sm-5 col-md-6">
-      <%= f.input :nome, label: 'Nome', input_html: { class: 'input-lg' } %>
+    <div class="row">
+      <div class="col-sm-5 col-md-6">
+        <%= f.input :nome, label: 'Nome', input_html: { class: 'input-lg' } %>
+      </div>
+      <div class="col-sm-5 col-md-4">
+        <%= f.input :email, label: 'email', wrapper: 'input_group', prepend: icn(:envelope) %>
+      </div>
+      <div class="col-sm-2 col-md-2">
+        <%= f.input :aniversario, label: "Aniversário", placeholder: 'dd/mm' %>
+      </div>
     </div>
-    <div class="col-sm-5 col-md-4">
-      <%= f.input :email, label: 'email', wrapper: 'input_group', prepend: icn(:envelope) %>
+    <div class="row">
+      <div class="col-sm-4">
+        <%= f.input :fone_cel, label: 'Celular', wrapper: 'input_group', prepend: icn(:mobile_alt) %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :fone_res, label: 'Fone Residencial', wrapper: 'input_group', prepend: icn(:phone) %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :fone_com, label: 'Fone Comercial', wrapper: 'input_group', prepend: icn(:phone) %>
+      </div>
+      <div class="col-sm-6">
+        <%= f.input :endereco, label: 'Endereco' %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :bairro, label: 'Bairro' %>
+      </div>
+      <div class="col-sm-2">
+        <%= f.input :cep, label: 'CEP' %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :cidade, label: 'Cidade' %>
+      </div>
+      <div class="col-sm-2">
+        <%= f.input :uf, label: 'UF' %>
+      </div>
     </div>
-    <div class="col-sm-2 col-md-2">
-      <%= f.input :aniversario, label: "Aniversário", placeholder: 'dd/mm' %>
+
+    <div class="row">
+
+      <div class="col-sm-12">
+        <%= f.input :obs, label: 'Obs' %>
+      </div>
+
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <%= f.input :fone_cel, label: 'Celular', wrapper: 'input_group', prepend: icn(:mobile_alt) %>
-    </div>
-    <div class="col-sm-4">
-      <%= f.input :fone_res, label: 'Fone Residencial', wrapper: 'input_group', prepend: icn(:phone) %>
-    </div>
-    <div class="col-sm-4">
-      <%= f.input :fone_com, label: 'Fone Comercial', wrapper: 'input_group', prepend: icn(:phone) %>
-    </div>
-    <div class="col-sm-6">
-      <%= f.input :endereco, label: 'Endereco' %>
-    </div>
-    <div class="col-sm-4">
-      <%= f.input :bairro, label: 'Bairro' %>
-    </div>
-    <div class="col-sm-2">
-      <%= f.input :cep, label: 'CEP' %>
-    </div>
-    <div class="col-sm-4">
-      <%= f.input :cidade, label: 'Cidade' %>
-    </div>
-    <div class="col-sm-2">
-      <%= f.input :uf, label: 'UF' %>
-    </div>
-  </div>
-
-  <div class="row">
-
-    <div class="col-sm-12">
-      <%= f.input :obs, label: 'Obs' %>
-    </div>
-
-  </div>
-
   <div class="bottom-actions">
     <%= f.button :submit, 'Salvar Cliente', class: 'btn btn-primary' %>
 
