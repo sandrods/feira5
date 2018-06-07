@@ -470,6 +470,26 @@ class CurrencyInput < SimpleForm::Inputs::Base
 
 end
 
+class PercentageInput < SimpleForm::Inputs::Base
+  def input(wrapper_options)
+    symbol = wrapper_options.delete(:symbol) || "%"
+    merged_input_options = merge_wrapper_options(input_html_options, wrapper_options)
+
+    tag.div input_group(symbol, merged_input_options), class: "input-group"
+  end
+
+  private
+
+  def input_group(symbol, merged_input_options)
+    "#{@builder.text_field(attribute_name, merged_input_options)} #{symbol_addon(symbol)}".html_safe
+  end
+
+  def symbol_addon(symbol)
+    tag.div tag.div(symbol, class: 'input-group-text'), class: "input-group-append"
+  end
+
+end
+
 module InputGroup
   def prepend(wrapper_options = nil)
     span_tag = content_tag(:span, options[:prepend], class: "input-group-text")
