@@ -56,6 +56,12 @@ Rails.application.routes.draw do
     end
     get 'print', on: :member
   end
-  
+
+  resources :vendas do
+    resources :itens, controller: 'vendas/itens'
+    resources :registros, controller: 'vendas/registros'
+    get 'mensal', on: :collection
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

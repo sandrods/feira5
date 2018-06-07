@@ -1,0 +1,17 @@
+<%= tag.tr id: dom_id(item) do %>
+  <td><small><%= item.barcode %></small></td>
+  <td><%= item.produto.ref %></td>
+  <td><small><%= item.cor&.nome %></small></td>
+  <td><small><%= item.tamanho&.nome %></small></td>
+  <td class="text-right">
+    <%= number_to_percentage item.desconto, precision: 1, format: "%n %" %>
+  </td>
+  <td class="text-right">
+    <%= number_to_currency item.valor %>
+  </td>
+  <td class="text-right">
+    <%= link_to icn(:edit),
+                  edit_venda_item_path(@venda, item),
+                  class: 'muted-danger',
+                  data: { behavior: 'load-modal' } %></td>
+<% end -%>

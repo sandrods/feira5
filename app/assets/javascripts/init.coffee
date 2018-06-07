@@ -37,6 +37,7 @@ App.init = ->
     $(this).mask _mask, autoclear: false
 
   $(".currency").maskMoney()
+  $(".percentage").maskMoney(precision: 0)
 
   $('.simple_form .clear').on 'click', (e) ->
     e.preventDefault()

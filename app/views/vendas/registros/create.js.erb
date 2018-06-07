@@ -1,0 +1,16 @@
+<%
+if @registro.persisted?
+
+  lista = render partial: "vendas/registros/registro", collection: @venda.pagamentos
+  total = number_to_currency @venda.pagamentos.sum(:valor)
+%>
+
+  $('#partial_vendas_registros_registro').html('<%= j lista %>');
+  $('#registro_data').val('');
+  $('#registro_valor').val('');
+  $('#registro_forma_id').select2('data', null)
+  $('#total_pagamentos_venda').html('<%= total %>')
+
+<% else %>
+  $('#add_pag_form').html('<%= j render partial: "vendas/registros/form" %>')
+<% end %>

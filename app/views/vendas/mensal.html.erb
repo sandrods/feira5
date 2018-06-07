@@ -1,0 +1,126 @@
+<%= page_header 'Vendas Mensais' do %>
+<% end %>
+
+<div class="well well-sm stats">
+  <h2 style="text-align: center">
+    <%= link_to icon(:chevron_left), mensal_vendas_path(mes: @vendas.calendar.last_month) %>
+    <%= @vendas.calendar.month %>
+    <%= link_to icon(:chevron_right), mensal_vendas_path(mes: @vendas.calendar.next_month) %>
+  </h2>
+</div>
+
+<div class="well stats">
+  <div class="row">
+    <div class="col-md-4 text-danger">
+      <h1> <%= @vendas.total_pecas %></h1>
+      <small>PEÇAS VENDIDAS</small>
+    </div>
+    <div class="col-md-4 text-success divider">
+      <h1> <%= number_to_currency @vendas.total_valor %></h1>
+      <small>VALOR TOTAL</small>
+    </div>
+    <div class="col-md-4 text-very-muted divider">
+      <h1> <%= number_to_currency @vendas.valor_medio %></h1>
+      <small>VALOR MÉDIO</small>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="well stats">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Por Fornecedor</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @vendas.por_fornecedor.each do |k, v| %>
+          <tr>
+            <td><%= k %></td>
+            <td class="right"><%= v %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="well stats">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Por Tipo</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @vendas.por_tipo.each do |k, v| %>
+          <tr>
+            <td><%= k %></td>
+            <td class="right"><%= v %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    <div class="well stats">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Por Coleção</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @vendas.por_colecao.each do |k, v| %>
+          <tr>
+            <td><%= k %></td>
+            <td class="right"><%= v %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+
+<hr/>
+
+<br/><h4>Valores de Vendas</h4><br/>
+<%= column_chart @graf.valor_por_mes,
+      library: {
+        plotOptions: {
+          series: {
+            dataLabels: { enabled: true, format: 'R$ {point.y:.0f}' } } } } %>
+<br/>
+<%= column_chart @graf.last_year.valor_por_mes,
+      colors: ['#eeb6c2'],
+      library: {
+        plotOptions: {
+          series: {
+            dataLabels: { enabled: true, format: 'R$ {point.y:.0f}' } } } } %>
+
+
+<hr/>
+
+<br/><h4>Quantidades de Vendas</h4><br/>
+
+<%= column_chart @graf.quantidade_por_mes,
+      library: {
+        plotOptions: {
+          series: {
+            dataLabels: { enabled: true } } } } %>
+<br/>
+<%= column_chart @graf.last_year.quantidade_por_mes,
+      colors: ['#eeb6c2'],
+      library: {
+        plotOptions: {
+          series: {
+            dataLabels: { enabled: true } } } }
+%>

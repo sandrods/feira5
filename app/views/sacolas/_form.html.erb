@@ -1,9 +1,13 @@
 <%= simple_form_for(@sacola) do |f| %>
 
-  <div class="row">
-    <div class="col-md-6">
+  <div class="card card-body bg-light card-text">
+
+    <div class="row">
+      <div class="col-md-6">
         <%= f.association :cliente, label: 'Cliente', collection: Cliente.all, label_method: :nome %>
+      </div>
     </div>
+
   </div>
 
   <div class="bottom-actions">

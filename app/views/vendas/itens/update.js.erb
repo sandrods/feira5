@@ -1,0 +1,6 @@
+$('#item_estoque_<%= @item.id %>').replaceWith('<%= j render partial: "vendas/itens/item", object: @item %>');
+$("#venda_itens_total").html("<%= number_to_currency @venda.total %>");
+
+$('#total_itens_venda').html('<%= number_to_currency @venda.total %>')
+
+$('#global_modal').modal("hide");

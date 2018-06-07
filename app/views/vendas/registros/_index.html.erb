@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header alert-danger d-flex align-items-center">
+    <b>Pagamentos</b>
+    <%= button_tag icn(:plus, 'Incluir Pagamento'), class: 'btn btn-sm btn-default ml-auto', id: 'add_pag' %>
+    <%= button_tag icn(:chevron_up, 'Terminei de incluir'), class: 'btn btn-sm btn-default ml-auto', id: 'end_add_pag', style: "display: none;"%>
+  </div>
+
+  <div class="card-body" id='add_pag_form' style="display: none;">
+    <%= render partial: 'vendas/registros/form' %>
+  </div>
+
+  <table class="table table-condensed table-striped mb-0">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Forma Pagto.</th>
+        <th class="text-right">Valor</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody id='partial_vendas_registros_registro'>
+      <%= render partial: 'vendas/registros/registro', collection: @venda.pagamentos %>
+    </tbody>
+  </table>
+  <div class="card-footer text-right">
+    <small>Total</small>
+    <span id="total_pagamentos_venda">
+      <%= number_to_currency @venda.pagamentos.sum(:valor) %></span>
+  </div>
+</div>

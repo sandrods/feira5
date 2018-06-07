@@ -1,0 +1,32 @@
+<%= simple_form_for [@venda, @registro || Registro.new], remote: true do |f| %>
+
+  <div class="row card-text">
+
+    <div class="col-sm-6">
+      <%= f.input :data %>
+    </div>
+    <div class="col-sm-6">
+      <%= f.input :valor, as: :currency %>
+    </div>
+
+  </div>
+
+  <div class="row card-text">
+
+    <div class="col-sm-8">
+      <%= f.association :forma, label_method: :nome, label: 'Forma de Pagamento' %>
+    </div>
+    <div class="col-sm-4">
+      <div class="control-group">
+        <label for="">Parcelas</label>
+        <%= select_tag :parcelas, options_for_select((1..6).to_a), class: 'form-control custom_select' %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom-actions">
+    <%= f.submit 'Salvar', class: 'btn btn-sm btn-primary ml-auto' %>
+  </div>
+
+<% end -%>

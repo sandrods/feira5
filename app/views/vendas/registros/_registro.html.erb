@@ -1,0 +1,13 @@
+<%= tag.tr id: dom_id(registro) do %>
+  <td><%= registro.data %></td>
+  <td><small><%= registro.forma&.nome %></small></td>
+  <td class="text-right"><%= number_to_currency registro.valor %></td>
+  <td class="text-right">
+    <%= link_to icn(:trash),
+                venda_registro_path(@venda, registro),
+                method: 'delete',
+                class: 'muted-danger',
+                data: { confirm: 'Confirma exclusão?' },
+                remote: true %>
+  </td>
+<% end %>

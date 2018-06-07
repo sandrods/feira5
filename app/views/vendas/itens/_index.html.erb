@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header alert-info d-flex align-items-center">
+    <b>Peças</b>
+    <div class="ml-auto">
+      <%= form_tag(venda_itens_path(@venda), remote: true ) do %>
+        <%= text_field_tag :barcode,
+                            nil,
+                            maxlength: 10,
+                            class: 'bar-code-input',
+                            placeholder: "Código de Barras",
+                            autocomplete: 'off' %>
+      <% end %>
+    </div>
+  </div>
+  <table class="table table-condensed table-striped mb-0">
+    <thead>
+      <tr>
+        <th>Cód.</th>
+        <th>Produto</th>
+        <th>Cor</th>
+        <th>Tam.</th>
+        <th class="text-right">Desc.</th>
+        <th class="text-right">Valor</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody id="itens_venda_table">
+      <%= render partial: 'vendas/itens/item', collection: @venda.itens %>
+    </tbody>
+  </table>
+  <div class="card-footer text-right">
+    <small>Total</small>
+    <span id="total_itens_venda">
+      <%= number_to_currency @venda.itens.sum(:valor) %></span>
+  </div>
+</div>

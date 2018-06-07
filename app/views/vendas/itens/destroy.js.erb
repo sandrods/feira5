@@ -1,0 +1,5 @@
+$('#item_estoque_<%= params[:id] %>').fadeOut();
+$("#venda_itens_count").html("<%= @venda.itens.count %>");
+$("#venda_itens_total").html("<%= number_to_currency @venda.total %>");
+$('#total_itens_venda').html('<%= number_to_currency @venda.total %>')
+$("#global_modal").modal('hide')

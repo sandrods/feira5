@@ -1,0 +1,50 @@
+<%= page_header "Vendas" do %>
+  <%= link_to(icn(:plus, 'Nova Venda'), new_venda_path, class: 'btn btn-success') %>
+<% end %>
+
+<div class="row">
+
+  <div class="col-md-9">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th width="80px">Data</th>
+          <th>Cliente</th>
+          <th class="right">Peças</th>
+          <th class="right">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @vendas.each do |venda| %>
+          <tr>
+            <td><small><%= venda.data %></small></td>
+            <td><%= link_to venda.cliente.nome, venda %></td>
+            <td class="right"><%= venda.itens.count %></td>
+            <td class="right"><%= number_to_currency venda.total %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <hr>
+    <%= index_count @vendas.count, "vendas encontradas" %>
+
+  </div>
+
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <b>Filtros</b>
+      </div>
+      <div class="card-body card-text">
+        <%= simple_form_for @search, url: vendas_path, method: 'GET' do |f| %>
+          <%= f.input :cliente_nome_cont, label: "Cliente" %>
+
+          <hr>
+          <%= f.submit 'Filtrar', class: 'btn btn-info btn-sm' %>
+          <%= button_tag 'Limpar', class: 'btn btn-light btn-sm clear' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
