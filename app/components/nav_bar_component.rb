@@ -21,7 +21,7 @@ class NavBarComponent
     end
 
     add_menu "Vendas", %w(vendas clientes) do |m|
-      m.link "Vendas", root_path
+      m.link "Vendas", vendas_path
       m.divider
       m.link "Sacolas", sacolas_path
       m.link "Clientes", clientes_path
