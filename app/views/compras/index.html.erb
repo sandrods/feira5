@@ -11,14 +11,18 @@
           <th width="90px">Data</th>
           <th>Fornecedor</th>
           <th>Coleção</th>
+          <th class="right">Peças</th>
+          <th class="right">Total</th>          
         </tr>
       </thead>
       <tbody>
         <% @compras.each do |compra| %>
           <tr>
-            <td><%= compra.data %></td>
+            <td><small><%= compra.data %></small></td>
             <td><%= link_to compra.fornecedor.nome, compra %></td>
             <td><%= compra.colecao.try :descricao %></td>
+            <td class="right"><%= compra.itens.count %></td>
+            <td class="right"><%= number_to_currency compra.total %></td>
           </tr>
         <% end %>
       </tbody>
