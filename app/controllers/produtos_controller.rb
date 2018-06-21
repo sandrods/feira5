@@ -25,7 +25,16 @@ class ProdutosController < ApplicationController
   end
 
   def new
-    @produto = Produto.new produto_params
+    @produto = Produto.new
+
+    if params[:like]
+      like = Produto.find params[:like]
+      @produto.colecao_id     = like.colecao_id
+      @produto.fornecedor_id  = like.fornecedor_id
+      @produto.linha_id       = like.linha_id
+      @produto.tipo_id        = like.tipo_id
+    end
+
   end
 
   def edit
@@ -36,7 +45,7 @@ class ProdutosController < ApplicationController
 
     if @produto.save
       flash[:notice] = 'Produto criado com sucesso.'
-      redirect_to_new_or_show
+      redirect_to @produto
     else
       render action: 'new'
     end
@@ -62,22 +71,11 @@ class ProdutosController < ApplicationController
     @lucro = Produto.lucro(valor, custo)
     @rentab = Produto.rentabilidade(valor, custo)
 
-    render json: { lucro: view_context.number_to_currency(@lucro), rentabilidade: view_context.number_to_percentage(@rentab) }
-
+    render json: { lucro: view_context.number_to_currency(@lucro),
+                   rentabilidade: view_context.number_to_percentage(@rentab) }
   end
 
   private
-
-    def redirect_to_new_or_show
-      if params[:commit] =~ /Novo/i
-        redirect_to new_produto_path produto: { colecao_id:     @produto.colecao_id,
-                                                fornecedor_id:  @produto.fornecedor_id,
-                                                linha_id:       @produto.linha_id,
-                                                tipo_id:        @produto.tipo_id }
-      else
-        redirect_to @produto
-      end
-    end
 
     def set_produto
       @produto = Produto.find(params[:id])

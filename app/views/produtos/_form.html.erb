@@ -74,14 +74,12 @@
 </div>
 
   <div class="bottom-actions">
-    <%= f.button :submit, 'Salvar e Novo', class: 'btn btn-info' if @produto.new_record? -%>
-
     <%= f.button :submit, 'Salvar Produto', class: 'btn btn-primary' %>
 
     <%= link_to icn(:trash, 'Apagar este Produto'),
-          @produto,
-          method: :delete,
-          data: { confirm: 'Tem certeza?' },
-          class: 'btn btn-sm text-danger ml-auto' unless @produto.new_record? %>
+                @produto,
+                method: :delete,
+                data: { confirm: 'Tem certeza?' },
+                class: 'btn btn-sm text-danger ml-auto' unless @produto.new_record? %>
   </div>
 <% end %>
