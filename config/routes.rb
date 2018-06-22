@@ -63,5 +63,13 @@ Rails.application.routes.draw do
     get 'mensal', on: :collection
   end
 
+  get 'financeiro/diario'
+  get 'financeiro/anual'
+
+  resources :registros do
+    post :duplicate, on: :member
+  end
+  resources :transferencias, controller: 'registros/transferencias'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

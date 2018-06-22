@@ -1,0 +1,184 @@
+<%= page_header "Diário Financeiro" do %>
+
+  <%= link_to icn(:exchange_alt, 'Transferência'), new_transferencia_path, class: 'btn btn-sm btn-info', data: { behavior: 'load-modal'} %>
+  <%= link_to icn(:plus, 'Incluir Receita'), new_registro_path(cd: 'C'), class: 'btn btn-sm btn-success ml-4', data: { behavior: 'load-modal'} %>
+  <%= link_to icn(:minus, 'Incluir Despesa'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger ml-1', data: { behavior: 'load-modal'} %>
+
+<% end %>
+
+<div class="well center mb-4 h2">
+  <%= link_to icn(:arrow_left), financeiro_diario_path(mes: @diario.calendar.last_month), class: "mr-3" %>
+  <%= @diario.calendar.month %>
+  <%= link_to icn(:arrow_right), financeiro_diario_path(mes: @diario.calendar.next_month), class: "ml-3" %>
+</div>
+
+<% unless @diario.calendar.future? %>
+
+  <div class="row">
+
+  <% @diario.contas.each do |conta| %>
+
+    <div class="col-sm-12 col-md-6">
+
+      <div class="card mb-4">
+        <div class="card-header alert-info">
+          <b><%= conta.nome %></b>
+        </div>
+        <div class="card-footer upper text-right">
+          <small>Saldo Inicial</small> &nbsp; <%= number_to_currency conta.saldo_inicial %>
+        </div>
+        <table class="table table-striped m-0">
+          <tbody id="registros_conta_caixa">
+            <%= render partial: 'registros/registro', collection: conta.registros.pagos %>
+          </tbody>
+        </table>
+        <div class="card-footer text-right">
+          <small>Saldo Final</small> &nbsp; <%= number_to_currency conta.saldo %>
+        </div>
+      </div>
+
+    </div>
+
+  <% end %>
+
+  </div>
+
+  <div class="well mb-4">
+    <%= link_to icn(:minus, 'Incluir Despesa'), new_registro_path(cd: 'D'), class: 'btn btn-sm btn-danger', data: { behavior: 'load-modal'} %>
+    <%= link_to icn(:plus, 'Incluir Receita'), new_registro_path(cd: 'C'), class: 'btn btn-sm btn-success ml-2', data: { behavior: 'load-modal'} %>
+
+    <%= link_to icn(:exchange_alt, 'Transferência'), new_transferencia_path, class: 'btn btn-sm btn-info ml-auto', data: { behavior: 'load-modal'} %>
+  </div>
+
+  <hr/>
+
+<% end %>
+
+<div class="row">
+
+  <div class="col-sm-12 col-md-6">
+
+    <div class="card smaller">
+      <div class="card-header alert-danger">
+        <b>CONTAS A PAGAR</b>
+      </div>
+      <table class="table table-striped mb-0">
+        <tbody id="registros_conta_caixa">
+          <%= render partial: 'registros/pendente', collection: @diario.a_pagar, as: :registro %>
+        </tbody>
+      </table>
+      <div class="card-footer text-right">
+        <small>Total</small> <%= number_to_currency @diario.a_pagar_total %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+
+    <div class="card smaller">
+      <div class="card-header alert-success">
+        <b>CONTAS A RECEBER</b>
+      </div>
+      <table class="table table-striped mb-0">
+        <tbody id="registros_conta_caixa">
+          <%= render partial: 'registros/pendente', collection: @diario.a_receber, as: :registro %>
+        </tbody>
+      </table>
+      <div class="card-footer text-right">
+        <small>Total</small> <%= number_to_currency @diario.a_receber_total %>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<hr/>
+<br/>
+<h3>Saldo Total por Dia</h3><br/>
+<%= line_chart @diario.saldos,
+                label: "Saldo",
+                library: {
+                  plotOptions: {
+                    series: {
+                      dataLabels: { enabled: false },
+                      negativeColor: 'red'
+                    }
+                  }
+                }
+ %>
+
+
+
+<div class="well center my-4 h2">
+  <%= link_to icn(:arrow_left), financeiro_diario_path(mes: @diario.calendar.last_month), class: "mr-3" %>
+  <%= @diario.calendar.month %>
+  <%= link_to icn(:arrow_right), financeiro_diario_path(mes: @diario.calendar.next_month), class: "ml-3" %>
+</div>
+
+
+<h4>Receitas e Despesas - Totais do Mês </h4>
+
+<div class="well flex-column stats mb-4">
+  <div class="row">
+    <div class="col-3 text-muted">
+      <h1> <%= number_to_currency @diario.saldo_inicial %></h1>
+      <small>SALDO ANTERIOR</small>
+    </div>
+    <div class="col-3 text-danger">
+      <h1> <%= number_to_currency @diario.total_despesas %></h1>
+      <small>TOTAL DE DESPESAS</small>
+    </div>
+    <div class="col-3 text-success">
+      <h1> <%= number_to_currency @diario.total_receitas %></h1>
+      <small>TOTAL DE RECEITAS</small>
+    </div>
+    <div class="col-3 text-info">
+      <h1> <%= number_to_currency @diario.saldo_final %></h1>
+      <small>SALDO FINAL</small>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-12 col-md-6">
+
+    <div class="card">
+      <div class="card-header alert-danger">
+        <b>DESPESAS</b>
+      </div>
+      <table class="table table-striped mb-0">
+        <tbody>
+          <% @diario.despesas.each do |cat, valor| %>
+          <tr>
+            <td><%= cat.try(:nome) || 'SEM CATEGORIA' %></td>
+            <td class='text-right' ><%= number_to_currency(valor) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+
+    <div class="card">
+      <div class="card-header alert-success">
+        <b>RECEITAS</b>
+      </div>
+      <table class="table table-striped mb-0">
+        <tbody>
+          <% @diario.receitas.each do |cat, valor| %>
+          <tr>
+            <td><%= cat.try(:nome) || 'SEM CATEGORIA' %></td>
+            <td class='text-right' ><%= number_to_currency(valor) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+  </div>

@@ -10,7 +10,9 @@
     <%= javascript_pack_tag 'application' %>
   </head>
 
-  <%= content_tag :body, data: { action: "#{controller_name}##{action_name}" } do %>
+  <%= content_tag :body,
+                  data: { action: "#{controller_name}##{action_name}" },
+                  class: "#{controller_name} #{action_name}" do %>
 
     <%= render partial: 'layouts/navbar' %>
 

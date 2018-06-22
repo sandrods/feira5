@@ -34,15 +34,18 @@ td small {
 }
 
 .smaller {
-  font-size: 85%;
+  font-size: 88%;
   .table td,
   .table th,
   .list-group-item { padding: 0.5rem 0.7rem }
 
   .card-header { padding: 0.5rem 0.7rem }
   small {
-    font-size: 90%;
+    font-size: 88%;
     text-transform: uppercase;
+  }
+  .card-footer {
+    padding: 0.5rem 0.7rem;
   }
 }
 
@@ -123,4 +126,16 @@ h1, h2, h3, h4, h5, h6,
 
 .table th {
   border: none;
+}
+
+.well {
+  display: flex;
+  flex-direction: row;
+  background-color: #f8f8fa;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  padding: 0.75rem;
+  &.center {
+    justify-content: center;
+  }
 }

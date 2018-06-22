@@ -1,6 +1,6 @@
 <%= page_header 'Vendas Mensais' %>
 
-<div class="card card-body bg-light stats mb-4 p-2 font-weight-bold">
+<div class="card card-body bg-light stats mb-4 p-2">
   <h2 style="text-align: center">
     <%= link_to icn(:arrow_left), mensal_vendas_path(mes: @vendas.calendar.last_month), class: "mr-3" %>
     <%= @vendas.calendar.month %>

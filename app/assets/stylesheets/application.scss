@@ -36,6 +36,9 @@ $table-cell-padding-sm: .4rem;
 @import "card_text";
 @import "select2_styles";
 
+td.C { color: theme-color("success"); }
+td.D { color: theme-color("danger"); }
+
 @import "compras";
 @import "estoque";
 @import "etiquetas";
