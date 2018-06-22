@@ -30,6 +30,10 @@
 //= require jquery.maskMoney
 //= require jquery.maskedinput/src/jquery.maskedinput
 
+// require Chart.bundle
+//= require highcharts
+//= require chartkick
+
 //= require init
 //= require select2_setup
 

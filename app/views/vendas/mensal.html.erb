@@ -1,14 +1,14 @@
 <%= page_header 'Vendas Mensais' %>
 
-<div class="well well-sm stats">
+<div class="card card-body bg-light stats mb-4 p-2 font-weight-bold">
   <h2 style="text-align: center">
-    <%= link_to icon(:chevron_left), mensal_vendas_path(mes: @vendas.calendar.last_month) %>
+    <%= link_to icn(:arrow_left), mensal_vendas_path(mes: @vendas.calendar.last_month), class: "mr-3" %>
     <%= @vendas.calendar.month %>
-    <%= link_to icon(:chevron_right), mensal_vendas_path(mes: @vendas.calendar.next_month) %>
+    <%= link_to icn(:arrow_right), mensal_vendas_path(mes: @vendas.calendar.next_month), class: "ml-3" %>
   </h2>
 </div>
 
-<div class="well stats">
+<div class="card card-body bg-light stats mb-4">
   <div class="row">
     <div class="col-md-4 text-danger">
       <h1> <%= @vendas.total_pecas %></h1>
@@ -28,8 +28,8 @@
 <div class="row">
 
   <div class="col-sm-12 col-md-6 col-lg-4">
-    <div class="well stats">
-      <table class="table table-condensed">
+    <div class="card card-body bg-light stats">
+      <table class="table table-sm">
         <thead>
           <tr>
             <th>Por Fornecedor</th>
@@ -48,8 +48,8 @@
   </div>
 
   <div class="col-sm-12 col-md-6 col-lg-4">
-    <div class="well stats">
-      <table class="table table-condensed">
+    <div class="card card-body bg-light stats">
+      <table class="table table-sm">
         <thead>
           <tr>
             <th>Por Tipo</th>
@@ -68,8 +68,8 @@
   </div>
 
   <div class="col-sm-12 col-md-6 col-lg-4">
-    <div class="well stats">
-      <table class="table table-condensed">
+    <div class="card card-body bg-light stats">
+      <table class="table table-sm">
         <thead>
           <tr>
             <th>Por Coleção</th>
