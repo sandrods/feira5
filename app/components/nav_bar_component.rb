@@ -15,21 +15,21 @@ class NavBarComponent
     end
 
     add_menu "Compras", %w(compras fornecedores colecoes) do |m|
-      m.link "Compras", compras_path
-      m.link "Fornecedores", fornecedores_path
-      m.link "Coleções", colecoes_path
+      m.link "Compras", compras_path, /compras/
+      m.link "Fornecedores", fornecedores_path, /fornecedores/
+      m.link "Coleções", colecoes_path, /colecoes/
     end
 
-    add_menu "Vendas", %w(vendas clientes) do |m|
-      m.link "Vendas", vendas_path
+    add_menu "Vendas", %w(vendas clientes sacolas) do |m|
+      m.link "Vendas", vendas_path, /vendas.*(?<!mensal)$/
       m.divider
-      m.link "Sacolas", sacolas_path
-      m.link "Clientes", clientes_path
+      m.link "Sacolas", sacolas_path, /sacolas/
+      m.link "Clientes", clientes_path, /clientes/
       m.divider
-      m.link "Vendas Mensais", root_path
+      m.link "Vendas Mensais", mensal_vendas_path, /mensal/
     end
 
-    add_menu "Financeiro", %w(vendas) do |m|
+    add_menu "Financeiro", %w(financeiro) do |m|
       m.link "Diário", root_path
       m.link "Anual", root_path
       m.divider
@@ -37,9 +37,6 @@ class NavBarComponent
       m.link "Categorias", root_path
       m.link "Formas de Pagto", root_path
     end
-    # add_link "Lançamento",
-    #          lancamento_propostas_path,
-    #          %w(lancamento)) if current_user.role?("admin_proposta")
 
     render_result
   end
@@ -72,9 +69,9 @@ class NavBarComponent
   Menu = Struct.new(:text, :pattern) do
     include ViewComponent
 
-    def link(text, url)
+    def link(text, url, pattern = nil)
       @itens ||= []
-      @itens << { text: text, url: url }
+      @itens << { text: text, url: url, pattern: pattern }
     end
 
     def divider
@@ -83,6 +80,8 @@ class NavBarComponent
     end
 
     def render
+      @active = pattern.present? && pattern.any? { |p| request.path.starts_with? "/#{p}"}
+
       yield self
 
       tag.div class: 'nav-item dropdown' do
@@ -95,10 +94,7 @@ class NavBarComponent
 
     def render_link
       cls = 'nav-link dropdown-toggle'
-
-      if pattern.present? && pattern.any? { |p| request.path.starts_with? "/#{p}"}
-        cls << ' active'
-      end
+      cls << ' active' if @active
 
       link_to text, "http://example.com",
                     class: cls,
@@ -117,7 +113,9 @@ class NavBarComponent
       if item[:divider]
         tag.div class: 'dropdown-divider'
       else
-        link_to item[:text], item[:url], class: 'dropdown-item'
+        cls = "dropdown-item"
+        cls << ' active' if request.path =~ item[:pattern] && @active
+        link_to item[:text], item[:url], class: cls
       end
     end
 
