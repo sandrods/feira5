@@ -450,6 +450,8 @@ class DateTimeInput < SimpleForm::Inputs::DateTimeInput
 
 end
 
+class PagoInput < SimpleForm::Inputs::BooleanInput; end
+
 class CurrencyInput < SimpleForm::Inputs::Base
   def input(wrapper_options)
     currency = options.delete(:currency) || "R$"

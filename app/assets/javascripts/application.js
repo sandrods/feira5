@@ -27,6 +27,8 @@
 //= require select2
 //= require select2_locale_pt-BR
 
+//= require bootstrap-toggle
+
 //= require jquery.maskMoney
 //= require jquery.maskedinput/src/jquery.maskedinput
 

@@ -139,3 +139,15 @@ h1, h2, h3, h4, h5, h6,
     justify-content: center;
   }
 }
+
+.card-header {
+  b { font-size: 110%; }
+}
+
+.card-footer {
+  small { color: #999; }
+}
+
+table.table td.date {
+  width: 80px;
+}

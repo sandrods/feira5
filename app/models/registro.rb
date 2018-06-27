@@ -19,7 +19,7 @@ class Registro < ActiveRecord::Base
   scope :da_conta, ->(conta) { where(conta_id: conta) }
 
   belongs_to :conta, optional: true
-  belongs_to :registravel, polymorphic: true
+  belongs_to :registravel, optional: true, polymorphic: true
   belongs_to :categoria, optional: true
   belongs_to :forma, optional: true
   belongs_to :colecao, optional: true

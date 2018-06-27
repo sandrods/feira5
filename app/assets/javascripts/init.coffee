@@ -39,6 +39,11 @@ App.init = ->
   $(".currency").maskMoney()
   $("input.percentage").maskMoney(precision: 0)
 
+  $("input[type=checkbox].pago").bootstrapToggle
+    on: 'PAGO'
+    off: 'NÃO PAGO'
+    width: '120px'
+
   $('.simple_form .clear').on 'click', (e) ->
     e.preventDefault()
 
