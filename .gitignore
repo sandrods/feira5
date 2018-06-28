@@ -20,7 +20,7 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-config/database.yml
+# config/database.yml
 config/app_config.yml
 
 # Ignore uploaded files in development
