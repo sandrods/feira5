@@ -10,4 +10,4 @@ then
   kill -TERM $(cat $pid)
 fi
 
-rails server -b 0.0.0.0 -p 3000 -e production
+DATABASE_URL=postgresql://localhost/feira4 rails server -b 0.0.0.0 -p 3000 -e production
