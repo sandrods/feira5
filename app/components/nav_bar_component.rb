@@ -31,7 +31,7 @@ class NavBarComponent
 
     add_menu "Financeiro", %w(financeiro) do |m|
       m.link "Diário", financeiro_diario_path
-      m.link "Anual", root_path
+      m.link "Anual", financeiro_anual_path
       m.divider
       m.link "Contas", root_path
       m.link "Categorias", root_path

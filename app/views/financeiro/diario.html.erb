@@ -109,18 +109,15 @@
                 }
  %>
 
-
-
 <div class="well center my-4 h2">
   <%= link_to icn(:arrow_left), financeiro_diario_path(mes: @diario.calendar.last_month), class: "mr-3" %>
   <%= @diario.calendar.month %>
   <%= link_to icn(:arrow_right), financeiro_diario_path(mes: @diario.calendar.next_month), class: "ml-3" %>
 </div>
 
-
 <h4>Receitas e Despesas - Totais do Mês </h4>
 
-<div class="well flex-column stats mb-4 px-4">
+<div class="well flex-column stats mb-4 mt-3 px-4">
   <div class="row">
     <div class="col-3 text-muted">
       <h1> <%= number_to_currency @diario.saldo_inicial %></h1>
@@ -134,7 +131,7 @@
       <h1> <%= number_to_currency @diario.total_receitas %></h1>
       <small>TOTAL DE RECEITAS</small>
     </div>
-    <div class="col-3 text-info">
+    <div class="col-3 text-primary">
       <h1> <%= number_to_currency @diario.saldo_final %></h1>
       <small>SALDO FINAL</small>
     </div>
