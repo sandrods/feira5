@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :categorias
   resources :tipos
   resources :linhas
   resources :tamanhos
