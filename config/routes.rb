@@ -71,5 +71,7 @@ Rails.application.routes.draw do
   end
   resources :transferencias, controller: 'registros/transferencias'
 
+  resources :contas
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
