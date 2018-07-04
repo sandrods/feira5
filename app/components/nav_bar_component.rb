@@ -29,13 +29,13 @@ class NavBarComponent
       m.link "Vendas Mensais", mensal_vendas_path, /mensal/
     end
 
-    add_menu "Financeiro", %w(financeiro contas categorias) do |m|
+    add_menu "Financeiro", %w(financeiro contas categorias formas) do |m|
       m.link "Diário", financeiro_diario_path
       m.link "Anual", financeiro_anual_path
       m.divider
       m.link "Contas", contas_path
       m.link "Categorias", categorias_path
-      m.link "Formas de Pagto", root_path
+      m.link "Formas de Pagto", formas_path
     end
 
     render_result
