@@ -3,8 +3,8 @@ module ClienteOuVendedor
 
   included do
 
-    belongs_to :cliente
-    belongs_to :vendedor
+    belongs_to :cliente, optional: true
+    belongs_to :vendedor, optional: true
 
     validates_presence_of :cliente_id,  if: ->(v) { v.vendedor_id.blank? }
     validates_presence_of :vendedor_id, if: ->(v) { v.cliente_id.blank? }
