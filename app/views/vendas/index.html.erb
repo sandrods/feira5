@@ -2,24 +2,22 @@
   <%= link_to(icn(:plus, 'Nova Venda'), new_venda_path, class: 'btn btn-success') %>
 <% end %>
 
-<% if params[:all] %>
-  <div class="search right mb-4">
+<div class="search right mb-4">
 
-    <%= simple_form_for @search,
-                        url: vendas_path,
-                        method: 'GET',
-                        html: { class: 'form-inline' } do |f| %>
+  <%= simple_form_for @search,
+                      url: vendas_path,
+                      method: 'GET',
+                      html: { class: 'form-inline' } do |f| %>
 
-      <input type="hidden" name="all" value="true" />
+    <input type="hidden" name="all" value="true" />
 
-      <%= f.input :cliente_nome_cont, label: "Cliente" %>
+    <%= f.input :cliente_nome_cont, label: "Cliente" %>
 
-      <%= button_tag icn(:search, 'Filtrar'), class: 'btn btn-sm btn-info mr-2' %>
-      <%= button_tag 'Limpar', class: 'btn btn-sm btn-secondary clear' %>
+    <%= button_tag icn(:search, 'Filtrar'), class: 'btn btn-sm btn-info mr-2' %>
+    <%= button_tag 'Limpar', class: 'btn btn-sm btn-secondary clear' %>
 
-    <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
 <table class="table table-striped">
   <thead>
