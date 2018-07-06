@@ -2,8 +2,13 @@ class VendasController < ApplicationController
   before_action :set_venda, only: [:show, :edit, :update, :destroy]
 
   def index
-    @search = Venda.search(params[:q])
-    @vendas = @search.result.order('id desc')
+    if params[:all]
+      @search = Venda.search(params[:q])
+      @vendas = @search.result.order('id desc')
+    else
+      @vendas = Venda.where('data > ?', 6.months.ago).order('id desc')
+      redirect_to vendas_path(all: true) if @vendas.blank?
+    end
     set_back_from(:venda_show)
   end
 

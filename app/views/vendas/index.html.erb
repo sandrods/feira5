@@ -1,50 +1,51 @@
-<%= page_header "Vendas" do %>
+<%= page_header "Vendas", (params[:all] ? '' : 'Recentes') do %>
   <%= link_to(icn(:plus, 'Nova Venda'), new_venda_path, class: 'btn btn-success') %>
 <% end %>
 
-<div class="row">
+<% if params[:all] %>
+  <div class="search right mb-4">
 
-  <div class="col-md-9">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th width="80px">Data</th>
-          <th>Cliente</th>
-          <th class="right">Peças</th>
-          <th class="right">Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @vendas.each do |venda| %>
-          <tr>
-            <td><small><%= venda.data %></small></td>
-            <td><%= link_to venda.cliente.nome, venda %></td>
-            <td class="right"><%= venda.itens.count %></td>
-            <td class="right"><%= number_to_currency venda.total %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= simple_form_for @search,
+                        url: vendas_path,
+                        method: 'GET',
+                        html: { class: 'form-inline' } do |f| %>
 
-    <hr>
-    <%= index_count @vendas.count, "vendas encontradas" %>
+      <input type="hidden" name="all" value="true" />
 
+      <%= f.input :cliente_nome_cont, label: "Cliente" %>
+
+      <%= button_tag icn(:search, 'Filtrar'), class: 'btn btn-sm btn-info mr-2' %>
+      <%= button_tag 'Limpar', class: 'btn btn-sm btn-secondary clear' %>
+
+    <% end %>
   </div>
+<% end %>
 
-  <div class="col-md-3">
-    <div class="card">
-      <div class="card-header">
-        <b>Filtros</b>
-      </div>
-      <div class="card-body card-text">
-        <%= simple_form_for @search, url: vendas_path, method: 'GET' do |f| %>
-          <%= f.input :cliente_nome_cont, label: "Cliente" %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th width="80px">Data</th>
+      <th>Cliente</th>
+      <th class="right">Peças</th>
+      <th class="right">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vendas.each do |venda| %>
+      <tr>
+        <td><small><%= venda.data %></small></td>
+        <td><%= link_to venda.cliente.nome, venda %></td>
+        <td class="right"><%= venda.itens.count %></td>
+        <td class="right"><%= number_to_currency venda.total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-          <hr>
-          <%= f.submit 'Filtrar', class: 'btn btn-info btn-sm' %>
-          <%= button_tag 'Limpar', class: 'btn btn-light btn-sm clear' %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<hr>
+<%= index_count @vendas.count, "vendas encontradas" %>
+<% unless params[:all] %>
+  <hr>
+  <%= alert text: "Exibindo as Vendas dos últimos <b>6 meses</b>. #{link_to('Clique aqui', vendas_path(all: true))} para ver todas.",
+            type: :info %>
+<% end %>
