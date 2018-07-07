@@ -1,0 +1,23 @@
+<%= modal_page_header @item.produto.ref, "Editar Produto" %>
+
+<%= simple_form_for @item, url: compra_item_path(@compra, @item), remote: true do |f| %>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <%= f.input :valor, as: :currency, input_html: { value: curr(@item.valor) } %>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <%= f.submit "Salvar", class: 'btn btn-sm btn-primary mr-auto' %>
+
+    <%= link_to icn(:trash, 'Remover este Produto'),
+          compra_item_path(@compra, @item),
+          method: :delete,
+          data: { confirm: 'Tem certeza?', remote: true },
+          class: 'btn btn-sm text-danger ml-auto' %>
+
+  </div>
+<% end %>

@@ -1,5 +1,6 @@
-$('#item_estoque_<%= params[:id] %>').fadeOut();
-$("#compra_itens_count").html("<%= @compra.itens.count %>");
+$('#item_estoque_<%= @item.id %>').replaceWith('<%= j render partial: "compras/itens/item", object: @item %>');
+
 $("#compra_itens_total").html("<%= number_to_currency @compra.total %>");
 $('#total_itens_compra').html('<%= number_to_currency @compra.itens.sum(:valor) %>')
-$("#global_modal").modal('hide')
+
+$('#global_modal').modal("hide");
