@@ -17,10 +17,11 @@ class Colecao::Resultado
     end
 
     def itens_vendidos
-      @iv ||= ItemEstoque
-                .vendidos
-                .joins(item: :produto)
-                .where(produtos: { colecao_id: @colecao.id })
+      @iv ||= ItemEstoque.vendidos.da_colecao(@colecao)
+    end
+
+    def itens_comprados
+      @ic ||= ItemEstoque.comprados.da_colecao(@colecao)
     end
 
     def quantidade_vendidos
@@ -28,7 +29,7 @@ class Colecao::Resultado
     end
 
     def quantidade_comprados
-      @qc ||= @colecao.compras.to_a.sum { |c| c.itens.count }
+      @qc ||= itens_comprados.count
     end
 
     def porcent_vendidos
@@ -36,7 +37,7 @@ class Colecao::Resultado
     end
 
     def valor_despesas
-      @vd ||= @colecao.compras.to_a.sum(&:total) + @colecao.despesas.sum(:valor)
+      @vd ||= itens_comprados.sum(:valor) + @colecao.despesas.sum(:valor)
     end
 
     def valor_receitas
@@ -51,15 +52,17 @@ class Colecao::Resultado
       @despesas ||= begin
         desp = []
 
-        @colecao.compras.each do |c|
-          desp << Line.new("Compra #{c.fornecedor.nome}", c.total, c.data)
+        itens_comprados.group_by(&:movimento).each do |compra, itens|
+          total = itens.sum(&:valor)
+          txt = "Compra #{itens[0].produto.fornecedor.nome} <small>##{compra.id}</small>".html_safe
+          desp << Line.new(txt, total, compra.data)
         end
 
         @colecao.despesas.each do |c|
           desp << Line.new(c.descricao, c.valor, c.data)
         end
 
-        desp
+        desp.sort_by(&:data)
       end
     end
 
@@ -72,22 +75,25 @@ class Colecao::Resultado
     attr_accessor :fornecedor
 
     def self.por(colecao)
-      fornecedores = colecao.compras.map(&:fornecedor).uniq
+      fornecedores = ItemEstoque.da_colecao(colecao)
+                                .map { |ie| ie.item.produto.fornecedor }
+                                .uniq
+
       fornecedores.map { |f| Fornecedor.new(colecao, f) }
     end
 
     def initialize(colecao, fornecedor)
-      @colecao = colecao
       @fornecedor = fornecedor
-
-      @compras = @colecao.compras.where(fornecedor_id: @fornecedor.id)
+      @itens = ItemEstoque.da_colecao(colecao)
+                          .do_fornecedor(fornecedor)
     end
 
     def itens_vendidos
-      @iv ||= ItemEstoque.vendidos.joins(item: :produto)
-                                  .where(produtos:
-                                            { colecao_id: @colecao.id,
-                                              fornecedor_id: @fornecedor.id })
+      @iv ||= @itens.vendidos
+    end
+
+    def itens_comprados
+      @ic ||= @itens.comprados
     end
 
     def quantidade_vendidos
@@ -95,7 +101,7 @@ class Colecao::Resultado
     end
 
     def quantidade_comprados
-      @qc ||= @compras.to_a.sum { |c| c.itens.count }
+      @qc ||= itens_comprados.count
     end
 
     def porcent_vendidos

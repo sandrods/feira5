@@ -10,7 +10,14 @@ class ItemEstoque < ActiveRecord::Base
 
   validates :tipo, presence: true, inclusion: { in: ['E', 'S'] }
 
-  scope :vendidos, -> { where(tipo: 'S', movimento_type: 'Venda') }
+  scope :vendidos,  -> { where(tipo: 'S', movimento_type: 'Venda') }
+  scope :comprados, -> { where(tipo: 'E', movimento_type: 'Compra') }
+
+  scope :da_colecao,   ->(c) { joins(item: :produto).
+                                   where(produtos: { colecao_id: c.id }) }
+
+ scope :do_fornecedor, ->(f) { joins(item: :produto).
+                                  where(produtos: { fornecedor_id: f.id }) }
 
   def set_desconto(_desconto)
     _valor = self.bruto * (1-(_desconto.to_f/100))
