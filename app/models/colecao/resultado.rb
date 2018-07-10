@@ -14,14 +14,15 @@ class Colecao::Resultado
 
     def initialize(colecao)
       @colecao = colecao
+      @itens = ItemEstoque.da_colecao(colecao)
     end
 
     def itens_vendidos
-      @iv ||= ItemEstoque.vendidos.da_colecao(@colecao)
+      @iv ||= @itens.vendidos
     end
 
     def itens_comprados
-      @ic ||= ItemEstoque.comprados.da_colecao(@colecao)
+      @ic ||= @itens.comprados
     end
 
     def quantidade_vendidos
@@ -42,6 +43,10 @@ class Colecao::Resultado
 
     def valor_receitas
       @vr ||= itens_vendidos.sum(:valor) + @colecao.receitas.sum(:valor)
+    end
+
+    def valor_estoque
+      @ve ||= (itens_comprados - itens_vendidos).sum(&:valor_venda)
     end
 
     def porcent_receitas
@@ -66,11 +71,17 @@ class Colecao::Resultado
       end
     end
 
+    def vendas_por_tipo
+      itens_vendidos
+        .group_by { |it| it.item.produto.tipo }
+        .map      { |tipo, itens| PorTipo.new(tipo.descricao, itens.size) }
+        .sort_by  { |i| i.quant }
+        .reverse
+    end
+
   end
 
   class Fornecedor
-
-    PorTipo = Struct.new(:tipo, :quant)
 
     attr_accessor :fornecedor
 
@@ -104,8 +115,24 @@ class Colecao::Resultado
       @qc ||= itens_comprados.count
     end
 
+    def valor_despesas
+      @vd ||= itens_comprados.sum(:valor)
+    end
+
+    def valor_receitas
+      @vr ||= itens_vendidos.sum(:valor)
+    end
+
+    def valor_estoque
+      @ve ||= (itens_comprados - itens_vendidos).sum(&:valor_venda)
+    end
+
     def porcent_vendidos
       (quantidade_vendidos.to_f / quantidade_comprados * 100).to_i rescue 0
+    end
+
+    def porcent_receitas
+      (valor_receitas.to_f / valor_despesas * 100).to_i rescue 0
     end
 
     def vendas_por_tipo
@@ -117,5 +144,7 @@ class Colecao::Resultado
     end
 
   end
+
+  PorTipo = Struct.new(:tipo, :quant)
 
 end

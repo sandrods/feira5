@@ -29,6 +29,10 @@ class ItemEstoque < ActiveRecord::Base
     update! desconto: _desconto, valor: _valor
   end
 
+  def valor_venda
+    item.produto.valor
+  end
+
   private
 
   def ajusta_estoque

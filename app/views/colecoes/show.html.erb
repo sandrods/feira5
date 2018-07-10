@@ -6,36 +6,56 @@
 
   <div class="col-sm-12 col-md-6">
 
-    <div class="card card-body bg-light stats">
+    <div class="well stats">
       <div class="row">
         <div class="col-md-4 text-danger">
-          <h1> <%= qc = @resultado.total.quantidade_comprados %></h1>
+          <h2> <%= qc = @resultado.total.quantidade_comprados %></h2>
           <small>PEÇAS COMPRADAS</small>
         </div>
         <div class="col-md-4 text-success divider">
-          <h1> <%= qv = @resultado.total.quantidade_vendidos %></h1>
+          <h2> <%= qv = @resultado.total.quantidade_vendidos %></h2>
           <small>PEÇAS VENDIDAS</small>
         </div>
         <div class="col-md-4 text-very-muted divider">
-          <h1> <%= qc - qv %></h1>
+          <h2> <%= qc - qv %></h2>
           <small>EM ESTOQUE</small>
         </div>
       </div>
       <%= progress(@resultado.total.porcent_vendidos) %>
+
+      <table class="table table-sm mt-2">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th class="right">Vendidas</th>
+          </tr>
+        </thead>
+        <% @resultado.total.vendas_por_tipo.each do |item| %>
+          <tr>
+            <td><%= item.tipo %></td>
+            <td class="right"><%= item.quant %></td>
+          </tr>
+        <% end %>
+      </table>
+
     </div>
 
   </div>
 
   <div class="col-sm-12 col-md-6">
-    <div class="card card-body bg-light stats">
+    <div class="well stats">
       <div class="row">
-        <div class="col-md-6 text-danger">
-          <h1> <%= number_to_currency @resultado.total.valor_despesas %></h1>
-          <small>TOTAL DESPESAS</small>
+        <div class="col text-danger">
+          <h2> <%= curr @resultado.total.valor_despesas %></h2>
+          <small>DESPESAS</small>
         </div>
-        <div class="col-md-6 text-success">
-          <h1> <%= number_to_currency @resultado.total.valor_receitas %></h1>
-          <small>TOTAL RECEITAS</small>
+        <div class="col text-success divider">
+          <h2> <%= curr @resultado.total.valor_receitas %></h2>
+          <small>RECEITAS</small>
+        </div>
+        <div class="col text-very-muted divider">
+          <h2> <%= curr @resultado.total.valor_estoque %></h2>
+          <small>VALOR ESTOQUE</small>
         </div>
       </div>
 
@@ -64,51 +84,66 @@
 
 <hr/>
 
-<div class="row">
+<% @resultado.por_fornecedor.each do |f| %>
 
-  <div class="col-sm-12 col-md-6">
+  <h4><b><%= f.fornecedor.nome %></b></h4>
 
-    <% @resultado.por_fornecedor.each do |f| %>
-    <h4><b><%= f.fornecedor.nome %></b></h4>
-    <div class="card card-body bg-light stats">
+  <div class="row mb-4">
 
-      <div class="row">
-        <div class="col-md-4 text-danger">
-          <h1> <%= qc = f.quantidade_comprados %></h1>
-          <small>PEÇAS COMPRADAS</small>
+    <div class="col-6">
+      <div class="well stats">
+        <div class="row">
+          <div class="col-md-4 text-danger">
+            <h2> <%= qc = f.quantidade_comprados %></h2>
+            <small>PEÇAS COMPRADAS</small>
+          </div>
+          <div class="col-md-4 text-success divider">
+            <h2> <%= qv = f.quantidade_vendidos %></h2>
+            <small>PEÇAS VENDIDAS</small>
+          </div>
+          <div class="col-md-4 text-very-muted divider">
+            <h2> <%= qc - qv %></h2>
+            <small>EM ESTOQUE</small>
+          </div>
         </div>
-        <div class="col-md-4 text-success divider">
-          <h1> <%= qv = f.quantidade_vendidos %></h1>
-          <small>PEÇAS VENDIDAS</small>
-        </div>
-        <div class="col-md-4 text-very-muted divider">
-          <h1> <%= qc - qv %></h1>
-          <small>EM ESTOQUE</small>
-        </div>
+        <%= progress(f.porcent_vendidos) %>
+        <table class="table table-sm mt-2">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th class="right">Vendidas</th>
+            </tr>
+          </thead>
+          <% f.vendas_por_tipo.each do |item| %>
+            <tr>
+              <td><%= item.tipo %></td>
+              <td class="right"><%= item.quant %></td>
+            </tr>
+          <% end %>
+        </table>
       </div>
-
-      <%= progress(f.porcent_vendidos) %>
-
-      <table class="table table-sm mt-2">
-        <thead>
-          <tr>
-            <th>Tipo</th>
-            <th class="right">Vendidas</th>
-          </tr>
-        </thead>
-        <% f.vendas_por_tipo.each do |item| %>
-          <tr>
-            <td><%= item.tipo %></td>
-            <td class="right"><%= item.quant %></td>
-          </tr>
-        <% end %>
-      </table>
-
     </div>
 
-    <br/>
+    <div class="col-6">
+      <div class="well stats">
+        <div class="row">
+          <div class="col-md-4 text-danger">
+            <h2> <%= curr f.valor_despesas %></h2>
+            <small>DESPESAS</small>
+          </div>
+          <div class="col-md-4 text-success divider">
+            <h2> <%= curr f.valor_receitas %></h2>
+            <small>RECEITAS</small>
+          </div>
+          <div class="col-md-4 text-very-muted divider">
+            <h2> <%= curr f.valor_estoque %></h2>
+            <small>VALOR ESTOQUE</small>
+          </div>
+        </div>
+        <%= progress(f.porcent_receitas) %>
+      </div>
+    </div>
 
-    <% end %>
   </div>
-
-</div>
+  <hr>
+<% end %>
