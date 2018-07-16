@@ -24,10 +24,11 @@
     }
   .action {
     position: absolute;
-    right: 0.8em;
-    bottom: 0.5em;
+    right: 0.8rem;
+    bottom: 0.5rem;
     color: #aaa;
     &:hover { color: $primary }
+    font-size: 90%;
   }
 }
 

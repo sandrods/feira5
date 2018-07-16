@@ -1,9 +1,9 @@
 <%= page_header "Exibir Cliente" do %>
   <%= link_to_back get_back_for(:cliente_show) %>
-  <%= link_to icn(:edit, 'Editar Cliente'), edit_cliente_path(@cliente), class: 'btn btn-sm btn-primary' %>
+
 <% end %>
 
-<div class="card card-body card-text mb-4">
+<div class="well vertical p-3 card-text mb-4">
 
     <h4 class="text-primary">
       <%= @cliente.nome %>
@@ -22,23 +22,28 @@
 
     </div>
 
+    <%= link_to icn(:edit, 'Editar Cliente'), edit_cliente_path(@cliente), class: 'action' %>
+
 </div>
 
-<table class="table">
-  <tbody>
-    <% @cliente.vendas.includes(itens: { item: [:produto, :cor, :tamanho] }).order(data: :desc).each do |venda| %>
-      <tr class='header'>
-        <td colspan="10"> <%= venda.data %> &nbsp;&nbsp;&nbsp; <%= link_to venda.descr, venda %>   </td>
-      </tr>
-      <% venda.itens.each do |item| %>
-      <tr>
-        <td><%= item.produto.ref %></td>
-        <td><%= item.produto.tipo.descricao %></td>
-        <td><%= item.produto.fornecedor.nome %></td>
-        <td><%= item.tamanho.try :nome %></td>
-        <td><%= item.cor.try :nome %></td>
-      </tr>
+<div class="well p-3">
+  <table class="table table-sm mb-0">
+    <tbody>
+      <% @cliente.vendas.includes(itens: { item: [:produto, :cor, :tamanho] }).order(data: :desc).each do |venda| %>
+        <tr class='header'>
+          <td colspan="10"> <%= venda.data %> &nbsp;&nbsp;&nbsp; <%= link_to venda.descr, venda %>   </td>
+        </tr>
+        <% venda.itens.each do |item| %>
+        <tr>
+          <td><%= item.produto.ref %></td>
+          <td><%= item.produto.tipo.descricao %></td>
+          <td><%= item.produto.fornecedor.nome %></td>
+          <td><%= item.tamanho.try :nome %></td>
+          <td><%= item.cor.try :nome %></td>
+        </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+
+</div>

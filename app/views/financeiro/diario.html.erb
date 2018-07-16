@@ -117,22 +117,22 @@
 
 <h4>Receitas e Despesas - Totais do Mês </h4>
 
-<div class="well flex-column stats mb-4 mt-3 px-4">
+<div class="well vertical stats mb-4 mt-3">
   <div class="row">
     <div class="col-3 text-muted">
-      <h1> <%= number_to_currency @diario.saldo_inicial %></h1>
+      <h2> <%= number_to_currency @diario.saldo_inicial %></h2>
       <small>SALDO ANTERIOR</small>
     </div>
     <div class="col-3 text-danger">
-      <h1> <%= number_to_currency @diario.total_despesas %></h1>
+      <h2> <%= number_to_currency @diario.total_despesas %></h2>
       <small>TOTAL DE DESPESAS</small>
     </div>
     <div class="col-3 text-success">
-      <h1> <%= number_to_currency @diario.total_receitas %></h1>
+      <h2> <%= number_to_currency @diario.total_receitas %></h2>
       <small>TOTAL DE RECEITAS</small>
     </div>
     <div class="col-3 text-primary">
-      <h1> <%= number_to_currency @diario.saldo_final %></h1>
+      <h2> <%= number_to_currency @diario.saldo_final %></h2>
       <small>SALDO FINAL</small>
     </div>
   </div>

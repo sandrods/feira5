@@ -1,24 +1,22 @@
 <%= page_header 'Vendas Mensais' %>
 
-<div class="card card-body bg-light stats mb-4 p-2">
-  <h2 style="text-align: center">
-    <%= link_to icn(:arrow_left), mensal_vendas_path(mes: @vendas.calendar.last_month), class: "mr-3" %>
-    <%= @vendas.calendar.month %>
-    <%= link_to icn(:arrow_right), mensal_vendas_path(mes: @vendas.calendar.next_month), class: "ml-3" %>
-  </h2>
+<div class="well center mb-4 h2">
+  <%= link_to icn(:arrow_left), mensal_vendas_path(mes: @vendas.calendar.last_month), class: "mr-3" %>
+  <%= @vendas.calendar.month %>
+  <%= link_to icn(:arrow_right), mensal_vendas_path(mes: @vendas.calendar.next_month), class: "ml-3" %>
 </div>
 
-<div class="card card-body bg-light stats mb-4">
+<div class="well vertical stats mb-4">
   <div class="row">
-    <div class="col-md-4 text-danger">
+    <div class="col text-danger">
       <h1> <%= @vendas.total_pecas %></h1>
       <small>PEÇAS VENDIDAS</small>
     </div>
-    <div class="col-md-4 text-success divider">
+    <div class="col text-success divider">
       <h1> <%= number_to_currency @vendas.total_valor %></h1>
       <small>VALOR TOTAL</small>
     </div>
-    <div class="col-md-4 text-very-muted divider">
+    <div class="col text-very-muted divider">
       <h1> <%= number_to_currency @vendas.valor_medio %></h1>
       <small>VALOR MÉDIO</small>
     </div>
@@ -28,7 +26,7 @@
 <div class="row">
 
   <div class="col-sm-12 col-md-6 col-lg-4">
-    <div class="card card-body bg-light stats">
+    <div class="well">
       <table class="table table-sm">
         <thead>
           <tr>
@@ -48,7 +46,7 @@
   </div>
 
   <div class="col-sm-12 col-md-6 col-lg-4">
-    <div class="card card-body bg-light stats">
+    <div class="well">
       <table class="table table-sm">
         <thead>
           <tr>
@@ -68,7 +66,7 @@
   </div>
 
   <div class="col-sm-12 col-md-6 col-lg-4">
-    <div class="card card-body bg-light stats">
+    <div class="well">
       <table class="table table-sm">
         <thead>
           <tr>

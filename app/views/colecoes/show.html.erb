@@ -1,6 +1,4 @@
-<%= page_header @colecao.descricao, 'Resultados', back_to: colecoes_path do %>
-  <%= link_to icn(:edit, 'Editar Coleção'), edit_colecao_path(@colecao), class: 'btn btn-primary btn-sm' %>
-<% end %>
+<%= page_header @colecao.descricao, 'Resultados', back_to: colecoes_path %>
 
 <div class="row">
 
@@ -147,3 +145,7 @@
   </div>
   <hr>
 <% end %>
+
+<div class="bottom-actions">
+  <%= link_to icn(:edit, 'Editar esta Coleção'), edit_colecao_path(@colecao), class: 'btn btn-sm text-primary ml-auto' %>
+</div>
