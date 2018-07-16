@@ -1,0 +1,43 @@
+<%= page_header 'Dashboard' %>
+
+<div class="row">
+  <div class="col-6">
+    <h5>Vendas últimos <%= @vendas.calendar.days %> dias</h5>
+    <div class="well vertical mb-4 px-3">
+
+      <div class="row stats right">
+        <div class="col-md-4 text-danger">
+          <h2> <%= @vendas.total_pecas %></h2>
+          <small>PEÇAS VENDIDAS</small>
+        </div>
+        <div class="col-md-4 text-success divider">
+          <h2> <%= curr @vendas.total_valor %></h2>
+          <small>VALOR TOTAL</small>
+        </div>
+        <div class="col-md-4 text-very-muted divider">
+          <h2> <%= curr @vendas.valor_medio %></h2>
+          <small>VALOR MÉDIO</small>
+        </div>
+      </div>
+
+      <table class="table table-sm mt-3">
+        <thead>
+          <tr>
+            <th style="width: 6rem">Data</th>
+            <th>Cliente</th>
+            <th class="right">Total</th>
+          </tr>
+        </thead>
+        <% @vendas.vendas.each do |venda| %>
+          <tr>
+            <td><small><%= venda.data %></small></td>
+            <td><%= link_to venda.cliente.nome, venda %></td>
+            <td class="right"><%= curr venda.total %></td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+
+  </div>
+</div>
