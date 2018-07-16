@@ -1,10 +1,10 @@
-class Venda::Mensal
+class Venda::Periodo
 
-  attr_accessor :calendar
+  attr_accessor :calendar, :vendas
 
-  def initialize(data)
-    @calendar = Calendar.new(date: data)
-    @vendas = Venda.where(data: @calendar.range)
+  def initialize(date: nil, days: nil)
+    @calendar = Calendar.new(date: date, days: days)
+    @vendas = Venda.where(data: @calendar.range).order(data: :desc)
     @itens = ItemEstoque.vendidos.where(movimento_id: @vendas.pluck(:id))
   end
 

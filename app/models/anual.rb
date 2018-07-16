@@ -4,12 +4,12 @@ class Anual
 
   def initialize(ano = nil)
     @calendar = Calendar.new(year: ano)
-    @registros = Registro.where(data: @calendar.range_year)
+    @registros = Registro.where(data: @calendar.range)
   end
 
   def saldos
 
-    anteriores = Registro.where('data < ?', @calendar.range_year.begin).efetivos
+    anteriores = Registro.where('data < ?', @calendar.range.begin).efetivos
     saldo_inicial = anteriores.creditos.sum(:valor) - anteriores.debitos.sum(:valor)
 
     registros = @registros.group_by { |r| r.data.month }
@@ -45,14 +45,14 @@ class Anual
 
   def saldo_inicial
     @saldo_inicial ||= begin
-      ant = Registro.where('data < ?', @calendar.range_year.begin).efetivos
+      ant = Registro.where('data < ?', @calendar.range.begin).efetivos
       ant.creditos.sum(:valor) - ant.debitos.sum(:valor)
     end
   end
 
   def saldo_final
     @saldo_final ||= begin
-      ant = Registro.where('data <= ?', @calendar.range_year.last).efetivos
+      ant = Registro.where('data <= ?', @calendar.range.last).efetivos
       ant.creditos.sum(:valor) - ant.debitos.sum(:valor)
     end
   end

@@ -53,7 +53,7 @@ class VendasController < ApplicationController
   end
 
   def mensal
-    @vendas = Venda::Mensal.new params[:mes]
+    @vendas = Venda::Periodo.new date: params[:mes]
     @graf = Venda::Grafico.new
   end
 

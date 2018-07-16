@@ -4,9 +4,9 @@ class Venda::Grafico
 
   delegate :year, to: :calendar
 
-  def initialize(year = nil)
+  def initialize(year = Date.today.year)
     @calendar = Calendar.new(year: year)
-    @vendas = Venda.where(data: @calendar.range_year)
+    @vendas = Venda.where(data: @calendar.range)
     @itens = ItemEstoque.vendidos.where(movimento_id: @vendas.pluck(:id))
 
     @itens_por_mes = @itens.to_a.group_by_month { |i| i.movimento.data }
