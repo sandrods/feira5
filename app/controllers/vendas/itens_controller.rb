@@ -18,7 +18,7 @@ class Vendas::ItensController < ApplicationController
     @item = @venda.itens.find(params[:id])
 
     if params[:commit] == 'Salvar Desconto'
-      @item.set_desconto item_params[:desconto]
+      @item.set_desconto item_params[:desconto] || 0
     else
       @item.set_valor item_params[:valor]
     end

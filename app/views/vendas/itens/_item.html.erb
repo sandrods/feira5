@@ -4,7 +4,11 @@
   <td><small><%= item.cor&.nome %></small></td>
   <td><small><%= item.tamanho&.nome %></small></td>
   <td class="text-right">
-    <%= number_to_percentage item.desconto, precision: 1, format: "%n %" %>
+    <% if item.desconto&.nonzero? %>
+    <small>
+      <%= number_to_percentage(item.desconto, precision: 1, format: "%n %") %>
+    </small>
+    <% end %>
   </td>
   <td class="text-right">
     <%= number_to_currency item.valor %>
