@@ -8,11 +8,11 @@
     <hr/>
     <div class="row">
       <div class="col-sm-6">
-        <%= f.input :desconto, as: :percentage, input_html: { value: @item.desconto.to_i } %>
+        <%= f.input :desconto, as: :percentage, input_html: { value: @item.desconto.to_i, autocomplete: 'off' } %>
         <%= f.submit "Salvar Desconto", class: 'btn btn-sm btn-primary' %>
       </div>
       <div class="col-sm-6">
-        <%= f.input :valor, as: :currency, input_html: { value: curr(@item.valor) } %>
+        <%= f.input :valor, as: :currency, input_html: { value: curr(@item.valor), autocomplete: 'off' } %>
         <%= f.submit "Salvar Valor", class: 'btn btn-sm btn-primary' %>
       </div>
     </div>

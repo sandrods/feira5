@@ -49,6 +49,11 @@ td small {
   }
 }
 
+table.smaller {
+  font-size: 85%;
+  td, thead th { padding: 0.3rem 0.6rem }
+}
+
 .muted-danger {
   color: #ccc;
   &:hover {
