@@ -26,6 +26,7 @@
       <th>Cliente</th>
       <th class="right">Peças</th>
       <th class="right">Total</th>
+      <th width="10px">&nbsp;</th>
     </tr>
   </thead>
   <tbody>
@@ -35,6 +36,7 @@
         <td><%= link_to venda.cliente.nome, venda %></td>
         <td class="right"><%= venda.itens.count %></td>
         <td class="right"><%= number_to_currency venda.total %></td>
+        <td class="right"><%= flag_pagamento(venda) %></td>
       </tr>
     <% end %>
   </tbody>
