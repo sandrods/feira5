@@ -2,8 +2,8 @@ class Anual
 
   attr_accessor :calendar
 
-  def initialize(ano = nil)
-    @calendar = Calendar.new(year: ano)
+  def initialize(ano)
+    @calendar = Calendar.new(year: ano || Date.today.year)
     @registros = Registro.where(data: @calendar.range)
   end
 
