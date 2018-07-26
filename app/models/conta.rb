@@ -2,7 +2,7 @@ class Conta < ActiveRecord::Base
 
   validates_length_of :nome, maximum: 20
 
-  has_many :registros, -> { order(:data) }
+  has_many :registros
 
   def Conta.to_select
     @@combo ||= Conta.update_select

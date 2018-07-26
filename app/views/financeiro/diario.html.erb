@@ -27,11 +27,13 @@
         <div class="card-footer upper text-right">
           <small>Saldo Inicial</small> &nbsp; <%= curr conta.saldo_inicial %>
         </div>
-        <table class="table table-striped m-0 table-sm">
-          <tbody id="registros_conta_caixa">
-            <%= render partial: 'registros/registro', collection: conta.registros.pagos %>
-          </tbody>
-        </table>
+        <div class="scroll">
+          <table class="table table-striped m-0 table-sm">
+            <tbody id="registros_conta_caixa">
+              <%= render partial: 'registros/registro', collection: conta.registros.pagos %>
+            </tbody>
+          </table>
+        </div>
         <div class="card-footer text-right">
           <small>Saldo Final</small> &nbsp; <%= curr conta.saldo %>
         </div>

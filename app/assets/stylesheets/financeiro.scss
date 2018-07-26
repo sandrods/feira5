@@ -34,3 +34,11 @@
     }
   }
 }
+
+.scroll{
+  overflow:auto;
+  height:310px;
+}
+.table-scroll thead tr{
+  display:block;
+}

@@ -81,7 +81,7 @@ class Diario
     delegate :nome, to: :@conta
 
     def registros
-      @conta.registros.where(data: @range)
+      @conta.registros.where(data: @range).order(data: :desc)
     end
 
     def saldo_inicial
