@@ -4,7 +4,7 @@ class Diario
 
   def initialize(data)
     @calendar = Calendar.new(date: data)
-    @contas = ::Conta.all.map { |c| Conta.new(c, @calendar.range) }
+    @contas = ::Conta.order(id: :desc).map { |c| Conta.new(c, @calendar.range) }.select { |c| c.registros.present? }
     @registros = Registro.where(data: @calendar.range)
   end
 

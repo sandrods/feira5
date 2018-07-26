@@ -25,15 +25,15 @@
           <b><%= conta.nome %></b>
         </div>
         <div class="card-footer upper text-right">
-          <small>Saldo Inicial</small> &nbsp; <%= number_to_currency conta.saldo_inicial %>
+          <small>Saldo Inicial</small> &nbsp; <%= curr conta.saldo_inicial %>
         </div>
-        <table class="table table-striped m-0">
+        <table class="table table-striped m-0 table-sm">
           <tbody id="registros_conta_caixa">
             <%= render partial: 'registros/registro', collection: conta.registros.pagos %>
           </tbody>
         </table>
         <div class="card-footer text-right">
-          <small>Saldo Final</small> &nbsp; <%= number_to_currency conta.saldo %>
+          <small>Saldo Final</small> &nbsp; <%= curr conta.saldo %>
         </div>
       </div>
 
@@ -68,7 +68,7 @@
         </tbody>
       </table>
       <div class="card-footer text-right">
-        <small>Total</small> <%= number_to_currency @diario.a_pagar_total %>
+        <small>Total</small> &nbsp; <%= curr @diario.a_pagar_total %>
       </div>
     </div>
 
@@ -86,7 +86,7 @@
         </tbody>
       </table>
       <div class="card-footer text-right">
-        <small>Total</small> <%= number_to_currency @diario.a_receber_total %>
+        <small>Total</small> &nbsp; <%= curr @diario.a_receber_total %>
       </div>
     </div>
 
@@ -151,7 +151,7 @@
           <% @diario.despesas.each do |cat, valor| %>
           <tr>
             <td><%= cat.try(:nome) || 'SEM CATEGORIA' %></td>
-            <td class='text-right' ><%= number_to_currency(valor) %></td>
+            <td class='text-right' ><%= curr(valor) %></td>
           </tr>
           <% end %>
         </tbody>
@@ -171,7 +171,7 @@
           <% @diario.receitas.each do |cat, valor| %>
           <tr>
             <td><%= cat.try(:nome) || 'SEM CATEGORIA' %></td>
-            <td class='text-right' ><%= number_to_currency(valor) %></td>
+            <td class='text-right' ><%= curr(valor) %></td>
           </tr>
           <% end %>
         </tbody>
