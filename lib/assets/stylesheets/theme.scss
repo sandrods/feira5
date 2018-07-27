@@ -1,11 +1,12 @@
-$theme-color: #624888;
+// #624888;
+$theme-color: #5e72e4;
 
 .bg-theme { background-color: $theme-color; }
 
 html { font-size: 14px; }
 body {
     background: asset-url("bg.png") 0 0 repeat;
-    padding-top: 60px;
+    padding-top: 70px;
     & > .container {
         background-color: #fff;
         padding: 0 20px 40px 20px;

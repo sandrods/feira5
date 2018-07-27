@@ -1,8 +1,8 @@
 
 .page-header {
-    margin: 10px 0 20px 0;
+    margin: 10px 0 25px 0;
     padding-bottom: 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 0px solid #ddd;
     position: relative;
     h1 {
         margin-top: 25px;
@@ -16,15 +16,15 @@
     }
     .line {
         position: relative;
-        bottom: -1px;
+        bottom: 0px;
         left: 0;
-        height: 5px;
+        height: 2px;
         width: 70px;
         background-color: lighten($theme-color, 2%);
     }
     .actions {
         position: absolute;
         right: 10px;
-        bottom: 10px;
+        bottom: 0px;
     }
 }

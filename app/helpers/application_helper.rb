@@ -148,7 +148,7 @@ def fa(*names)
   end
 
   def link_to_back(path = nil)
-    link_to icn(:arrow_left, "Voltar"), (path || :back), class: 'btn btn-clean'
+    link_to icn(:arrow_left, "Voltar"), (path || :back), class: 'btn btn-clear btn-sm'
   end
 
   def modal(id:, &block)
