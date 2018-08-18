@@ -21,12 +21,13 @@ class NavBarComponent
     end
 
     add_menu "Vendas", %w(vendas clientes sacolas) do |m|
-      m.link "Vendas", vendas_path, /vendas.*(?<!mensal)$/
+      m.link icn(:list, "Listagem de Vendas"), vendas_path, /vendas.*(?<!mensal)(?<!new)$/
+      m.link icn(:plus, "Nova Venda"), new_venda_path, /vendas\/new$/
       m.divider
-      m.link "Sacolas", sacolas_path, /sacolas/
-      m.link "Clientes", clientes_path, /clientes/
+      m.link icn(:shopping_bag, "Sacolas"), sacolas_path, /sacolas/
+      m.link icn(:user, "Clientes"), clientes_path, /clientes/
       m.divider
-      m.link "Vendas Mensais", mensal_vendas_path, /mensal/
+      m.link icn(:calendar, "Vendas Mensais"), mensal_vendas_path, /mensal/
     end
 
     add_menu "Financeiro", %w(financeiro contas categorias formas) do |m|
