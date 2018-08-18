@@ -11,6 +11,8 @@ class Compra < ActiveRecord::Base
 
   has_many :pagamentos, -> { where(cd: 'D').order('data') }, class_name: "Registro", as: :registravel
 
+  validates :data, presence: true
+
   def adiciona_item!(bc)
 
     item = Item.find_or_create_by_barcode(bc)

@@ -4,7 +4,7 @@
 
     <div class="row">
       <div class="col-sm-6">
-        <%= f.input :fornecedor_id, label: "Fornecedor", collection: Fornecedor.ativos, label_method: :nome %>
+        <%= f.association :fornecedor, label: "Fornecedor", collection: Fornecedor.ativos, label_method: :nome %>
       </div>
       <div class="col-sm-6">
         <%= f.association :colecao, label: 'Coleção', label_method: :descricao, input_html: { class: 'select2' } %>
