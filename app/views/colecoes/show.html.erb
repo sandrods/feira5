@@ -15,7 +15,7 @@
           <small>PEÇAS VENDIDAS</small>
         </div>
         <div class="col-md-4 text-very-muted divider">
-          <h2> <%= qc - qv %></h2>
+          <h2> <%= @resultado.total.quantidade_estoque %></h2>
           <small>EM ESTOQUE</small>
         </div>
       </div>
@@ -92,15 +92,15 @@
       <div class="well vertical stats">
         <div class="row">
           <div class="col-md-4 text-danger">
-            <h2> <%= qc = f.quantidade_comprados %></h2>
+            <h2> <%= f.quantidade_comprados %></h2>
             <small>PEÇAS COMPRADAS</small>
           </div>
           <div class="col-md-4 text-success divider">
-            <h2> <%= qv = f.quantidade_vendidos %></h2>
+            <h2> <%= f.quantidade_vendidos %></h2>
             <small>PEÇAS VENDIDAS</small>
           </div>
           <div class="col-md-4 text-very-muted divider">
-            <h2> <%= qc - qv %></h2>
+            <h2> <%= f.quantidade_estoque %></h2>
             <small>EM ESTOQUE</small>
           </div>
         </div>

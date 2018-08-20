@@ -33,6 +33,10 @@ class Colecao::Resultado
       @qc ||= itens_comprados.count
     end
 
+    def quantidade_estoque
+      @qe ||= itens_comprados.map(&:item).uniq.sum(&:estoque)
+    end
+
     def porcent_vendidos
       (quantidade_vendidos.to_f / quantidade_comprados * 100).to_i rescue 0
     end
@@ -46,7 +50,7 @@ class Colecao::Resultado
     end
 
     def valor_estoque
-      @ve ||= (itens_comprados - itens_vendidos).sum(&:valor_venda)
+      @ve ||= itens_comprados.map(&:item).uniq.sum(&:valor_estoque)
     end
 
     def porcent_receitas
@@ -115,6 +119,10 @@ class Colecao::Resultado
       @qc ||= itens_comprados.count
     end
 
+    def quantidade_estoque
+      @qe ||= itens_comprados.map(&:item).uniq.sum(&:estoque)
+    end
+
     def valor_despesas
       @vd ||= itens_comprados.sum(:valor)
     end
@@ -124,7 +132,7 @@ class Colecao::Resultado
     end
 
     def valor_estoque
-      @ve ||= (itens_comprados - itens_vendidos).sum(&:valor_venda)
+      @ve ||= itens_comprados.map(&:item).uniq.sum(&:valor_estoque)
     end
 
     def porcent_vendidos

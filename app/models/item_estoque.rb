@@ -16,7 +16,7 @@ class ItemEstoque < ActiveRecord::Base
   scope :da_colecao,   ->(c) { joins(item: :produto).
                                    where(produtos: { colecao_id: c.id }) }
 
- scope :do_fornecedor, ->(f) { joins(item: :produto).
+  scope :do_fornecedor, ->(f) { joins(item: :produto).
                                   where(produtos: { fornecedor_id: f.id }) }
 
   def set_desconto(_desconto)
