@@ -31,8 +31,9 @@ class NavBarComponent
     end
 
     add_menu "Financeiro", %w(financeiro contas categorias formas) do |m|
-      m.link "Diário", financeiro_diario_path
-      m.link "Anual", financeiro_anual_path
+      m.link icn(:r_calendar, "Diário"), financeiro_diario_path
+      m.link icn(:calendar_alt, "Anual"), financeiro_anual_path
+      m.link icn(:search, "Pesquisa"), registros_path
       m.divider
       m.link "Contas", contas_path
       m.link "Categorias", categorias_path

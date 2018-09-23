@@ -74,7 +74,7 @@ def fa(*names)
     names.map! do |n|
       return n if n =~ /pull-(?:left|right)/
 
-      if n =~ /r-(.*)/
+      if n =~ /^r-(.*)/
         pre = 'far'
         n = $1
       else

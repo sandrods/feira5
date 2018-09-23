@@ -34,13 +34,13 @@
 
   <div class="modal-footer">
 
-    <%= link_to icon(:trash, 'Apagar esta Transferência'),
+    <%= link_to icn(:trash, 'Apagar esta Transferência'),
           @transf,
           method: :delete,
           data: { confirm: 'Tem certeza?' },
-          class: 'btn btn-sm text-danger pull-left' %>
+          class: 'btn btn-sm text-danger' %>
 
-    <button type="button" class="btn btn-light" data-dismiss="modal">Fechar</button>
+    <button type="button" class="btn btn-light ml-auto" data-dismiss="modal">Fechar</button>
     <%= f.submit "Salvar Transferência", class: 'btn btn-primary' %>
   </div>
 

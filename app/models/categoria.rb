@@ -5,4 +5,7 @@ class Categoria < ActiveRecord::Base
 
   scope :por_cd, ->(cd) { where(cd: cd) }
 
+  def self.to_select
+    self.order(:nome).pluck(:nome, :id)
+  end
 end

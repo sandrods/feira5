@@ -1,5 +1,10 @@
 class RegistrosController < ApplicationController
 
+  def index
+    params[:q] = { data_gteq: 30.days.ago.to_date } unless params[:q]
+    @search = Registro.order('data desc').search(params[:q])
+  end
+
   def new
     @registro = Registro.new(cd: params[:cd])
     render layout: false
