@@ -4,7 +4,7 @@ class Diario
 
   def initialize(data)
     @calendar = Calendar.new(date: data)
-    @contas = ::Conta.order(id: :desc).map { |c| Conta.new(c, @calendar.range) }.select { |c| c.registros.present? }
+    @contas = ::Conta.order(:id).map { |c| Conta.new(c, @calendar.range) }.select { |c| c.registros.present? }
     @registros = Registro.where(data: @calendar.range)
   end
 
@@ -92,6 +92,11 @@ class Diario
     def saldo
       r = @conta.registros.where('data <= ?', @range.last)
       r.creditos.pagos.sum(:valor) - r.debitos.pagos.sum(:valor)
+    end
+
+    def saldo_do_mes
+      r = @conta.registros.where(data: @range)
+      r.creditos.sum(:valor) - r.debitos.sum(:valor)
     end
 
   end
