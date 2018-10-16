@@ -6,22 +6,26 @@
 
   <div class="modal-body">
 
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.input :conta_origem, collection: Conta.to_select, label: 'Conta Origem' %>
-      </div>
-      <div class="col-md-6">
-        <%= f.input :conta_destino, collection: Conta.to_select, label: 'Conta Destino' %>
-      </div>
-    </div>
+    <div class="well vertical card-text mb-3">
 
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.input :data, as: :datetime %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :conta_origem, collection: Conta.to_select, label: 'Conta Origem' %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :conta_destino, collection: Conta.to_select, label: 'Conta Destino' %>
+        </div>
       </div>
-      <div class="col-md-6">
-        <%= f.input :valor, as: :currency %>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :data, as: :datetime %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :valor, as: :currency %>
+        </div>
       </div>
+
     </div>
 
   </div>

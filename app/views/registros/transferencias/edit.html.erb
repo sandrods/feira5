@@ -6,28 +6,32 @@
 
   <div class="modal-body">
 
-    <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Conta Origem</label>
-          <p class="form-control-static"> <%= @transf.reg_origem.conta.nome %> </p>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label>Conta Destino</label>
-          <p class="form-control-static"> <%= @transf.reg_destino.conta.nome %> </p>
-        </div>
-      </div>
-    </div>
+    <div class="well vertical card-text mb-3">
 
-    <div class="row">
-      <div class="col-md-6">
-        <%= f.input :data, as: :datetime %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Conta Origem</label>
+            <p class="form-control-static"> <%= @transf.reg_origem.conta.nome %> </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Conta Destino</label>
+            <p class="form-control-static"> <%= @transf.reg_destino.conta.nome %> </p>
+          </div>
+        </div>
       </div>
-      <div class="col-md-6">
-        <%= f.input :valor, as: :currency, input_html: { value: curr(@transf.valor) } %>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :data, as: :datetime %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :valor, as: :currency, input_html: { value: curr(@transf.valor) } %>
+        </div>
       </div>
+
     </div>
 
   </div>
