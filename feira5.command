@@ -1,4 +1,5 @@
 #!/bin/sh
+ifconfig | grep 192.168
 
 cd /Users/sandro/dev/workspace/feira5
 
