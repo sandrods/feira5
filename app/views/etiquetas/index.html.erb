@@ -1,6 +1,19 @@
 <%= page_header "Etiquetas" do %>
   <%= link_to icn(:r_file, 'Limpar Página'), unselect_all_etiquetas_path, method: 'POST', class: 'btn btn-warning' %>
-  <%= link_to icn(:th, 'Preencher Página'), select_page_etiquetas_path(q: params[:q].permit!), method: 'POST', class: 'btn btn-success' %>
+
+  <div class="btn-group">
+    <%= link_to icn(:th, 'Preencher Página'), select_page_etiquetas_path(q: params[:q].permit!), method: 'POST', class: 'btn btn-success' %>
+    <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right">
+        <%= link_to icn(:th, 'Preencher Página (incluir já adicionadas)'),
+                    select_page_etiquetas_path(q: params[:q].permit!, all: true),
+                    method: 'POST',
+                    class: 'dropdown-item' %>
+    </div>
+  </div>
+
   <span class="btn"></span>
 
   <div class="btn-group">
@@ -25,18 +38,9 @@
 
 <div class="row">
 
-  <div class="col-7">
+  <div class="col-6">
 
     <table class="table" id="grid">
-      <thead>
-        <tr>
-          <th><%= nbsp %></th>
-          <th><%= nbsp %></th>
-          <th><%= nbsp %></th>
-          <th><%= nbsp %></th>
-          <th><%= nbsp %></th>
-        </tr>
-      </thead>
       <tbody>
         <%= render partial: 'grid' %>
       </tbody>
@@ -44,7 +48,7 @@
 
   </div>
 
-  <div class="col-md-5">
+  <div class="col-md-6">
 
     <div class="card card-body card-text bg-light stats">
     <%= simple_form_for @search, url: etiquetas_path, method: 'GET' do |f| %>

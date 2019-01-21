@@ -1,12 +1,12 @@
       <% @selected.each_with_index do |tr, i| %>
-        <tr <%= ((i+1) % 5) == 0 ? 'class=page' : '' %>>
+        <tr <%= ((i+1) % 11) == 0 ? 'class=page' : '' %>>
           <% tr.each do |td| %>
             <td>
               <b><%= link_to td.ref,
                             unselect_etiqueta_path(td),
                             remote: true,
-                            method: 'POST' %></b><br/>
-              <small><%= td.barcode %></small><br/>
+                            method: 'POST' %></b>
+              <small><%= td.barcode %></small>
               <%= td.sub1 %>
             </td>
           <% end %>

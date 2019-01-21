@@ -19,7 +19,7 @@ class EtiquetasController < ApplicationController
                         .references(:fornecedor)
                         .order('etiquetas.gerada, fornecedores.nome, produtos.ref')
 
-    @selected = Etiqueta.selecionadas.in_groups_of(5, false)
+    @selected = Etiqueta.selecionadas.in_groups_of(3, false)
 
   end
 
@@ -53,14 +53,14 @@ class EtiquetasController < ApplicationController
     @etiqueta = Etiqueta.find(params[:id])
     @etiqueta.mark!
 
-    @selected = Etiqueta.selecionadas.in_groups_of(5, false)
+    @selected = Etiqueta.selecionadas.in_groups_of(3, false)
   end
 
   def unselect
     @etiqueta = Etiqueta.find(params[:id])
     @etiqueta.unmark!
 
-    @selected = Etiqueta.selecionadas.in_groups_of(5, false)
+    @selected = Etiqueta.selecionadas.in_groups_of(3, false)
     render :select
   end
 
@@ -71,8 +71,8 @@ class EtiquetasController < ApplicationController
 
   def select_page
     index
-    dif = Etiqueta.selecionadas.count % 25
-    @etiquetas.where(gerada: false, mark: nil).limit(25 - dif).each { |e| e.mark! }
+    dif = Etiqueta.selecionadas.count % 33
+    @etiquetas.where(gerada: false, mark: nil).limit(33 - dif).each { |e| e.mark! }
 
     redirect_to etiquetas_path(params[:q].permit!)
   end
