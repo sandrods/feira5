@@ -1,42 +1,21 @@
 <audio src="<%= asset_path('beep.mp3') %>" id="sound"></audio>
 
-<div class="modal fade" id="item_modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header alert-success">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h2 class="text-center text-info"   id="modal_ref"></h2>
-        <h2 class="text-center text-danger" id="modal_cor"></h2>
-        <h2 class="text-center text-danger" id="modal_tam"></h2>
-        <br/>
-      </div>
-
-    </div>
+<%= modal id: "item_modal" do %>
+  <%= modal_header "" %>
+  <div class="modal-body">
+    <h2 class="text-center text-info"   id="modal_ref"></h2>
+    <h2 class="text-center text-danger" id="modal_cor"></h2>
+    <h2 class="text-center text-danger" id="modal_tam"></h2>
+    <br/>
   </div>
-</div>
-
+<% end %>
 
 <audio src="<%= asset_path('fail.mp3') %>" id="fail_sound"></audio>
 
-<div class="modal fade" id="error_modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header alert-danger">
-        <h5 class="modal-title" id="exampleModalLabel">Erro Processando Item</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h3 class="text-center text-danger" id="error_msg"></h3>
-        <br/>
-      </div>
-
-    </div>
+<%= modal id: "error_modal" do %>
+  <%= modal_header "Erro Processando Item" %>
+  <div class="modal-body">
+    <h3 class="text-center text-danger" id="error_msg"></h3>
+    <br/>
   </div>
-</div>
+<% end %>

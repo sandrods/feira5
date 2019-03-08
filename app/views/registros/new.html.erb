@@ -1,10 +1,4 @@
-
-<div class="modal-header">
-  <h4 class="modal-title">
-    Incluir Registro
-    <%= label_cd(@registro.cd) %>
-  </h4>
-</div>
+<%= modal_header "Incluir Registro #{label_cd(@registro.cd)}" %>
 
 <%= simple_form_for @registro, remote: false do |f| %>
 

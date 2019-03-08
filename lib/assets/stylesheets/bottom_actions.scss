@@ -4,7 +4,8 @@
     background-color: #f8f8f8;
     padding: 20px;
     margin: 30px -20px -40px -20px;
-
+    border-radius: 0 0 6px 6px;
+    
     display: flex !important;
     -webkit-box-align: center!important;
     -ms-flex-align: center!important;
@@ -14,9 +15,11 @@
 }
 
 .card .bottom-actions {
+    border-width: 1px;
     background-color: #f9f9f6;
-    padding: 10px;
-    margin: 20px -16px -16px -16px;
+    padding: 15px;
+    margin: 20px -16px -20px -16px;
+    border-radius: 0 0 4px 4px;
 }
 
 .card tfoot.bottom tr {

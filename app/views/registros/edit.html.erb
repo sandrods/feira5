@@ -1,9 +1,4 @@
-<div class="modal-header">
-  <h4 class="modal-title">
-    Editar Registro
-    <%= label_cd(@registro.cd) %>
-  </h4>
-</div>
+<%= modal_header "Editar Registro #{label_cd(@registro.cd)}" %>
 
 <%= simple_form_for @registro, remote: false do |f| %>
   <div class="modal-body">

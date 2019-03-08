@@ -6,7 +6,7 @@ window.show_item_exception = (msg) ->
 window.show_item_box = (data) ->
   $("#sound")[0].play()
 
-  $("#item_modal .modal-title").html(data.title)
+  $("#item_modal .modal-header h1").html(data.title)
 
   $("#modal_ref").html(data.ref)
   $("#modal_cor").html(data.cor)

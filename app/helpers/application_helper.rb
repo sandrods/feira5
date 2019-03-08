@@ -11,46 +11,34 @@ module ApplicationHelper
       <div class="page-header">
           <h1>#{title} #{_sub}</h1>
           <div class="actions">#{actions}</div>
-          <div class="line"></div>
       </div>
-      <div class="flash-messages">
-        #{flash_messages}
-      </div>
+      #{flash_messages}
     HTML
     header.html_safe
   end
 
-  def modal_page_header(title, sub = nil, &block)
+  def modal_header(title, sub = nil, &block)
     _sub = sub ? "&nbsp;<small>#{sub}</small>" : ""
     actions = tag.div(class: 'actions', &block) if block_given?
 
     header = <<-HTML
 
-    <div class="modal-header flex-column">
+    <div class="modal-header align-items-center">
+      <h1 class="flex-grow-1">#{title} #{_sub}</h1>
+      #{actions}
 
-      <div class='d-flex w-100 justify-content-between'>
-        <div class="page-header w-100">
-            <h1>#{title} #{_sub}</h1>
-            #{actions}
-            <div class="line"></div>
-        </div>
-
-        <button type="button" class="close right" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="flash-messages w-100">
-        #{flash_messages}
-      </div>
-
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+
+      #{flash_messages(dismissable: false)}
 
     HTML
     header.html_safe
   end
 
-  def flash_messages
+  def flash_messages(dismissable: true)
     _flashes = ""
     flash.each do |name, msg|
       case name.to_sym
@@ -62,30 +50,48 @@ module ApplicationHelper
           _type = 'warning'
         when :info
           _type = 'info'
+        else
+          _type = name
         end
-      _flashes << alert(text: msg, type: _type, dismissable: true)
+      _flashes << alert(text: msg, type: _type, dismissable: dismissable)
     end
     flash.discard
-    _flashes.html_safe
+
+      <<-HTML.html_safe
+        <div class="flash-messages w-100">
+          #{_flashes}
+        </div>
+      HTML
+
   end
 
-def fa(*names)
+  def fa(*names)
     names.map! { |name| name.to_s.gsub('_','-') }
     names.map! do |n|
       return n if n =~ /pull-(?:left|right)/
 
+      cls = []
+
       if n =~ /^r-(.*)/
-        pre = 'far'
+        cls << 'far'
         n = $1
       else
-        pre = 'fas'
+        cls << 'fas'
       end
 
       if n =~ /(.*)-(xs|sm|lg|\dx)$/
-        "#{pre} fa-#{$1} fa-#{$2}"
-      else
-        "#{pre} fa-#{n}"
+        cls << "fa-#{$2}"
+        n = $1
       end
+
+      if n =~ /(.*)-spin\b(.*)/
+        cls << "fa-spin"
+        n = $1
+      end
+
+      cls << "fa-#{n}"
+
+      cls.join " "
 
     end
 
@@ -109,26 +115,29 @@ def fa(*names)
 
     case type.to_s
     when 'success', 'notice'
-      _icon = icn(:check_circle_2x)
+      _icon = icon(:check_circle_2x)
       clazz = 'success'
 
     when 'warning'
-      _icon = icn(:exclamation_circle_2x)
+      _icon = icon(:exclamation_circle_2x)
       clazz = 'warning'
 
     when 'error', 'danger'
-      _icon = icn(:times_circle_2x)
+      _icon = icon(:times_circle_2x)
       clazz = 'danger'
 
     when 'info'
-      _icon = icn(:info_circle_2x)
+      _icon = icon(:info_circle_2x)
       clazz = 'info'
 
     else
-      raise "Invalid type: #{type} for alert helper"
+      _icon = icon(:times_2x)
+      clazz = 'dark'
+
+      txt += "<br><small>Invalid type: <b>#{type}</b> for alert</small>".html_safe
     end
 
-    ic = icon.present? ? icn("#{icon}_2x") : _icon
+    ic = icon.present? ? icon("#{icon}_2x") : _icon
 
     content = tag.div(ic + tag.div(txt, class: 'text'), class: 'd-flex align-items-center')
 
@@ -148,15 +157,18 @@ def fa(*names)
   end
 
   def link_to_back(path = nil)
-    link_to icn(:arrow_left, "Voltar"), (path || :back), class: 'btn btn-clean'
+    link_to icn(:arrow_left, "Voltar"), (path || :back), class: 'btn btn-clean py-0'
   end
 
-  def modal(id:, &block)
+  def modal(id:, size: nil, center: false, &block)
     content = tag.div(class: 'modal-content', &block)
+
+    _size   = size.present? ? "modal-#{size}" : ''
+    _center = center ? 'modal-dialog-centered' : ''
 
     modal = <<-HTML
       <div class="modal fade" id=#{id}>
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog #{_size} #{_center}" role="document">
           #{content}
         </div>
       </div>
@@ -196,4 +208,27 @@ def fa(*names)
     tag.h5 _count + _space + _text, class: 'index_count'
 
   end
+
+  def dropdown_button(text, variant:'primary', size: '', itens: nil, &block)
+
+    id = 'dd_' + strip_tags(text).parameterize
+
+    if block_given?
+      links = tag.div(class: 'dropdown-menu', 'aria-labelledby': id, &block)
+    else
+      links = tag.div(itens.html_safe, class: 'dropdown-menu', 'aria-labelledby': id)
+    end
+
+    button = button_tag text,
+                        type: :button,
+                        class: "btn btn-#{variant.to_s} btn-#{size} dropdown-toggle",
+                        data: { toggle: 'dropdown' },
+                        id: id,
+                        'aria-haspopup': true,
+                        'aria-expanded': false
+
+    tag.div(class: 'btn-group', role: 'group') { button + links }
+
+  end
+
 end

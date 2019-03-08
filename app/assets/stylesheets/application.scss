@@ -29,14 +29,8 @@ $table-cell-padding-sm: .4rem;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+$theme-color: #624888;
 @import "theme";
-@import "page_header";
-@import "bottom_actions";
-@import "modals";
-@import "bs-misc";
-@import "search";
-@import "card_text";
-@import "select2_styles";
 
 td.C { color: theme-color("success"); }
 td.D { color: theme-color("danger"); }

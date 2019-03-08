@@ -60,10 +60,10 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
-  config.active_job.queue_adapter     = :sidekiq
+  # config.active_job.queue_adapter     = :sidekiq
   # config.active_job.queue_name_prefix = "feira5_#{Rails.env}"
 
-  config.action_mailer.perform_caching = false
+  # config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

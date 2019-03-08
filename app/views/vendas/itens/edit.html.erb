@@ -1,8 +1,9 @@
-<%= modal_page_header @item.produto.ref, "Editar Produto" %>
+<%= modal_header @item.produto.ref, "Editar Produto" %>
 
 <%= simple_form_for @item, url: venda_item_path(@venda, @item), remote: true do |f| %>
 
   <div class="modal-body">
+
     <label>Preço do Produto </label><br/>
     <%= number_to_currency(@item.produto.valor) %>
     <hr/>
@@ -18,6 +19,7 @@
     </div>
 
   </div>
+
   <div class="modal-footer">
 
     <%= link_to icn(:trash, 'Remover este Produto'),

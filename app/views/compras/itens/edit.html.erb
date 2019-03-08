@@ -1,4 +1,4 @@
-<%= modal_page_header @item.produto.ref, "Editar Produto" %>
+<%= modal_header @item.produto.ref, "Editar Produto" %>
 
 <%= simple_form_for @item, url: compra_item_path(@compra, @item), remote: true do |f| %>
 
