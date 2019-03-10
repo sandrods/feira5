@@ -2,7 +2,7 @@
 
 
 
-<div class="well center mb-4 h2">
+<div class="well well-row center mb-4 h2">
   <%= link_to icn(:arrow_left), financeiro_anual_path(ano: @anual.calendar.last_year), class: "mr-3" %>
   <%= @anual.calendar.year %>
   <%= link_to icn(:arrow_right), financeiro_anual_path(ano: @anual.calendar.next_year), class: "ml-3" %>

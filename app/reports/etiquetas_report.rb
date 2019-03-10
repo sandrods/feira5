@@ -23,7 +23,7 @@ class EtiquetasReport
                                bottom_margin: 9.mm
 
     @pdf.define_grid(columns: COLS, rows: ROWS, column_gutter: 3.mm, row_gutter: 0)
-    @pdf.grid.show_all
+    # @pdf.grid.show_all
 
     @pages.each_with_index do |page, i|
       @pdf.start_new_page unless i==0
@@ -47,15 +47,15 @@ class EtiquetasReport
           bc = Barby::Code25Interleaved.new(etiqueta.barcode)
           out = Barby::PrawnOutputter.new(bc)
 
-          out.annotate_pdf(@pdf, x:6, y: 28, height: 30, xdim: 0.8)
+          out.annotate_pdf(@pdf, x:8, y: 28, height: 30, xdim: 0.9)
 
-          @pdf.draw_text etiqueta.barcode, size: 9, at: [18, 18]
+          @pdf.draw_text etiqueta.barcode, size: 9, at: [25, 18]
 
-          @pdf.draw_text etiqueta.ref,  size: 9, at: [95, 50]
-          @pdf.draw_text etiqueta.sub1, size: 8, at: [95, 40]
+          @pdf.draw_text etiqueta.ref,  size: 9, at: [105, 50]
+          @pdf.draw_text etiqueta.sub1, size: 8, at: [105, 40]
 
           if @show_price
-            @pdf.draw_text etiqueta.valor, size: 12, style: :bold, at: [95, 17]
+            @pdf.draw_text etiqueta.valor, size: 12, style: :bold, at: [105, 17]
           end
 
         end
