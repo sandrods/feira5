@@ -115,29 +115,29 @@ module ApplicationHelper
 
     case type.to_s
     when 'success', 'notice'
-      _icon = icon(:check_circle_2x)
+      _icon = icn(:check_circle_2x)
       clazz = 'success'
 
     when 'warning'
-      _icon = icon(:exclamation_circle_2x)
+      _icon = icn(:exclamation_circle_2x)
       clazz = 'warning'
 
     when 'error', 'danger'
-      _icon = icon(:times_circle_2x)
+      _icon = icn(:times_circle_2x)
       clazz = 'danger'
 
     when 'info'
-      _icon = icon(:info_circle_2x)
+      _icon = icn(:info_circle_2x)
       clazz = 'info'
 
     else
-      _icon = icon(:times_2x)
+      _icon = icn(:times_2x)
       clazz = 'dark'
 
       txt += "<br><small>Invalid type: <b>#{type}</b> for alert</small>".html_safe
     end
 
-    ic = icon.present? ? icon("#{icon}_2x") : _icon
+    ic = icon.present? ? icn("#{icon}_2x") : _icon
 
     content = tag.div(ic + tag.div(txt, class: 'text'), class: 'd-flex align-items-center')
 
