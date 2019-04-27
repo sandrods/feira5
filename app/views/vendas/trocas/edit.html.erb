@@ -1,0 +1,28 @@
+<%= modal_header @item.produto.ref, "Editar Valor da Troca" %>
+
+<%= simple_form_for @item, url: venda_troca_path(@venda, @item), remote: true do |f| %>
+
+  <div class="modal-body">
+
+    <label>Preço do Produto </label><br/>
+    <%= number_to_currency(@item.produto.valor) %>
+    <hr/>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= f.input :valor, as: :currency, input_html: { value: curr(@item.valor), autocomplete: 'off' } %>
+        <%= f.submit "Salvar Valor", class: 'btn btn-sm btn-primary' %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <%= link_to icn(:trash, 'Remover esta Troca'),
+          venda_troca_path(@venda, @item),
+          method: :delete,
+          data: { confirm: 'Tem certeza?', remote: true },
+          class: 'btn btn-sm text-danger ml-auto' %>
+
+  </div>
+<% end %>

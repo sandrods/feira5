@@ -12,12 +12,13 @@ class ItemEstoque < ActiveRecord::Base
 
   scope :vendidos,  -> { where(tipo: 'S', movimento_type: 'Venda') }
   scope :comprados, -> { where(tipo: 'E', movimento_type: 'Compra') }
+  scope :trocas,    -> { where(tipo: 'E', movimento_type: 'Venda') }
 
-  scope :da_colecao,   ->(c) { joins(item: :produto).
+  scope :da_colecao,    ->(c) { joins(item: :produto).
                                    where(produtos: { colecao_id: c.id }) }
 
   scope :do_fornecedor, ->(f) { joins(item: :produto).
-                                  where(produtos: { fornecedor_id: f.id }) }
+                                   where(produtos: { fornecedor_id: f.id }) }
 
   def set_desconto(_desconto)
     _valor = self.bruto * (1-(_desconto.to_f/100))
@@ -33,10 +34,18 @@ class ItemEstoque < ActiveRecord::Base
     item.produto.valor
   end
 
+  def entrada?
+    tipo == 'E'
+  end
+
+  def saida?
+    tipo == 'S'
+  end
+
   private
 
   def ajusta_estoque
-    if (tipo == 'E' && !destroyed?) || (tipo == 'S' && destroyed?)
+    if (entrada? && !destroyed?) || (saida? && destroyed?)
       item.increment!(:estoque)
     else
       item.decrement!(:estoque)

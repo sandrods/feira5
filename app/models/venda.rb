@@ -1,8 +1,8 @@
 class Venda < ActiveRecord::Base
   include ClienteOuVendedor
 
-  #has_many :itens, class_name: "ItemVenda", dependent: :destroy
-  has_many :itens, -> { where(tipo: 'S') }, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
+  has_many :itens,  -> { where(tipo: 'S') }, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
+  has_many :trocas, -> { where(tipo: 'E') }, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
 
   has_many :pagamentos, -> { where(cd: "C").order('data asc') },  class_name: "Registro", as: :registravel
 
@@ -28,6 +28,23 @@ class Venda < ActiveRecord::Base
     self.itens.create!(item_id: item.id, bruto: item.produto.valor, desconto: (desconto || 0), valor: liquido)
 
     #self.itens.create!(item_id: item.id, valor: item.produto.valor)
+
+  end
+
+  def adiciona_troca!(bc)
+
+    item = Item.find_by_barcode!(bc)
+
+    troca = ItemEstoque
+              .vendidos
+              .where(movimento_id: outras_vendas.pluck(:id))
+              .find_by(item_id: item.id)
+
+    if troca
+      trocas.create!(item_id: item.id, bruto: troca.bruto, desconto: troca.desconto, valor: troca.valor)
+    else
+      trocas.create!(item_id: item.id, bruto: item.produto.valor, desconto: 0, valor: 0)
+    end
 
   end
 

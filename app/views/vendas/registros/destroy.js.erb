@@ -1,6 +1,2 @@
-<%
-  total = number_to_currency @venda.pagamentos.sum(:valor)
-%>
-
 $('#registro_<%= params[:id] %>').fadeOut();
-$('#total_pagamentos_venda').html('<%= total %>')
+$('#totais_pagamentos').html('<%= j render partial: "vendas/registros/totais" %>');

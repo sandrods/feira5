@@ -1,7 +1,8 @@
 module VendasHelper
 
   def flag_pagamento(venda)
-    return unless (100 - (venda.total / venda.pagamentos.sum(:valor) * 100)).abs > 3
+    total_pagamentos = venda.pagamentos.sum(:valor) + venda.trocas.sum(:valor)
+    return unless (100 - (venda.total / total_pagamentos * 100)).abs > 3
 
     tag.span icn(:exclamation_triangle), class: 'text-danger'
   end

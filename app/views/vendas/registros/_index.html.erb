@@ -22,9 +22,7 @@
       <%= render partial: 'vendas/registros/registro', collection: @venda.pagamentos %>
     </tbody>
   </table>
-  <div class="card-footer text-right">
-    <small>Total</small>
-    <span id="total_pagamentos_venda">
-      <%= number_to_currency @venda.pagamentos.sum(:valor) %></span>
+  <div class="card-footer text-right" id="totais_pagamentos">
+    <%= render partial: 'vendas/registros/totais' %>
   </div>
 </div>

@@ -18,7 +18,11 @@ module ProdutosHelper
     when 'Compra'
       link_to "Compra ##{ie.movimento_id}", ie.movimento, class: 'badge badge-success badge-md'
     when 'Venda'
-      link_to "Venda ##{ie.movimento_id}", ie.movimento, class: 'badge badge-danger badge-md'
+      if ie.saida?
+        link_to "Venda ##{ie.movimento_id}", ie.movimento, class: 'badge badge-danger badge-md'
+      else
+        link_to "Troca ##{ie.movimento_id}", ie.movimento, class: 'badge badge-success badge-md'
+      end
     when 'Ajuste'
       cor = ie.movimento.tipo == 'E' ? 'success' : 'danger'
       link_to "Ajuste ##{ie.movimento_id}", ie.movimento, class: "badge badge-#{cor} badge-md"

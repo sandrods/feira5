@@ -24,4 +24,14 @@ module ClienteOuVendedor
       vendedor.try(:nome)
   end
 
+  def outras_vendas
+    outras = Venda.where.not(id: id)
+
+    if cliente_id.present?
+      outras.where(cliente_id: cliente_id)
+    else
+      outras.where(vendedor_id: vendedor_id)
+    end
+  end
+
 end

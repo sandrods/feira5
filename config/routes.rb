@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :vendas do
     resources :itens, controller: 'vendas/itens'
+    resources :trocas, controller: 'vendas/trocas'
     resources :registros, controller: 'vendas/registros'
     get 'mensal', on: :collection
   end

@@ -1,0 +1,19 @@
+<% if @venda.trocas.present? %>
+<table class="text-right w-100">
+  <tr>
+    <td><small>Pagamentos</small></td>
+    <td><%= number_to_currency @venda.pagamentos.sum(:valor) %></td>
+  </tr>
+  <tr>
+    <td><small>Trocas</small></td>
+    <td><%= number_to_currency @venda.trocas.sum(:valor) %></td>
+  </tr>
+  <tr>
+    <td><small>Total</small></td>
+    <td style="width: 7rem"><b><%= number_to_currency @venda.trocas.sum(:valor) + @venda.pagamentos.sum(:valor) %></b></td>
+  </tr>
+</table>
+<% else %>
+  <small>Total</small>
+  <%= number_to_currency @venda.pagamentos.sum(:valor) %>
+<% end %>

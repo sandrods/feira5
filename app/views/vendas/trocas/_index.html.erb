@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header alert-warning d-flex align-items-center">
+    <b>Trocas</b>
+    <div class="ml-auto">
+      <%= form_tag(venda_trocas_path(@venda), remote: true ) do %>
+        <%= text_field_tag :barcode,
+                            nil,
+                            maxlength: 10,
+                            class: 'bar-code-input',
+                            placeholder: "devolver aqui" %>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table table-sm table-striped mb-0">
+    <thead>
+      <tr>
+        <th>Cód.</th>
+        <th>Produto</th>
+        <th>Cor</th>
+        <th>Tam.</th>
+        <th class="text-right">Desc.</th>
+        <th class="text-right">Valor</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody id="itens_troca_table">
+      <%= render partial: 'vendas/trocas/item', collection: @venda.trocas %>
+    </tbody>
+  </table>
+  <div class="card-footer text-right">
+    <small>Total</small>
+    <span id="total_trocas_venda">
+      <%= number_to_currency @venda.trocas.sum(:valor) %></span>
+  </div>
+</div>

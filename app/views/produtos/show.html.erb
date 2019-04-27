@@ -2,20 +2,28 @@
   <%= link_to icn(:edit, 'Editar Produto'), edit_produto_path(@produto), class: 'btn btn-primary btn-sm' %>
 <% end %>
 
-<div class="d-flex mb-4">
-  <div class="card card-body card-text bg-light">
-    <div class="row">
-      <div class="col">
-        <%= card_item(@produto.colecao&.descricao, 'Coleção') %>
-        <%= card_item(@produto.fornecedor&.nome, 'Fornecedor') %>
-      </div>
-      <div class="col">
-        <%= card_item(@produto.linha&.descricao, 'Linha') %>
-        <%= card_item(@produto.tipo&.descricao, 'Tipo') %>
-      </div>
+<div class="well card-text mb-5">
+  <div class="row">
+    <div class="col">
+      <%= card_item(@produto.colecao&.descricao, 'Coleção') %>
+    </div>
+    <div class="col">
+      <%= card_item(@produto.fornecedor&.nome, 'Fornecedor') %>
+    </div>
+    <div class="col">
+      <%= card_item(@produto.linha&.descricao, 'Linha') %>
+    </div>
+    <div class="col">
+      <%= card_item(@produto.tipo&.descricao, 'Tipo') %>
     </div>
   </div>
-  <div class="card card-body alert-warning valores ml-4">
+</div>
+
+
+<div class="row mb-4">
+  <div class="col">
+
+    <div class="card card-body alert-warning valores">
       <div class="row">
         <div class="col">
           <div class="rotulo">Valor de Venda</div>
@@ -37,17 +45,19 @@
         </div>
       </div>
     </div>
-</div>
-
-<div class="row">
-
-  <div class="col">
-    <%= render partial: 'produtos/etiquetas/index' %>
   </div>
 
   <div class="col">
     <%= render partial: 'produtos/itens/index' %>
+  </div>
 
+</div>
+
+<div class="row">
+  <div class="col">
+    <%= render partial: 'produtos/etiquetas/index' %>
+  </div>
+  <div class="col">
     <%= render partial: 'produtos/estoques' %>
   </div>
 </div>
