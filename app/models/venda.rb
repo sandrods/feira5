@@ -20,19 +20,12 @@ class Venda < ActiveRecord::Base
   end
 
   def adiciona_item!(bc)
-
     item = Item.find_by_barcode!(bc)
 
-    liquido = (self.desconto?) ? item.produto.valor * (1-(self.desconto/100)) : item.produto.valor
-
-    self.itens.create!(item_id: item.id, bruto: item.produto.valor, desconto: (desconto || 0), valor: liquido)
-
-    #self.itens.create!(item_id: item.id, valor: item.produto.valor)
-
+    itens.create!(item_id: item.id, bruto: item.produto.valor, desconto: 0, valor: item.produto.valor)
   end
 
   def adiciona_troca!(bc)
-
     item = Item.find_by_barcode!(bc)
 
     troca = ItemEstoque
@@ -49,7 +42,10 @@ class Venda < ActiveRecord::Base
   end
 
   def total
-    itens.sum(:valor)
+    t = itens.sum(:valor)
+    return t unless desconto?
+
+    t * (1 - (desconto / 100)).to_f
   end
 
   def desconto?
@@ -58,6 +54,13 @@ class Venda < ActiveRecord::Base
 
   def descr
     "Venda ##{id}"
+  end
+
+  def pendente?
+    total_pagamentos = pagamentos.sum(:valor) + trocas.sum(:valor)
+
+    (100 - (total / total_pagamentos * 100)).abs > 3
+
   end
 
 end

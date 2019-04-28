@@ -10,10 +10,13 @@
         <%= f.association :cliente, label: 'Cliente', collection: Cliente.ativos, label_method: :nome %>
         <%= f.hidden_field :tipo, value: 'C' %>
       </div>
+      <div class="col-sm-3 col-md-2">
+        <%= f.input :desconto, as: :percentage %>
+      </div>
     </div>
 
     <%= f.input :obs, as: :text %>
-  
+
   </div>
 
   <div class="bottom-actions">

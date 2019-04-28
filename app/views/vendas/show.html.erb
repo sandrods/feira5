@@ -6,7 +6,7 @@
 
   <div class="row">
 
-    <div class="col-sm-5 big">
+    <div class="col-sm-4 big">
       <%= @venda.nome %>
       <small><%= l @venda.data, format: :medium %></small>
     </div>
@@ -15,14 +15,15 @@
       <span id="venda_itens_count"><%= @venda.itens.count %></span> <small>peças</small>
     </div>
 
-    <div class="col-sm-3 col-xs-4 big">
+    <div class="col-sm-2 col-xs-4 big">
       <span id="venda_itens_total"><%= number_to_currency @venda.total %></span> <small>total com desconto</small>
     </div>
 
-    <!-- <div class="col-sm-2 col-xs-4 big desconto">
-      < number_to_percentage @venda.desconto, precision: 1, format: "%n %" >
-      <small><b>DESCONTO</b></small>
-    </div> -->
+    <div class="col-sm-2 col-xs-4 big desconto">
+      <%= number_to_percentage (@venda.desconto || 0), precision: 1, format: "%n %" %>
+      <small>desconto</small>
+    </div>
+
     <%= link_to 'Editar Venda', edit_venda_path(@venda), class: 'action' %>
   </div>
 
