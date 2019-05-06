@@ -9,5 +9,6 @@ window.show_item_box({
   ref:   '<%= @item.produto.ref %>',
   cor:   '<%= @item.cor.try :nome %>',
   tam:   '<%= @item.tamanho.try :nome %>',
-  title: 'Item INCLUÍDO'
+  title: 'Item INCLUÍDO',
+  focus: $('#barcode')
 });
