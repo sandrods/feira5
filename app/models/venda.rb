@@ -48,6 +48,14 @@ class Venda < ActiveRecord::Base
     t * (1 - (desconto / 100)).to_f
   end
 
+  def total_pagamentos
+    trocas.sum(:valor) + pagamentos.sum(:valor)
+  end
+
+  def saldo
+    total_pagamentos - total 
+  end
+
   def desconto?
     desconto.present? && desconto > 0
   end
