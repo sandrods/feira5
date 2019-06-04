@@ -4,7 +4,7 @@ class VendasController < ApplicationController
   def index
     @search = Venda.search(params[:q])
 
-    if params[:all]
+    if params[:q] || params[:all]
       @vendas = @search.result.order('id desc')
     else
       @vendas = Venda.where('data > ?', 6.months.ago).order('id desc')
@@ -63,7 +63,8 @@ class VendasController < ApplicationController
     end
 
     def venda_params
-      params.require(:venda).permit(:cliente_id, :desconto, :data, :tipo, :obs)
+      params.require(:venda)
+            .permit(:cliente_id, :desconto, :data, :tipo, :obs)
     end
 
     def from_sacola

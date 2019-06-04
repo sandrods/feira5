@@ -14,3 +14,14 @@ document.addEventListener "turbolinks:load", ->
     e.preventDefault()
     $('#add_pag_form').slideUp()
     $('#end_add_pag').fadeOut(300, () -> $('#add_pag').show() )
+
+  # $(".compra_nf input[type=checkbox]").bootstrapToggle
+  #   on: 'COM NF'
+  #   off: 'SEM NF'
+  #   width: '100px'
+  #   onstyle: 'danger'
+  #   offstyle: 'secondary'
+
+  $('[data-behavior~=valor_nf]').on "click", (ev) ->
+    ev.preventDefault()
+    $('#compra_valor_nf').val($(ev.target).data('valor'))

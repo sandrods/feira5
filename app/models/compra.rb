@@ -34,7 +34,11 @@ class Compra < ActiveRecord::Base
   end
 
   def desconto?
-    desconto.present? && desconto > 0
+    desconto.present? && desconto.nonzero?
+  end
+
+  def com_nf?
+    valor_nf.present? && valor_nf.nonzero?
   end
 
 

@@ -1,5 +1,3 @@
-<%= page_header "Nova Compra" do %>
-  <%= link_to icn(:chevron_left, "Voltar"), compras_path, class: 'btn' %>
-<% end %>
+<%= page_header "Nova Compra", back_to: compras_path %>
 
 <%= render 'form' %>

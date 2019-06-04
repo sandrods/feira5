@@ -2,6 +2,22 @@
   <%= link_to(icn(:plus, 'Nova Compra'), new_compra_path, class: 'btn btn-success') %>
 <% end %>
 
+<div class="search right mb-4">
+
+  <%= simple_form_for @search,
+                      url: compras_path,
+                      method: 'GET',
+                      html: { class: 'form-inline' } do |f| %>
+
+    <%= f.input :colecao_id_eq, label: "Coleção", collection: Colecao.to_select %>
+    <%= f.input :fornecedor_id_eq, label: "Fornecedor", collection: Fornecedor.all, label_method: :nome %>
+
+    <%= button_tag icn(:search, 'Filtrar'), class: 'btn btn-sm btn-info mr-2' %>
+    <%= button_tag 'Limpar', class: 'btn btn-sm btn-secondary clear' %>
+
+  <% end %>
+</div>
+
 <div class="row">
 
   <div class="col-md-8">
@@ -12,7 +28,8 @@
           <th>Fornecedor</th>
           <th>Coleção</th>
           <th class="right">Peças</th>
-          <th class="right">Total</th>          
+          <th class="right">Total</th>
+          <th class="w-3">NF</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +40,9 @@
             <td><%= compra.colecao.try :descricao %></td>
             <td class="right"><%= compra.itens.count %></td>
             <td class="right"><%= number_to_currency compra.total %></td>
+            <td>
+              <%= tag.span icn(:receipt_lg), class: compra.com_nf? ? 'text-danger' : 'text-subtle' %>
+            </td>
           </tr>
         <% end %>
       </tbody>
@@ -31,22 +51,29 @@
     <hr>
     <%= index_count @compras.count, 'compras encontradas' %>
 
+    <% unless params[:all] %>
+      <hr>
+      <%= alert text: "Exibindo somente as compras <b>deste ano e do anterior</b>. #{link_to('Clique aqui', compras_path(all: true))} para ver todas.",
+                type: :info %>
+    <% end %>
   </div>
 
   <div class="col-md-4">
-    <div class="card">
-      <div class="card-header">
-        <b>Filtros</b>
+    <% @stats_tot.each do |ano, total| %>
+      <h5 class=""> <%= ano.year %> </h5>
+      <div class="well stats mb-4">
+        <div class="row">
+          <div class="col text-info">
+            <h4> <%= curr total %></h4>
+            <small>TOTAL DE COMPRAS</small>
+          </div>
+          <div class="col text-danger divider">
+            <h4> <%= curr @stats_nf[ano] %></h4>
+            <small>COM NOTA FISCAL</small>
+          </div>
+        </div>
       </div>
-      <div class="card-body card-text">
-        <%= simple_form_for @search, url: compras_path, method: 'GET' do |f| %>
-          <%= f.input :fornecedor_id_eq, label: "Fornecedor", collection: Fornecedor.all, label_method: :nome %>
-          <%= f.input :colecao_id_eq, label: "Coleção", collection: Colecao.to_select %>
-          <hr>
-          <%= f.submit 'Filtrar', class: 'btn btn-info btn-sm' %>
-          <%= button_tag 'Limpar', class: 'btn btn-light btn-sm clear' %>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
+
   </div>
 </div>

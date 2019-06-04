@@ -3,8 +3,17 @@ class ComprasController < ApplicationController
 
   def index
     @search = Compra.search(params[:q])
-    @compras = @search.result.order('id desc')
+
+    if params[:q] || params[:all]
+      @compras = @search.result.order('id desc')
+    else
+      @compras = Compra.where('data >= ?', Date.today.beginning_of_year.last_year).order('id desc')
+    end
     set_back_from(:compra_show)
+
+    @stats_tot = Compra.joins(:itens).group_by_year(:data, last: 2, reverse: true).sum('itens_estoque.valor')
+    @stats_nf  = Compra.group_by_year(:data, last: 2, reverse: true).sum(:valor_nf)
+
   end
 
   def show
@@ -46,6 +55,8 @@ class ComprasController < ApplicationController
     end
 
     def compra_params
-      params.require(:compra).permit(:fornecedor_id, :data, :desconto, :colecao_id)
+      params.require(:compra)
+            .permit(:fornecedor_id, :data, :desconto, :colecao_id, :valor_nf)
+            .delocalize(valor_nf: :number)
     end
 end

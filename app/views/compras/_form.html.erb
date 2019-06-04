@@ -18,6 +18,13 @@
       <div class="col-sm-3">
         <%= f.input :desconto, label: "Desconto (%)" %>
       </div>
+      <div class="col-sm-3">
+        <%= f.input :valor_nf,
+                    label: "Valor NF",
+                    as: :currency,
+                    input_html: { value: curr(@compra.valor_nf) },
+                    hint: link_to("Copiar da Compra", "#", data: { behavior: 'valor_nf', valor: curr(@compra.total) }) %>
+      </div>
     </div>
 
   </div>

@@ -18,6 +18,10 @@
   color: #aaa;
 }
 
+.text-subtle {
+  color: #ddd;
+}
+
 small.sub {
   line-height: 1.1;
   display: block;
@@ -152,6 +156,12 @@ input.currency { text-align: right }
 .tw-300  { font-weight: 300; }
 .tw-600  { font-weight: 600; }
 .tw-800  { font-weight: 800; }
+
+.w-1 { width: 1rem }
+.w-2 { width: 2rem }
+.w-3 { width: 3rem }
+.w-4 { width: 4rem }
+.w-5 { width: 5rem }
 
 .striped {
   .list-group-item:nth-child(even) { background-color: #f7f7f7;}
