@@ -4,8 +4,8 @@ class Tamanho < ActiveRecord::Base
 
   default_scope -> { order('nome') }
 
-  def Tamanho.to_select
-    @@combo ||= Tamanho.all.map {|c| [c.nome, c.id]}
+  def self.to_select
+    Tamanho.order(:id).pluck(:nome, :id)
   end
 
 end

@@ -8,8 +8,8 @@ class Colecao < ActiveRecord::Base
   has_many :compras
   has_many :produtos
 
-  def Colecao.to_select
-    Colecao.order('id desc').map { |c| [c.descricao, c.id] }
+  def self.to_select
+    Colecao.order('id desc').pluck(:descricao, :id)
   end
 
 end
