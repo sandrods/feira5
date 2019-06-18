@@ -1,7 +1,7 @@
 class Sacola < ActiveRecord::Base
   include ClienteOuVendedor
 
-  has_many :itens, class_name: "ItemSacola", dependent: :destroy
+  has_many :itens, -> { joins(item: :produto).order('produtos.ref') }, class_name: "ItemSacola", dependent: :destroy
 
   def adiciona_item!(bc)
     ItemSacola.from_barcode(bc, self)

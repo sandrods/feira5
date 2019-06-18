@@ -29,6 +29,14 @@ class Produto < ActiveRecord::Base
     itens_estoque.sort_by { |m| m.movimento.data }
   end
 
+  def descricao
+    "#{tipo.descricao} #{ref} #{fornecedor.nome}"
+  end
+
+  def ref1
+    ref =~ /\S+\s+(\S+)\s+\S+/ ? $1 : ref
+  end
+
   private
 
   def calcula_lucro

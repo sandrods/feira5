@@ -18,11 +18,13 @@ class RomaneioReport
     r.add_field(:cliente, @sacola.nome)
 
     r.add_table("T_ITENS", @sacola.itens.incluidos.includes(item: :produto).order('produtos.ref')) do |t|
-      t.add_column(:codigo) { |i| i.barcode }
-      t.add_column(:ref) { |i| i.produto.ref }
-      t.add_column(:tam) { |i| i.tamanho.nome }
-      t.add_column(:cor) { |i| i.cor.nome }
-      t.add_column(:valor) { |i| curr(i.valor) }
+      t.add_column(:codigo)     { |i| i.barcode }
+      t.add_column(:tipo)       { |i| i.produto.tipo.descricao }
+      t.add_column(:ref)        { |i| i.produto.ref }
+      t.add_column(:fornecedor) { |i| i.produto.fornecedor.nome }
+      t.add_column(:tam)        { |i| i.tamanho.nome }
+      t.add_column(:cor)        { |i| i.cor.nome }
+      t.add_column(:valor)      { |i| curr(i.valor) }
     end
 
     r.add_field(:num, @sacola.itens.incluidos.count)

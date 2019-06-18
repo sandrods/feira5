@@ -1,6 +1,8 @@
 <%= tag.tr id: dom_id(item) do %>
   <td><small><%= item.barcode %></small></td>
+  <td><small><%= item.produto.tipo.descricao %></small></td>
   <td><%= item.produto.ref %></td>
+  <td><%= item.produto.fornecedor.nome %></td>
   <td><small><%= item.cor&.nome %></small></td>
   <td><small><%= item.tamanho&.nome %></small></td>
   <td class="text-right">

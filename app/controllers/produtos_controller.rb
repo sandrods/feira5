@@ -13,7 +13,7 @@ class ProdutosController < ApplicationController
 
     if params[:q]
       @search = Produto.search(params[:q])
-      @produtos = @search.result.includes(:fornecedor).order('fornecedores.nome, ref')
+      @produtos = @search.result.includes(:fornecedor, :tipo).order('fornecedores.nome, tipos.descricao, ref')
     else
       @search = Produto.search
       @produtos = Produto.none

@@ -8,6 +8,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <th>Tipo</th>
           <th>Ref</th>
           <th>Fornecedor</th>
           <th>Coleção</th>
@@ -18,9 +19,14 @@
       <tbody>
         <% @produtos.each do |produto| %>
           <tr>
-            <td><%= link_to produto.ref, produto %></td>
-            <td><small><%= produto.fornecedor.try :nome %></small></td>
-            <td><%= produto.colecao.try :descricao %></td>
+            <td><%= produto.tipo.descricao %></td>
+            <td>
+              <%= link_to produto.ref, produto %><br>
+              <%= produto.ref1 %>
+            </td>
+
+            <td><small><%= produto.fornecedor&.nome %></small></td>
+            <td><%= produto.colecao&.descricao %></td>
             <td class="right">
               <% if produto.etiquetas.present? %>
                 <span class="badge"> <%= produto.etiquetas.count %></span>

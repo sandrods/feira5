@@ -1,4 +1,4 @@
-<%= page_header @produto.ref, back_to: produtos_path do %>
+<%= page_header @produto.descricao, back_to: produtos_path do %>
   <%= link_to icn(:edit, 'Editar Produto'), edit_produto_path(@produto), class: 'btn btn-primary btn-sm' %>
 <% end %>
 
