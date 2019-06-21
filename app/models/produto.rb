@@ -33,6 +33,10 @@ class Produto < ActiveRecord::Base
     "#{tipo.descricao} #{ref} #{fornecedor.nome}"
   end
 
+  def descricao_short
+    "#{tipo.descricao} #{ref}"
+  end
+
   def ref1
     ref =~ /\S+\s+(\S+)\s+\S+/ ? $1 : ref
   end

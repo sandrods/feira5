@@ -51,7 +51,7 @@ class EtiquetasReport
 
           @pdf.draw_text etiqueta.barcode, size: 9, at: [25, 18]
 
-          @pdf.draw_text etiqueta.descricao_short,  size: 9, at: [105, 50]
+          @pdf.draw_text etiqueta.ref,  size: 9, at: [105, 50]
           @pdf.draw_text etiqueta.sub1, size: 8, at: [105, 40]
 
           if @show_price
