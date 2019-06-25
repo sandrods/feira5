@@ -47,15 +47,17 @@ class EtiquetasReport
           bc = Barby::Code25Interleaved.new(etiqueta.barcode)
           out = Barby::PrawnOutputter.new(bc)
 
-          out.annotate_pdf(@pdf, x:8, y: 28, height: 30, xdim: 0.9)
+          out.annotate_pdf(@pdf, x:8, y: 22, height: 30, xdim: 0.9)
 
-          @pdf.draw_text etiqueta.barcode, size: 9, at: [25, 18]
+          @pdf.draw_text etiqueta.descricao_short, size: 9, at: [10, 58]
 
-          @pdf.draw_text etiqueta.descricao_short,  size: 9, at: [105, 50]
-          @pdf.draw_text etiqueta.sub1, size: 8, at: [105, 40]
+          @pdf.draw_text etiqueta.barcode, size: 9, at: [25, 12]
+
+          @pdf.draw_text etiqueta.fornecedor.nome, size: 9, at: [105, 43]
+          @pdf.draw_text etiqueta.sub1, size: 8, at: [105, 33]
 
           if @show_price
-            @pdf.draw_text etiqueta.valor, size: 12, style: :bold, at: [105, 17]
+            @pdf.draw_text etiqueta.valor, size: 12, style: :bold, at: [105, 12]
           end
 
         end

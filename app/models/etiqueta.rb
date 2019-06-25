@@ -3,7 +3,7 @@ class Etiqueta < ActiveRecord::Base
   belongs_to :tamanho
   belongs_to :produto
 
-  delegate :ref, :fornecedor, :colecao, to: :produto
+  delegate :ref, :fornecedor, :colecao, :descricao_short, to: :produto
 
   validates :cor_id, :tamanho_id, :produto_id, presence: true
 

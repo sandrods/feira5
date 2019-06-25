@@ -2,7 +2,7 @@ require 'barby/barcode/code_25_interleaved'
 require 'barby/outputter/prawn_outputter'
 require "prawn/measurement_extensions"
 
-class EtiquetasReport
+class Etiquetas1Report
 
   ROWS = 11
   COLS = 3
