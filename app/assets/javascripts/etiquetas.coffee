@@ -4,7 +4,7 @@
 
 window.DeleteRow = (tr) ->
     row = $(tr).children('td')
-    	      .css(backgroundColor: "maroon", color: "white")
+    	      .css(backgroundColor: "#c82333", color: "white")
 
     del = () =>
             $(row)
@@ -13,7 +13,7 @@ window.DeleteRow = (tr) ->
             .children()
             .slideUp(200, () -> $(this).closest('tr').remove() )
 
-    setTimeout del, 200
+    setTimeout del, 500
 
 document.addEventListener "turbolinks:load", ->
 

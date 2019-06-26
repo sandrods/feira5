@@ -1,7 +1,7 @@
 <%= page_header "Etiquetas" do %>
   <%= link_to icn(:r_file, 'Limpar Página'), unselect_all_etiquetas_path, method: 'POST', class: 'btn btn-warning' %>
 
-  <div class="btn-group">
+  <div class="btn-group mr-4">
     <%= link_to icn(:th, 'Preencher Página'), select_page_etiquetas_path(q: params[:q].permit!), method: 'POST', class: 'btn btn-success' %>
     <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <span class="sr-only">Toggle Dropdown</span>
@@ -13,8 +13,6 @@
                     class: 'dropdown-item' %>
     </div>
   </div>
-
-  <span class="btn"></span>
 
   <div class="btn-group">
   <%= link_to icn(:barcode_lg, 'Gerar Etiquetas PDF'), print_etiquetas_path(q: params[:q].permit!), method: 'POST', class: 'btn btn-danger' %>
@@ -37,23 +35,6 @@
 <% end %>
 
 <div class="row">
-
-  <div class="col-6">
-
-    <table class="table table-bordered table-striped" id="grid">
-      <thead>
-        <tr>
-          <td style="width: 33%"></td>
-          <td style="width: 33%"></td>
-          <td style="width: 33%"></td>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render partial: 'grid' %>
-      </tbody>
-    </table>
-
-  </div>
 
   <div class="col-md-6">
 
@@ -89,13 +70,14 @@
     </div>
     </div>
 
-    <table class="table table-striped table-sm">
+    <table class="table table-striped table-sm mt-3">
       <thead>
         <tr>
-          <th>&nbsp;</th>
-          <th>Ref</th>
+
+          <th>Produto</th>
           <th>Barcode</th>
           <th>Fornecedor</th>
+          <th>&nbsp;</th>
           <th>&nbsp;</th>
 
         </tr>
@@ -103,17 +85,34 @@
       <tbody>
         <% @etiquetas.nao_selecionadas.each do |etiqueta| %>
           <tr id="tr_<%= etiqueta.id %>">
-            <td><%= link_mark(etiqueta) %></td>
             <td><%= etiqueta.descricao_short %></td>
             <td><code><%= etiqueta.barcode %></code></td>
             <td><small><%= etiqueta.fornecedor.try :nome %></small></td>
             <td><span class="btn btn-sm text-info"><%= icn(:check) if etiqueta.gerada %></span></td>
+            <td class="right"><%= link_mark(etiqueta) %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
 
     <%= index_count @etiquetas.nao_selecionadas.count, 'etiquetas encontradas' %>
+
+  </div>
+
+  <div class="col-6">
+
+    <table class="table table-bordered table-striped" id="grid">
+      <thead>
+        <tr>
+          <td style="width: 33%"></td>
+          <td style="width: 33%"></td>
+          <td style="width: 33%"></td>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'grid' %>
+      </tbody>
+    </table>
 
   </div>
 </div>

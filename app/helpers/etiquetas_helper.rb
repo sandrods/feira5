@@ -8,7 +8,7 @@ module EtiquetasHelper
               method: 'POST',
               class: 'btn text-danger'
     else
-      link_to icn(:chevron_left, 'add'),
+      link_to icn(:chevron_right, 'add', false),
               select_etiqueta_path(etiqueta),
               remote: true,
               method: 'POST',

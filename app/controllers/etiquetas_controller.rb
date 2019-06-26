@@ -53,14 +53,14 @@ class EtiquetasController < ApplicationController
     @etiqueta = Etiqueta.find(params[:id])
     @etiqueta.mark!
 
-    @selected = Etiqueta.selecionadas.in_groups_of(3, false)
+    @selected = Etiqueta.selecionadas.in_groups_of(3, nil)
   end
 
   def unselect
     @etiqueta = Etiqueta.find(params[:id])
     @etiqueta.unmark!
 
-    @selected = Etiqueta.selecionadas.in_groups_of(3, false)
+    @selected = Etiqueta.selecionadas.in_groups_of(3, nil)
     render :select
   end
 
