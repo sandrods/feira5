@@ -19,7 +19,7 @@ class EtiquetasController < ApplicationController
                         .references(:fornecedor)
                         .order('etiquetas.gerada, fornecedores.nome, produtos.ref')
 
-    @selected = Etiqueta.selecionadas.in_groups_of(3, false)
+    @selected = Etiqueta.selecionadas.in_groups_of(3, nil)
 
   end
 

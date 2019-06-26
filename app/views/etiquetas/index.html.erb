@@ -40,7 +40,14 @@
 
   <div class="col-6">
 
-    <table class="table" id="grid">
+    <table class="table table-bordered table-striped" id="grid">
+      <thead>
+        <tr>
+          <td style="width: 33%"></td>
+          <td style="width: 33%"></td>
+          <td style="width: 33%"></td>
+        </tr>
+      </thead>
       <tbody>
         <%= render partial: 'grid' %>
       </tbody>
@@ -97,8 +104,8 @@
         <% @etiquetas.nao_selecionadas.each do |etiqueta| %>
           <tr id="tr_<%= etiqueta.id %>">
             <td><%= link_mark(etiqueta) %></td>
-            <td><%= etiqueta.ref %></td>
-            <td><%= etiqueta.barcode %></td>
+            <td><%= etiqueta.descricao_short %></td>
+            <td><code><%= etiqueta.barcode %></code></td>
             <td><small><%= etiqueta.fornecedor.try :nome %></small></td>
             <td><span class="btn btn-sm text-info"><%= icn(:check) if etiqueta.gerada %></span></td>
           </tr>
