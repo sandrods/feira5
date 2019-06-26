@@ -7,7 +7,7 @@ class Compra < ActiveRecord::Base
   belongs_to :colecao
 
   #has_many :itens, class_name: 'ItemCompra', dependent: :destroy
-  has_many :itens, -> { where(tipo: 'E') }, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
+  has_many :itens, -> { where(tipo: 'E').joins(item: :produto).order('produtos.tipo_id, produtos.ref') }, class_name: 'ItemEstoque', as: :movimento, dependent: :destroy
 
   has_many :pagamentos, -> { where(cd: 'D').order('data') }, class_name: "Registro", as: :registravel
 

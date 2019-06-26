@@ -19,12 +19,8 @@
       <tbody>
         <% @produtos.each do |produto| %>
           <tr>
-            <td><%= produto.tipo.descricao %></td>
-            <td>
-              <%= link_to produto.ref, produto %><br>
-              <%= produto.ref1 %>
-            </td>
-
+            <td><%= produto.tipo&.descricao %></td>
+            <td><%= link_to produto.ref, produto_path(produto) %></td>
             <td><small><%= produto.fornecedor&.nome %></small></td>
             <td><%= produto.colecao&.descricao %></td>
             <td class="right">

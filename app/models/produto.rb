@@ -30,7 +30,7 @@ class Produto < ActiveRecord::Base
   end
 
   def descricao
-    "#{tipo.descricao} #{ref} #{fornecedor.nome}"
+    "#{tipo&.descricao} #{ref} #{fornecedor.nome}"
   end
 
   def descricao_short
@@ -38,7 +38,11 @@ class Produto < ActiveRecord::Base
   end
 
   def ref1
-    ref =~ /\S+\s+(\S+)\s+\S+/ ? $1 : ref
+    if ref =~ /\S+\s+(\S+)\s+CC/
+      "#{$1} CC"
+    else
+      ref =~ /\S+\s+(\S+)\s+\S+/ ? $1 : ref
+    end
   end
 
   private
