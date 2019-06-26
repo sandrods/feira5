@@ -34,41 +34,29 @@
 
 <% end %>
 
+<div class="search right mb-4">
+
+  <%= simple_form_for @search,
+                      url: etiquetas_path,
+                      method: 'GET',
+                      html: { class: 'form-inline' } do |f| %>
+
+    <%= f.input :produto_colecao_id_eq, label: "Coleção", collection: Colecao.to_select, input_html: { style: "width: 14rem" } %>
+    <%= f.input :produto_fornecedor_id_eq, label: "Fornecedor", collection: Fornecedor.to_select, input_html: { style: "width: 14rem" } %>
+    <%= f.input :produto_tipo_id_eq, label: 'Tipo', collection: Tipo.to_select, input_html: { style: "width: 12rem" } %>
+
+    <%= button_tag icn(:search, 'Filtrar'), class: 'btn btn-sm btn-info mr-2' %>
+    <%= button_tag 'Limpar', class: 'btn btn-sm btn-secondary clear' %>
+
+  <% end %>
+</div>
+
+
 <div class="row">
 
   <div class="col-md-6">
 
-    <div class="card card-body card-text bg-light stats">
-    <%= simple_form_for @search, url: etiquetas_path, method: 'GET' do |f| %>
-
-      <div class="row">
-        <div class="col-5">
-          <%= f.input :produto_colecao_id_eq, label: 'Coleção', collection: Colecao.to_select %>
-        </div>
-        <div class="col-7">
-          <%= f.input :produto_fornecedor_id_eq, label: 'Fornecedor', collection: Fornecedor.to_select %>
-        </div>
-      </div>
-
-      <%= f.submit 'Filtrar', class: 'btn btn-sm btn-info' %>
-
-    <% end %>
-    <hr/>
-    <div class="row">
-      <div class="col-sm-4">
-        <h3><%= @etiquetas.selecionadas.count %></h3>
-        <small>SELECIONADAS</small>
-      </div>
-      <div class="col-sm-4 divider">
-        <h3><%= @etiquetas.nao_selecionadas.pendentes.count %></h3>
-        <small>PENDENTES</small>
-      </div>
-      <div class="col-sm-4 divider">
-        <h3><%= @etiquetas.geradas.count %></h3>
-        <small>GERADAS</small>
-      </div>
-    </div>
-    </div>
+    <%= render 'stats'  %>
 
     <table class="table table-striped table-sm mt-3">
       <thead>

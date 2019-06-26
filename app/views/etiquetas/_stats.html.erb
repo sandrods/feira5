@@ -1,0 +1,16 @@
+    <div class="card card-body card-text bg-light stats" id="etiquetas_stats">
+      <div class="row">
+        <div class="col-sm-4">
+          <h3><%= @etiquetas.selecionadas.count %></h3>
+          <small>SELECIONADAS</small>
+        </div>
+        <div class="col-sm-4 divider">
+          <h3><%= @etiquetas.nao_selecionadas.pendentes.count %></h3>
+          <small>PENDENTES</small>
+        </div>
+        <div class="col-sm-4 divider">
+          <h3><%= @etiquetas.geradas.count %></h3>
+          <small>GERADAS</small>
+        </div>
+      </div>
+    </div>
