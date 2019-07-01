@@ -1,11 +1,13 @@
 <%= tag.tr id: dom_id(item) do %>
   <td><small><%= item.barcode %></small></td>
-  <td><small><%= item.produto.ref %></small></td>
+  <td class="text-primary"><small><%= item.produto.tipo&.descricao %></small></td>
+  <td class="text-primary"><small><%= item.produto.ref %></small></td>
+  <td class="text-primary"><small><%= item.produto.fornecedor&.nome %></small></td>
   <td><small><%= item.cor.try :nome %></small></td>
   <td><small><%= item.tamanho.try :nome %></small></td>
   <td class="text-right"><%= link_to icn(:trash),
                   sacola_item_path(@sacola, item),
                   method: 'delete',
-                  class: 'muted-danger', 
+                  class: 'muted-danger',
                   remote: true %></td>
 <% end -%>
