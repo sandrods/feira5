@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header alert-warning d-flex align-items-center">
+    <b>Trocas</b>
+    <div class="ml-auto">
+      <%= form_tag(compra_trocas_path(@compra), remote: true ) do %>
+        <%= text_field_tag :barcode,
+                            nil,
+                            maxlength: 10,
+                            class: 'bar-code-input',
+                            id: 'barcode_troca',
+                            placeholder: "devolver aqui" %>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table table-sm table-striped mb-0">
+    <thead>
+      <tr>
+        <th>Cód.</th>
+        <th>Tipo</th>
+        <th>Ref.</th>
+        <th>Coleção</th>
+        <th>Cor</th>
+        <th>Tam.</th>
+        <th class="text-right">Valor</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody id="itens_troca_table">
+      <%= render partial: 'compras/trocas/item', collection: @compra.trocas %>
+    </tbody>
+  </table>
+  <div class="card-footer text-right">
+    <small>Total</small>
+    <span id="total_trocas_compra">
+      <%= number_to_currency @compra.trocas.sum(:valor) %></span>
+  </div>
+</div>

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :compras do
     resources :itens, controller: 'compras/itens'
     resources :registros, controller: 'compras/registros'
+    resources :trocas, controller: 'compras/trocas'
   end
 
   resources :ajustes do

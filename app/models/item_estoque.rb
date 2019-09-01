@@ -12,7 +12,7 @@ class ItemEstoque < ActiveRecord::Base
 
   scope :vendidos,  -> { where(tipo: 'S', movimento_type: 'Venda') }
   scope :comprados, -> { where(tipo: 'E', movimento_type: 'Compra') }
-  scope :trocas,    -> { where(tipo: 'E', movimento_type: 'Venda') }
+  # scope :trocas,    -> { where(tipo: 'E', movimento_type: 'Venda') }
 
   scope :da_colecao,    ->(c) { joins(item: :produto).
                                    where(produtos: { colecao_id: c.id }) }

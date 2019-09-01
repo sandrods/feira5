@@ -1,0 +1,28 @@
+<table class="text-right w-100">
+<% if @compra.trocas.present? %>
+  <tr>
+    <td><small>Pagamentos</small></td>
+    <td><%= number_to_currency @compra.pagamentos.sum(:valor) %></td>
+  </tr>
+  <tr>
+    <td><small>Trocas</small></td>
+    <td><%= number_to_currency @compra.trocas.sum(:valor) %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td><small>Total</small></td>
+    <td style="width: 7rem"><b><%= number_to_currency @compra.total_pagamentos %></b></td>
+  </tr>
+<% if @compra.pendente? %>
+  <tr><td colspan="10" class="small">&nbsp;</td></tr>
+  <tr>
+    <td><small>Valor da Nota</small></td>
+    <td class="text-info"><%= number_to_currency @compra.total %></td>
+  </tr>
+  <tr>
+    <td><small>Saldo</small></td>
+    <% cls = @compra.saldo.positive? ? 'success' : 'danger' %>
+    <%= tag.td number_to_currency(@compra.saldo), class: "text-#{cls}" %>
+  </tr>
+<% end %>
+</table>

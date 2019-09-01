@@ -30,6 +30,7 @@
           <th class="right">Peças</th>
           <th class="right">Total</th>
           <th class="w-3">NF</th>
+          <th class="w-3">&nbsp;</th>
         </tr>
       </thead>
       <tbody>
@@ -43,6 +44,7 @@
             <td>
               <%= tag.span icn(:receipt_lg), class: compra.com_nf? ? 'text-danger' : 'text-subtle' %>
             </td>
+            <td><%= flag_pagamento(compra) %></td>
           </tr>
         <% end %>
       </tbody>
