@@ -7,7 +7,7 @@
     "popper.js": "^1.14.7",
     "coffeescript": "1.12.7",
     "foreman": "^2.0.0",
-    "jquery": "^3.2.1",
+    "jquery": "^3.4.0",
     "jquery.maskedinput": "^1.4.1",
     "popper.js": "^1.12.5",
     "stimulus": "^1.1.0",
