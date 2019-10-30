@@ -1,13 +1,16 @@
 $("#itens_compra_table").prepend("<%= j render partial: 'compras/itens/item', object: @item %>");
 $("#compra_itens_count").html("<%= @compra.itens.count %>");
 $("#compra_itens_total").html("<%= number_to_currency @compra.total %>");
-$(".bar-code-input").val('');
 
 $('#total_itens_compra').html('<%= number_to_currency @compra.itens.sum(:valor) %>')
+$('#totais_pagamentos').html('<%= j render partial: "compras/registros/totais" %>');
+
+$(".bar-code-input").val('');
 
 window.show_item_box({
   ref:   '<%= @item.produto.ref %>',
   cor:   '<%= @item.cor.try :nome %>',
   tam:   '<%= @item.tamanho.try :nome %>',
-  title: 'Item Incluído'
+  title: 'Item Incluído',
+  focus: $('#barcode')
 });

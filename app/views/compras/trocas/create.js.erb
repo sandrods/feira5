@@ -1,8 +1,9 @@
 $("#itens_troca_table").prepend("<%= j render partial: 'compras/trocas/item', object: @item %>");
-$(".bar-code-input").val('');
 
 $('#total_trocas_compra').html('<%= number_to_currency @compra.trocas.sum(:valor) %>');
 $('#totais_pagamentos').html('<%= j render partial: "compras/registros/totais" %>');
+
+$(".bar-code-input").val('');
 
 window.show_item_box({
   ref:   '<%= @item.produto.descricao_short %>',
