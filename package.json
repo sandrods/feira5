@@ -11,7 +11,7 @@
     "jquery.maskedinput": "^1.4.1",
     "popper.js": "^1.12.5",
     "stimulus": "^1.1.0",
-    "yarn": "^1.2.1"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
