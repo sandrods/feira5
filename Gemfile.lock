@@ -131,7 +131,7 @@ GEM
       method_source (~> 0.9.0)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
-    puma (3.11.4)
+    puma (3.12.4)
     rack (2.0.6)
     rack-proxy (0.6.4)
       rack
@@ -260,7 +260,7 @@ DEPENDENCIES
   pickadate-rails
   prawn
   pry-rails
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.2)
   rails-erd
   ransack
